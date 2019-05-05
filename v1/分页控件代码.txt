@@ -1,0 +1,148 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ChargeSys.Options
+{
+    /// <summary>
+    /// 用水户查询
+    /// </summary>
+    public partial class FrmWusr : UserControl
+    {
+        public FrmWusr()
+        {
+            InitializeComponent();
+            Load += delegate
+            {
+                //info.MacAddress = info.MacAddress.Replace(":", "");
+                //areacode = Sql.SqlSuppert.GetaCode(Role.SerConnect, info.MacAddress);
+
+                //分页绑定
+                pager1.PageCount = 1;
+                pager1.Bind();
+                pager1.EventPaging += new ChargeSys.Tools.EventPagingHandler(pager1_EventPaging);
+                dataGridView.AllowUserToAddRows = false;
+                dgvbind();
+                dataGridView.AllowUserToOrderColumns = false;
+            };
+        }
+
+        void pager1_EventPaging(ChargeSys.Tools.EventPagingArg e)
+        {
+            dgvbind();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Role Role { get; set; }
+
+        /// <summary>
+        /// 区域代码
+        /// </summary>
+        public string areacode { get; set; }
+
+        string query = "";
+        public void dgvbind()
+        {
+
+            int total = 0;
+            pager1.bindingSource.DataSource = Sql.SqlSuppert.GetPager(
+                 Role.SerConnect,
+                "tb_accunt as a ",
+                "a.time as 开户时间,a.operator as 收费员, a.accunt_id as 账号, a.[name] as 用户姓名,a.phone as 手机号,a.[address] as 地址,a.[wleft] as 剩余量,a.[accumulation] as 累积用量",
+                " a.accunt_id ",
+                10,
+                pager1.PageCurrent,
+                "a.areacode='" + areacode + "'" + query,
+                out total);
+            pager1.bindingNavigator.BindingSource = pager1.bindingSource;
+            dataGridView.DataSource = pager1.bindingSource;
+            pager1.NMax = total;
+            this.dataGridView.Columns[0].HeaderText = "序号";
+
+            for (int i = 0; i < this.dataGridView.Columns.Count; i++)
+            {
+                this.dataGridView.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            query = "";
+            if (textBoxname.Text != "") query += " and a.[name]='" + textBoxname.Text.Trim() + "'";
+            if (textBoxid.Text != "") query += " and a.accunt_id='" + textBoxid.Text + "'";
+            if (query == "")
+                return;
+            dgvbind();
+            pager1.PageCurrent = 1;
+            pager1.Bind();
+            Role.Action = "查询用水账户";
+            Role.ActionLog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            query = "";
+            dgvbind();
+            pager1.PageCurrent = 1;
+            pager1.Bind();
+        }
+
+        private void dataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridViewRow row = dataGridView.Rows[e.RowIndex];
+            Role.Uid = dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ContextMenuStrip = new WUser().GetMenu(row, Role, this);
+                this.ContextMenuStrip.Show();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class WUser
+    {
+        ContextMenuStrip _cms;
+
+        public ContextMenuStrip GetMenu(DataGridViewRow row, Role role, FrmWusr frm)
+        {
+            _cms = new ContextMenuStrip();
+            ToolStripMenuItem _itemEdit = new ToolStripMenuItem("编辑选择项");
+            _itemEdit.Click += delegate
+            {
+                FrmWuserEdit edit = new FrmWuserEdit() { Role = role, Row = row };
+                edit.OnChange += new Change(frm.dgvbind);
+                edit.ShowDialog();
+            };
+            _cms.Items.Add(_itemEdit);
+
+            //ToolStripMenuItem _itemDel = new ToolStripMenuItem("删除选择项");
+            //_itemDel.Click += delegate
+            //{
+            //    if (row == null)
+            //    {
+            //        MessageBox.Show("未选择要删除的用户", "删除用户", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        return;
+            //    }
+            //    if (MessageBox.Show("确定要删除该条记录吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            //    {
+            //        Service.PeopleRoleService.Delete(role.Uid, role.ConnectionString);
+            //        frm.LoadPeopleRole();
+            //    }
+            //};
+            //_cms.Items.Add(_itemDel);
+
+            return _cms;
+        }
+    }
+}
+
