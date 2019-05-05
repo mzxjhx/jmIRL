@@ -22,7 +22,7 @@ using System.Text.RegularExpressions;
 
 using System.Data;
 using System.IO;
-
+using jmILRL.DAL;
 
 namespace jmILRL.common
 {
@@ -163,6 +163,52 @@ namespace jmILRL.common
 
             return data;
 
+        }
+
+        public void dataToExcel(FBT fbt) {
+            int i = 0;
+            int j = 0;
+            int count = 0;
+            ISheet sheet = null;
+
+            fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            if (fileName.IndexOf(".xlsx") > 0) // 2007版本
+                workbook = new XSSFWorkbook();
+            else if (fileName.IndexOf(".xls") > 0) // 2003版本
+                workbook = new HSSFWorkbook();
+
+            try
+            {
+                if (workbook != null)
+                {
+                    sheet = workbook.CreateSheet("sheet1");
+                }
+
+                /*
+                IRow row = sheet.CreateRow(0);
+                for (j = 0; j < data.Columns.Count; ++j)
+                {
+                    row.CreateCell(j).SetCellValue(data.Columns[j].ColumnName);
+                }
+                count = 1;
+
+
+                for (i = 0; i < data.Rows.Count; ++i)
+                {
+                    IRow row = sheet.CreateRow(count);
+                    for (j = 0; j < data.Columns.Count; ++j)
+                    {
+                        row.CreateCell(j).SetCellValue(data.Rows[i][j].ToString());
+                    }
+                    ++count;
+                }
+                */
+                workbook.Write(fs); //写入到excel
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ using jmILRL.BAL;
 using jmILRL.DAL;
 using jmILRL.common;
 using RS232;
+using System.Configuration;
+
 namespace jmILRL
 {
     public partial class FrmMain : FrmBase
@@ -37,7 +39,8 @@ namespace jmILRL
         {
             rs232.OnCallBack += Rs232_DataRec;
             PortInit();
-            LogisTrac.WriteInfo(typeof(FrmMain), "启动餐饮管理系统");     
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            String sqlcon = config.AppSettings.Settings["connString"].Value;
         }
 
         /// <summary>
@@ -78,12 +81,20 @@ namespace jmILRL
             }
         }
 
-        private void signleButton1_Click(object sender, EventArgs e)
+
+        private void signleButton2_Click(object sender, EventArgs e)
         {
             if (!rs232.IsOpen)
                 return;
             rs232.Write("SOUR:PM:WAVE 1550");
             rs232.Write("WAV1550:IL?");
+        }
+
+        private void signleButton1_Click(object sender, EventArgs e)
+        {
+            if (!rs232.IsOpen)
+                return;
+            rs232.Write(textBox1.Text.Trim());
         }
     }
 }

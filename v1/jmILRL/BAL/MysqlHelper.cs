@@ -5,6 +5,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Data;
 using jmILRL.common;
+using System.Configuration;
 
 namespace jmILRL.BAL
 {
@@ -13,7 +14,8 @@ namespace jmILRL.BAL
     /// </summary>
     public class MysqlHelper
     {
-        private static string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_ILRL;Charset=utf8";//连接MySQL的字符串
+        private static string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_IRL;Charset=utf8";//连接MySQL的字符串
+        private static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         /// <summary>
         /// 
         /// </summary>
@@ -22,6 +24,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public static int insert(string sql, MySqlParameter[] param)
         {
+            sqlcon = config.AppSettings.Settings["connString"].Value;
             Console.WriteLine(string.Format(">>>>>>>>>>>insert sql={0}", sql));
             int res = 0;
             using (MySqlConnection conn = new MySqlConnection(sqlcon))
@@ -68,7 +71,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public static int execSql(string sql, MySqlParameter[] param)
         {
-            LogisTrac.WriteInfo(typeof(MysqlHelper), string.Format(">>>>>>>>>>>execSql  sql={0}", sql));
+
             int res = 0;
             using (MySqlConnection conn = new MySqlConnection(sqlcon))
             {
@@ -81,7 +84,6 @@ namespace jmILRL.BAL
                     foreach (var item in param)
                     {
                         cmd.Parameters.Add(item);
-                        LogisTrac.WriteInfo(typeof(MysqlHelper), string.Format(">>>>>>>>>>>execSql  key={0}, value={1}", item.ParameterName, item.Value));
                     }
                     cmd.CommandText = sql;
 
@@ -112,7 +114,7 @@ namespace jmILRL.BAL
         public static DataTable getDataTable(string sql, MySqlParameter[] param)
         {
             Console.WriteLine(string.Format(">>>>>>>>>>>getDataTable  sql={0}", sql));
-            LogisTrac.WriteInfo(typeof(MysqlHelper), string.Format(">>>>>>>>>>>getDataTable  sql={0}", sql));
+            
             DataTable dt = new DataTable();
             try
             {
@@ -126,7 +128,7 @@ namespace jmILRL.BAL
                         {
                             cmd.Parameters.Add(item);
                             Console.WriteLine(string.Format(">>>>>>>>>>>execSql  key={0:G}, value={1:G}", item.ParameterName, item.Value));
-                            LogisTrac.WriteInfo(typeof(MysqlHelper), string.Format(">>>>>>>>>>>execSql  key={0:G}, value={1:G}", item.ParameterName, item.Value));
+
                         }
                     conn.Open();
                     MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
@@ -139,11 +141,9 @@ namespace jmILRL.BAL
             catch (MySqlException ex)
             {
                 Console.WriteLine(string.Format("MySqlException={0}", ex.Message));
-                LogisTrac.WriteError(typeof(MysqlHelper), string.Format("MySqlException={0}", ex.Message));
             }
             catch (Exception ex)
             {
-                LogisTrac.WriteError(typeof(MysqlHelper), string.Format("getDataTable exception={0}", ex.Message));
             }
             return dt;
         }

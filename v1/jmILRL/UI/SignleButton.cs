@@ -1,16 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using jmILRL.common;
-using System.ComponentModel;
-using System.Drawing;
 using System.Drawing.Drawing2D;
+
+/*
+ * 单一颜色按键
+ */
+
 namespace jmILRL.UI
 {
     public partial class SignleButton : Button
     {
+        public enum MouseActionType
+        {
+            None,
+            Hover,
+            Click
+        }
+
+        public enum Style
+        { 
+            signle,
+            Gradient
+        }
 
         private MouseActionType mouseAction;
         private Style _colorstyle = Style.Gradient;
@@ -48,7 +65,7 @@ namespace jmILRL.UI
         public Color BaseColor
         {
             get { return _baseColor; }
-            set
+            set 
             {
                 _baseColor = value;
                 this.Invalidate();
@@ -56,7 +73,8 @@ namespace jmILRL.UI
         }
 
         public SignleButton()
-        {            
+        {
+            //InitializeComponent();
             mouseAction = MouseActionType.None;
             this.SetStyle(ControlStyles.SupportsTransparentBackColor |
                ControlStyles.UserPaint |
@@ -64,12 +82,7 @@ namespace jmILRL.UI
                ControlStyles.DoubleBuffer, true);
             this.SetStyle(ControlStyles.Opaque, false);
         }
-        /// <summary>
-        /// 获取路径
-        /// </summary>
-        /// <param name="rc"></param>
-        /// <param name="r"></param>
-        /// <returns></returns>
+
         private GraphicsPath GetGraphicsPath(Rectangle rc, int r)
         {
             int x = rc.X, y = rc.Y, w = rc.Width, h = rc.Height;
@@ -82,16 +95,13 @@ namespace jmILRL.UI
             return path;
         }
 
-        /// <summary>
-        /// 该事件生成Graphics类，画按键
-        /// </summary>
-        /// <param name="pevent"></param>
         protected override void OnPaint(PaintEventArgs pevent)
         {
             //base.OnPaint(pevent);
             Graphics g = pevent.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.CompositingQuality = CompositingQuality.HighQuality;
+            int btnOffset = 0;
             Color clr = this.BackColor;
             switch (mouseAction)
             {
@@ -127,10 +137,7 @@ namespace jmILRL.UI
             }
             DrawString(g);
         }
-        /// <summary>
-        /// 画按键text
-        /// </summary>
-        /// <param name="gr"></param>
+
         public void DrawString(Graphics gr)
         {
             if (this.Text != "")

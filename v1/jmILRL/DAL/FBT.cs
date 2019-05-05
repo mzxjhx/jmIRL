@@ -23,8 +23,26 @@ namespace jmILRL.DAL
         /// </summary>
         public String staff { get; set; }
 
-        public String IL1 { get; set; }
+        public float[] IL { get; set; }
 
+        public float[] RL { get; set; }
+
+        /// <summary>
+        /// 默认构造函数，IL、RL均=4
+        /// </summary>
+        public FBT() {
+            IL = new float[4];
+            RL = new float[4];
+        }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="n">IL、RL数组列数</param>
+        public FBT(int n) {
+            IL = new float[n];
+            RL = new float[n];
+        }
 
     }
 }

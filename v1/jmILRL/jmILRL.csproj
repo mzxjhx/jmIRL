@@ -64,6 +64,7 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -87,12 +88,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BAL\FoodService.cs" />
+    <Compile Include="BAL\FbtService.cs" />
     <Compile Include="BAL\MysqlHelper.cs" />
     <Compile Include="Class\232.cs" />
+    <Compile Include="common\configTool.cs" />
     <Compile Include="common\enums.cs" />
     <Compile Include="common\ini.cs" />
-    <Compile Include="common\LogisTrac.cs" />
     <Compile Include="common\NPOIHelper.cs" />
     <Compile Include="common\Win32Enum.cs" />
     <Compile Include="DAL\FBT.cs" />
@@ -162,6 +163,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -186,8 +188,11 @@
     <Compile Include="UI\PagerEx.designer.cs">
       <DependentUpon>PagerEx.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\SingleBtn.cs">
+    <Compile Include="UI\SignleButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\SignleButton.designer.cs">
+      <DependentUpon>SignleButton.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Sysbtn.cs">
       <SubType>Component</SubType>
@@ -195,11 +200,6 @@
     <Compile Include="UI\ThreeDbtn.cs">
       <SubType>Component</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="log.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\_3btn_close.png" />
