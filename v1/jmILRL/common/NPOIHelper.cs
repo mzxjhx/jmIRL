@@ -40,6 +40,10 @@ namespace jmILRL.common
             this.fileName = fileName;
         }
 
+        public NPOIHelper() {
+
+        }
+
         /// <summary>
         /// 将DataTable数据导入到excel中
         /// </summary>
@@ -165,13 +169,13 @@ namespace jmILRL.common
 
         }
 
-        public void dataToExcel(FBT fbt) {
+        public void dataToExcel(string file,FBT fbt) {
             int i = 0;
             int j = 0;
             int count = 0;
             ISheet sheet = null;
 
-            fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             if (fileName.IndexOf(".xlsx") > 0) // 2007版本
                 workbook = new XSSFWorkbook();
             else if (fileName.IndexOf(".xls") > 0) // 2003版本

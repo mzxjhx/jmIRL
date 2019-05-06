@@ -11,12 +11,35 @@ using jmILRL.DAL;
 using jmILRL.common;
 using RS232;
 using System.Configuration;
+using System.IO;
+using Zxui;
+using System.Text.RegularExpressions;
 
 namespace jmILRL
 {
     public partial class FrmMain : FrmBase
     {
         Rs232 rs232 = new Rs232();
+        /// <summary>
+        /// 文件保存路径
+        /// </summary>
+        string filePath = "";
+        /// <summary>
+        /// 
+        /// </summary>
+        NPOIHelper npoiHelper = new NPOIHelper();
+        /// <summary>
+        /// 
+        /// </summary>
+        FBT fbt = new FBT();
+        /// <summary>
+        /// 
+        /// </summary>
+        FBTService fbtService = new FBTService();
+
+        private Label[] il = new Label[4];
+        private Label[] rl = new Label[4];
+
         public FrmMain()
         {
             InitializeComponent();
@@ -41,6 +64,9 @@ namespace jmILRL
             PortInit();
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             String sqlcon = config.AppSettings.Settings["connString"].Value;
+            filePath = config.AppSettings.Settings["filePath"].Value;
+
+            LabelInit();
         }
 
         /// <summary>
@@ -55,22 +81,42 @@ namespace jmILRL
             }
             if (portnames.Length == 0)
             {
-                richTextBox1.AppendText("未检测到串口\r\n");
+
             }
             else {
                 try
                 {
                     rs232.Com = portnames[0];
                     rs232.Open();
-                    richTextBox1.AppendText("串口打开\r\n");
+
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.AppendText(ex.Message + "\r\n");
+
                 }
 
             }
             
+        }
+
+        private void LabelInit() {
+            for (int i = 0; i < il.Length; i++)
+            {
+                il[i] = new Label();
+            }
+            il[0] = IL1;
+            il[1] = IL2;
+            il[2] = IL3;
+            il[3] = IL4;
+
+            for (int i = 0; i < rl.Length; i++)
+            {
+                rl[i] = new Label();
+            }
+            rl[0] = RL1;
+            rl[1] = RL2;
+            rl[2] = RL3;
+            rl[3] = RL4;
         }
 
         /// <summary>
@@ -82,28 +128,41 @@ namespace jmILRL
             try
             {
                 string str = System.Text.Encoding.Default.GetString(bs);
-                richTextBox1.AppendText(str + "\r\n");
-
+                labelget.Text = string.Format("get:{0}", str);
+                string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
+                if (comboBoxILRL.Text == "IL")
+                    il[0].Text = tmp[0];
+                else
+                    rl[0].Text = tmp[0];
             }
             catch (Exception)
             {
             }
         }
 
-
-        private void signleButton2_Click(object sender, EventArgs e)
+        private void btnTest_Click(object sender, EventArgs e)
         {
             if (!rs232.IsOpen)
                 return;
-            rs232.Write("SOUR:PM:WAVE 1550");
-            rs232.Write("WAV1550:IL?");
+            
+            rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", comboBoxILRL.Text));
         }
 
-        private void signleButton1_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
+        {            
+            /*
+            npoiHelper.dataToExcel(Path.Combine(filePath,serialNumber+ ".xls"), fbt);
+            fbtService.addNewFBT(fbt);
+            */
+        }
+
+        private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!rs232.IsOpen)
-                return;
-            rs232.Write(textBox1.Text.Trim());
+            comboBoxPort.Items.Clear();
+            for (int i = 0; i < comboBoxPortType.SelectedIndex + 2; i++)
+            {
+                comboBoxPort.Items.Add(i + 1);
+            }
         }
     }
 }

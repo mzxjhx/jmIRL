@@ -101,7 +101,6 @@ namespace jmILRL.UI
             Graphics g = pevent.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.CompositingQuality = CompositingQuality.HighQuality;
-            int btnOffset = 0;
             Color clr = this.BackColor;
             switch (mouseAction)
             {
