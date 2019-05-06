@@ -55,11 +55,20 @@ namespace jmILRL
             }
             if (portnames.Length == 0)
             {
-
+                richTextBox1.AppendText("未检测到串口\r\n");
             }
             else {
-                rs232.Com = portnames[0];
-                rs232.Open();
+                try
+                {
+                    rs232.Com = portnames[0];
+                    rs232.Open();
+                    richTextBox1.AppendText("串口打开\r\n");
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.AppendText(ex.Message + "\r\n");
+                }
+
             }
             
         }
