@@ -197,7 +197,7 @@ namespace RS232
         /// <param name="ss"></param>
         public void Write(string ss)
         {
-            _serialPort.Write(ss);
+            _serialPort.Write(ss + "\r\n");
         }
  
         /// <summary>
