@@ -47,15 +47,15 @@
             this.comboBoxPort = new System.Windows.Forms.ComboBox();
             this.comboBoxILRL = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.IL4 = new Zxui.ColorLabel();
-            this.IL3 = new Zxui.ColorLabel();
-            this.IL2 = new Zxui.ColorLabel();
-            this.IL1 = new Zxui.ColorLabel();
+            this.labelget = new System.Windows.Forms.Label();
             this.RL4 = new Zxui.ColorLabel();
             this.RL3 = new Zxui.ColorLabel();
             this.RL2 = new Zxui.ColorLabel();
             this.RL1 = new Zxui.ColorLabel();
-            this.labelget = new System.Windows.Forms.Label();
+            this.IL4 = new Zxui.ColorLabel();
+            this.IL3 = new Zxui.ColorLabel();
+            this.IL2 = new Zxui.ColorLabel();
+            this.IL1 = new Zxui.ColorLabel();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -244,6 +244,7 @@
             this.comboBoxPort.Name = "comboBoxPort";
             this.comboBoxPort.Size = new System.Drawing.Size(80, 24);
             this.comboBoxPort.TabIndex = 0;
+            this.comboBoxPort.SelectedIndexChanged += new System.EventHandler(this.comboBoxPort_SelectedIndexChanged);
             // 
             // comboBoxILRL
             // 
@@ -275,52 +276,15 @@
             this.groupBox2.TabIndex = 90;
             this.groupBox2.TabStop = false;
             // 
-            // IL4
+            // labelget
             // 
-            this.IL4.AutoSize = true;
-            this.IL4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL4.Lever = 0D;
-            this.IL4.Location = new System.Drawing.Point(385, 42);
-            this.IL4.Name = "IL4";
-            this.IL4.Size = new System.Drawing.Size(32, 16);
-            this.IL4.TabIndex = 0;
-            this.IL4.Text = "IL4";
-            // 
-            // IL3
-            // 
-            this.IL3.AutoSize = true;
-            this.IL3.Beyong = false;
-            this.IL3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL3.Lever = 0D;
-            this.IL3.Location = new System.Drawing.Point(272, 42);
-            this.IL3.Name = "IL3";
-            this.IL3.Size = new System.Drawing.Size(32, 16);
-            this.IL3.TabIndex = 0;
-            this.IL3.Text = "IL3";
-            // 
-            // IL2
-            // 
-            this.IL2.AutoSize = true;
-            this.IL2.Beyong = false;
-            this.IL2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL2.Lever = 0D;
-            this.IL2.Location = new System.Drawing.Point(166, 42);
-            this.IL2.Name = "IL2";
-            this.IL2.Size = new System.Drawing.Size(32, 16);
-            this.IL2.TabIndex = 0;
-            this.IL2.Text = "IL2";
-            // 
-            // IL1
-            // 
-            this.IL1.AutoSize = true;
-            this.IL1.Beyong = false;
-            this.IL1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL1.Lever = 0D;
-            this.IL1.Location = new System.Drawing.Point(63, 42);
-            this.IL1.Name = "IL1";
-            this.IL1.Size = new System.Drawing.Size(32, 16);
-            this.IL1.TabIndex = 0;
-            this.IL1.Text = "IL1";
+            this.labelget.AutoSize = true;
+            this.labelget.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelget.Location = new System.Drawing.Point(57, 162);
+            this.labelget.Name = "labelget";
+            this.labelget.Size = new System.Drawing.Size(40, 16);
+            this.labelget.TabIndex = 5;
+            this.labelget.Text = "get:";
             // 
             // RL4
             // 
@@ -370,15 +334,53 @@
             this.RL1.TabIndex = 4;
             this.RL1.Text = "RL1";
             // 
-            // labelget
+            // IL4
             // 
-            this.labelget.AutoSize = true;
-            this.labelget.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelget.Location = new System.Drawing.Point(57, 162);
-            this.labelget.Name = "labelget";
-            this.labelget.Size = new System.Drawing.Size(40, 16);
-            this.labelget.TabIndex = 5;
-            this.labelget.Text = "get:";
+            this.IL4.AutoSize = true;
+            this.IL4.Beyong = false;
+            this.IL4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.IL4.Lever = 0D;
+            this.IL4.Location = new System.Drawing.Point(385, 42);
+            this.IL4.Name = "IL4";
+            this.IL4.Size = new System.Drawing.Size(32, 16);
+            this.IL4.TabIndex = 0;
+            this.IL4.Text = "IL4";
+            // 
+            // IL3
+            // 
+            this.IL3.AutoSize = true;
+            this.IL3.Beyong = false;
+            this.IL3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.IL3.Lever = 0D;
+            this.IL3.Location = new System.Drawing.Point(272, 42);
+            this.IL3.Name = "IL3";
+            this.IL3.Size = new System.Drawing.Size(32, 16);
+            this.IL3.TabIndex = 0;
+            this.IL3.Text = "IL3";
+            // 
+            // IL2
+            // 
+            this.IL2.AutoSize = true;
+            this.IL2.Beyong = false;
+            this.IL2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.IL2.Lever = 0D;
+            this.IL2.Location = new System.Drawing.Point(166, 42);
+            this.IL2.Name = "IL2";
+            this.IL2.Size = new System.Drawing.Size(32, 16);
+            this.IL2.TabIndex = 0;
+            this.IL2.Text = "IL2";
+            // 
+            // IL1
+            // 
+            this.IL1.AutoSize = true;
+            this.IL1.Beyong = false;
+            this.IL1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.IL1.Lever = 0D;
+            this.IL1.Location = new System.Drawing.Point(63, 42);
+            this.IL1.Name = "IL1";
+            this.IL1.Size = new System.Drawing.Size(32, 16);
+            this.IL1.TabIndex = 0;
+            this.IL1.Text = "IL1";
             // 
             // FrmMain
             // 

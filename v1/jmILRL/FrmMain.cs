@@ -37,6 +37,8 @@ namespace jmILRL
         /// </summary>
         FBTService fbtService = new FBTService();
 
+        private int curPort = 1;
+
         private Label[] il = new Label[4];
         private Label[] rl = new Label[4];
 
@@ -131,9 +133,9 @@ namespace jmILRL
                 labelget.Text = string.Format("get:{0}", str);
                 string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
                 if (comboBoxILRL.Text == "IL")
-                    il[0].Text = tmp[0];
+                    il[curPort].Text = tmp[0];
                 else
-                    rl[0].Text = tmp[0];
+                    rl[curPort].Text = tmp[0];
             }
             catch (Exception)
             {
@@ -163,6 +165,15 @@ namespace jmILRL
             {
                 comboBoxPort.Items.Add(i + 1);
             }
+        }
+
+        private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            curPort = comboBoxPort.SelectedIndex + 1;
+        }
+
+        private string killdB(string dB) {
+            return dB.Replace("dB", "");
         }
     }
 }
