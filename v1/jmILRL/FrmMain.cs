@@ -40,7 +40,7 @@ namespace jmILRL
         /// </summary>
         FBTService fbtService = new FBTService();
 
-        private int curPort = 1;
+        private int curPort = 1, totalPort = 2;
 
         private Label[] il = new Label[4];
         private Label[] rl = new Label[4];
@@ -58,6 +58,8 @@ namespace jmILRL
         /// 10次数组取最值
         /// </summary>
         private float[] RLs = new float[10];
+
+        private float ilLevel = 0,rlLevel=0;
 
         public FrmMain()
         {
@@ -102,10 +104,12 @@ namespace jmILRL
                     btnTest.Enabled = true;
                 }
                 else {
-                    rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", comboBoxILRL.Text));
+                    rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
                     timerCount++;
                 }
             };
+            ilLevel = float.Parse(config.AppSettings.Settings["level_IL"].Value);
+            rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
         }
 
         /// <summary>
@@ -128,11 +132,11 @@ namespace jmILRL
                 {
                     rs232.Com = portnames[0];
                     rs232.Open();
-
+                    labelCom.Text = string.Format("COM：{0}", "已连接");
                 }
                 catch (Exception ex)
                 {
-
+                    labelCom.Text = string.Format("COM：{0}", ex.Message);
                 }
 
             }
@@ -168,26 +172,29 @@ namespace jmILRL
             try
             {
                 string str = System.Text.Encoding.Default.GetString(bs);
-                labelget.Text = string.Format("get:{0}", str);
                 string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
-                if (comboBoxILRL.Text == "IL")
+                if (radioButtonIL.Checked)
                 {
                     il[curPort].Text = tmp[0];
                     ILs[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    //循环次数到
                     if (timerCount == ILs.Length - 1) {
                         float tt = Tools.getMin(ILs);
                         il[curPort].Text = tt + "dB";
                         fbt.IL[curPort - 1] = tt;
+                        level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
+
                     }
                 }
                 else {
                     rl[curPort].Text = tmp[0];
-                    //fbt.RL[curPort - 1] = Tools.killdB(tmp[0]);
                     RLs[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    //循环次数到
                     if (timerCount == RLs.Length - 1) {
                         float tt = Tools.getMin(RLs);
                         rl[curPort].Text = tt + "dB";
                         fbt.RL[curPort - 1] = tt;
+                        level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
                     }
                 }
                 
@@ -233,6 +240,26 @@ namespace jmILRL
             for (int i = 0; i < comboBoxPortType.SelectedIndex + 2; i++)
             {
                 comboBoxPort.Items.Add(i + 1);
+            }
+            switch (comboBoxPortType.SelectedIndex)
+            {
+                case 0:
+                    IL3.Text = IL4.Text = "";
+                    RL3.Text = RL4.Text = "";
+                    totalPort = 2;
+                    break;
+                case 1:
+                    IL4.Text = "";
+                    RL4.Text = "";
+                    totalPort = 3;
+                    break;
+                case 2:
+                    totalPort = 4;
+                    break
+                        ;
+                default:
+                    totalPort = 2;
+                    break;
             }
         }
 

@@ -194,6 +194,7 @@ namespace jmILRL.common
                     row.CreateCell(col++).SetCellValue("工号");
                     row.CreateCell(col++).SetCellValue("日期");
                     row.CreateCell(col++).SetCellValue("产品类型");
+                    row.CreateCell(col++).SetCellValue("等级");
                     row.CreateCell(col++).SetCellValue("IL1");
                     row.CreateCell(col++).SetCellValue("IL2");
                     row.CreateCell(col++).SetCellValue("IL3");
@@ -210,6 +211,7 @@ namespace jmILRL.common
                     row.CreateCell(col++).SetCellValue(fbt.staff);
                     row.CreateCell(col++).SetCellValue(DateTime.Now.ToString());
                     row.CreateCell(col++).SetCellValue(fbt.PortType);
+                    row.CreateCell(col++).SetCellValue(fbt.Level);
                     row.CreateCell(col++).SetCellValue(fbt.IL[0]);
                     row.CreateCell(col++).SetCellValue(fbt.IL[1]);
                     row.CreateCell(col++).SetCellValue(fbt.IL[2]);

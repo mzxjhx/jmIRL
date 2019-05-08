@@ -1,4 +1,5 @@
-﻿using System;
+﻿using jmILRL.DAL;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -56,6 +57,49 @@ namespace jmILRL.common
                     min = input[i];
             }
             return min;
+        }
+
+        /// <summary>
+        /// IL大于阈值时返回true
+        /// </summary>
+        /// <param name="port">出纤总数</param>
+        /// <param name="fbt">fbt类</param>
+        /// <param name="level">阈值</param>
+        /// <returns>IL大于阈值时返回true</returns>
+        public static bool isBeyond(int port, FBT fbt, float level) {
+            bool fl = false;
+            for (int i = 0; i < port; i++)
+            {
+                if (fbt.IL[i] > level)
+                {
+                    fl = true;
+                    fbt.Level = "不合格";
+                    break;
+                }                    
+            }
+            return fl;
+        }
+
+        /// <summary>
+        /// RL大于阈值时返回true
+        /// </summary>
+        /// <param name="port">出纤总数</param>
+        /// <param name="fbt">fbt类</param>
+        /// <param name="level">阈值</param>
+        /// <returns>IL大于阈值时返回true</returns>
+        public static bool isBelow(int port, FBT fbt, float level)
+        {
+            bool fl = false;
+            for (int i = 0; i < port; i++)
+            {
+                if (fbt.IL[i] < level)
+                {
+                    fl = true;
+                    fbt.Level = "不合格";
+                    break;
+                }
+            }
+            return fl;
         }
     }
 }
