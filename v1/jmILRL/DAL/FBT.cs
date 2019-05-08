@@ -30,6 +30,10 @@ namespace jmILRL.DAL
         /// 端口类型
         /// </summary>
         public String PortType { get; set; }
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public String Level { get; set; }
 
         /// <summary>
         /// 默认构造函数，IL、RL均=4

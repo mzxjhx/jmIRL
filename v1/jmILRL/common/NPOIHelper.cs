@@ -170,48 +170,61 @@ namespace jmILRL.common
         }
 
         public void dataToExcel(string file,FBT fbt) {
-            int i = 0;
-            int j = 0;
-            int count = 0;
             ISheet sheet = null;
 
-            fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            if (fileName.IndexOf(".xlsx") > 0) // 2007版本
-                workbook = new XSSFWorkbook();
-            else if (fileName.IndexOf(".xls") > 0) // 2003版本
-                workbook = new HSSFWorkbook();
-
-            try
+            using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
-                if (workbook != null)
-                {
-                    sheet = workbook.CreateSheet("sheet1");
-                }
 
-                /*
-                IRow row = sheet.CreateRow(0);
-                for (j = 0; j < data.Columns.Count; ++j)
-                {
-                    row.CreateCell(j).SetCellValue(data.Columns[j].ColumnName);
-                }
-                count = 1;
+                if (file.IndexOf(".xlsx") > 0) // 2007版本
+                    workbook = new XSSFWorkbook();
+                else if (file.IndexOf(".xls") > 0) // 2003版本
+                    workbook = new HSSFWorkbook();
 
-
-                for (i = 0; i < data.Rows.Count; ++i)
+                try
                 {
-                    IRow row = sheet.CreateRow(count);
-                    for (j = 0; j < data.Columns.Count; ++j)
+                    if (workbook != null)
                     {
-                        row.CreateCell(j).SetCellValue(data.Rows[i][j].ToString());
+                        sheet = workbook.CreateSheet("sheet1");
                     }
-                    ++count;
+
+                    IRow row = sheet.CreateRow(0);
+                    int col = 0;
+                    row.CreateCell(col++).SetCellValue("制造单号");
+                    row.CreateCell(col++).SetCellValue("SN号");
+                    row.CreateCell(col++).SetCellValue("工号");
+                    row.CreateCell(col++).SetCellValue("日期");
+                    row.CreateCell(col++).SetCellValue("产品类型");
+                    row.CreateCell(col++).SetCellValue("IL1");
+                    row.CreateCell(col++).SetCellValue("IL2");
+                    row.CreateCell(col++).SetCellValue("IL3");
+                    row.CreateCell(col++).SetCellValue("IL4");
+                    row.CreateCell(col++).SetCellValue("RL1");
+                    row.CreateCell(col++).SetCellValue("RL2");
+                    row.CreateCell(col++).SetCellValue("RL3");
+                    row.CreateCell(col++).SetCellValue("RL4");
+
+                    row = sheet.CreateRow(1);
+                    col = 0;
+                    row.CreateCell(col++).SetCellValue(fbt.batchNumber);
+                    row.CreateCell(col++).SetCellValue(fbt.serialNumber);
+                    row.CreateCell(col++).SetCellValue(fbt.staff);
+                    row.CreateCell(col++).SetCellValue(DateTime.Now.ToString());
+                    row.CreateCell(col++).SetCellValue(fbt.PortType);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[0]);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[1]);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[2]);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[3]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[0]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[1]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[2]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[3]);
+
+                    workbook.Write(fs); //写入到excel
                 }
-                */
-                workbook.Write(fs); //写入到excel
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.Message);
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: " + ex.Message);
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace jmILRL.common
 {
-    class configTool
+    public class Tools
     {
         /// <summary>
         /// 修改AppSettings中配置
@@ -30,6 +30,32 @@ namespace jmILRL.common
             {
                 return false;
             }
-        }        
+        }
+
+        public static string killdB(string dB)
+        {
+            return dB.Replace("dB", "").Replace("-", "");
+        }
+
+        public static float getMax(float[] input) {
+            float max = input[0];
+            for (int i = 1; i < input.Length; i++)
+            {
+                if (input[i] > max)
+                    max = input[i];
+            }
+            return max;
+        }
+
+        public static float getMin(float[] input)
+        {
+            float min = input[0];
+            for (int i = 1; i < input.Length; i++)
+            {
+                if (input[i] < min)
+                    min = input[i];
+            }
+            return min;
+        }
     }
 }

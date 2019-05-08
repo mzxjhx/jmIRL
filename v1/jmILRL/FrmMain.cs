@@ -15,6 +15,9 @@ using System.IO;
 using Zxui;
 using System.Text.RegularExpressions;
 
+/// <summary>
+/// 
+/// </summary>
 namespace jmILRL
 {
     public partial class FrmMain : FrmBase
@@ -23,7 +26,7 @@ namespace jmILRL
         /// <summary>
         /// 文件保存路径
         /// </summary>
-        string filePath = "";
+        string filePath = "D:\\FBT";
         /// <summary>
         /// 
         /// </summary>
@@ -41,6 +44,20 @@ namespace jmILRL
 
         private Label[] il = new Label[4];
         private Label[] rl = new Label[4];
+
+        Timer timer = new Timer();
+        /// <summary>
+        /// 5秒内读10次
+        /// </summary>
+        private int timerCount = 0;
+        /// <summary>
+        /// 10次数组取最值
+        /// </summary>
+        private float[] ILs = new float[10];
+        /// <summary>
+        /// 10次数组取最值
+        /// </summary>
+        private float[] RLs = new float[10];
 
         public FrmMain()
         {
@@ -69,6 +86,26 @@ namespace jmILRL
             filePath = config.AppSettings.Settings["filePath"].Value;
 
             LabelInit();
+
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+
+            timer.Interval = 500;
+            timer.Tick += (object s, EventArgs obj) => {
+                if (!rs232.IsOpen)
+                    return;
+
+                if (timerCount > 9)
+                {
+                    timerCount = 0;
+                    timer.Enabled = false;
+                    btnTest.Enabled = true;
+                }
+                else {
+                    rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", comboBoxILRL.Text));
+                    timerCount++;
+                }
+            };
         }
 
         /// <summary>
@@ -77,13 +114,14 @@ namespace jmILRL
         private void PortInit()
         {
             string[] portnames = System.IO.Ports.SerialPort.GetPortNames();
-            foreach (string item in portnames)
-            {
+            //foreach (string item in portnames)
+            //{
                 
-            }
+            //}
             if (portnames.Length == 0)
             {
-
+                MessageBox.Show("未找到串口，请确认！");
+                return;
             }
             else {
                 try
@@ -133,9 +171,26 @@ namespace jmILRL
                 labelget.Text = string.Format("get:{0}", str);
                 string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
                 if (comboBoxILRL.Text == "IL")
+                {
                     il[curPort].Text = tmp[0];
-                else
+                    ILs[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    if (timerCount == ILs.Length - 1) {
+                        float tt = Tools.getMin(ILs);
+                        il[curPort].Text = tt + "dB";
+                        fbt.IL[curPort - 1] = tt;
+                    }
+                }
+                else {
                     rl[curPort].Text = tmp[0];
+                    //fbt.RL[curPort - 1] = Tools.killdB(tmp[0]);
+                    RLs[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    if (timerCount == RLs.Length - 1) {
+                        float tt = Tools.getMin(RLs);
+                        rl[curPort].Text = tt + "dB";
+                        fbt.RL[curPort - 1] = tt;
+                    }
+                }
+                
             }
             catch (Exception)
             {
@@ -144,18 +199,32 @@ namespace jmILRL
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            if (!rs232.IsOpen)
-                return;
-            
-            rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", comboBoxILRL.Text));
+            //if (!rs232.IsOpen)
+            //    return;
+
+            //rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", comboBoxILRL.Text));
+            timer.Enabled = true;
         }
 
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
-        {            
+        {
+            if (serialNumber.Text.Trim() == "") {
+                MessageBox.Show("请填写SN号");
+                return;
+            }
+            fbt.serialNumber = serialNumber.Text.Trim();
+            fbt.batchNumber = batchNumber.Text.Trim();
+            fbt.staff = textBoxID.Text.Trim();
+            fbt.PortType = comboBoxPortType.Text;
+            npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
             /*
-            npoiHelper.dataToExcel(Path.Combine(filePath,serialNumber+ ".xls"), fbt);
-            fbtService.addNewFBT(fbt);
-            */
+           fbtService.addNewFBT(fbt);
+           */
         }
 
         private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)
@@ -172,8 +241,6 @@ namespace jmILRL
             curPort = comboBoxPort.SelectedIndex + 1;
         }
 
-        private string killdB(string dB) {
-            return dB.Replace("dB", "");
-        }
+
     }
 }
