@@ -40,7 +40,7 @@ namespace jmILRL
         /// </summary>
         FBTService fbtService = new FBTService();
 
-        private int curPort = 1, totalPort = 2;
+        private int curPort = 0, totalPort = 2;
 
         private Label[] labelIL = new Label[4];
         private Label[] labelRL = new Label[4];
@@ -50,6 +50,8 @@ namespace jmILRL
         /// 5秒内读10次
         /// </summary>
         private int timerCount = 0;
+
+        private bool flag = false;
         /// <summary>
         /// 10次数组取最值
         /// </summary>
@@ -83,10 +85,7 @@ namespace jmILRL
         {
             rs232.OnCallBack += Rs232_DataRec;
             PortInit();
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            String sqlcon = config.AppSettings.Settings["connString"].Value;
-            filePath = config.AppSettings.Settings["filePath"].Value;
-
+            ReadConfig();
             LabelInit();
 
             if (!Directory.Exists(filePath))
@@ -105,9 +104,17 @@ namespace jmILRL
                 }
                 else {
                     rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
-                    timerCount++;
+                    if (timerCount == ilstmp.Length - 1)
+                        flag = true;
                 }
             };
+
+        }
+
+        private void ReadConfig() {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            String sqlcon = config.AppSettings.Settings["connString"].Value;
+            filePath = config.AppSettings.Settings["filePath"].Value;
             ilLevel = float.Parse(config.AppSettings.Settings["level_IL"].Value);
             rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
         }
@@ -175,24 +182,26 @@ namespace jmILRL
                 string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
                 if (radioButtonIL.Checked)
                 {
-                    labelIL[curPort].Text = tmp[0];
-                    ilstmp[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    labelIL[curPort].Text = String.Format("IL{0}: {1} dB ",curPort, Tools.killdB(tmp[0]));
+                    ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
                     //循环次数到
-                    if (timerCount == ilstmp.Length - 1) {
+                    if (flag) {
+                        flag = !flag;
                         float tt = Tools.getMin(ilstmp);
                         labelIL[curPort].Text = tt + "dB";
-                        fbt.IL[curPort - 1] = tt;
+                        fbt.IL[curPort] = tt;
                         level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                     }
                 }
                 else {
-                    labelRL[curPort].Text = tmp[0];
-                    rlstmp[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    labelRL[curPort].Text = String.Format("RL{0}: {1} dB ", curPort, Tools.killdB(tmp[0]));
+                    rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
                     //循环次数到
-                    if (timerCount == rlstmp.Length - 1) {
+                    if (flag) {
+                        flag = !flag;
                         float tt = Tools.getMin(rlstmp);
                         labelRL[curPort].Text = tt + "dB";
-                        fbt.RL[curPort - 1] = tt;
+                        fbt.RL[curPort] = tt;
                         level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
                     }
                 }
@@ -233,6 +242,8 @@ namespace jmILRL
            */
         }
 
+
+
         private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxPort.Items.Clear();
@@ -262,11 +273,33 @@ namespace jmILRL
             }
         }
 
-        private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
+        private void pictureBox2_MouseHover(object sender, EventArgs e)
         {
-            curPort = comboBoxPort.SelectedIndex + 1;
+            pictureBox2.BackColor = Color.FromArgb(155, 0, 155, 0);
         }
 
+        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox2.BackColor = Color.Transparent;
+        }
 
+        private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            curPort = comboBoxPort.SelectedIndex;
+        }
+        /// <summary>
+        /// 设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            FrmOption frm = new FrmOption();
+            frm.OnParamChange += (obj, parm) =>
+            {
+                ReadConfig();
+            };
+            frm.ShowDialog();
+        }
     }
 }

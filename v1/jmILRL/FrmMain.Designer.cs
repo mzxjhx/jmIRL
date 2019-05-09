@@ -44,14 +44,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxPort = new System.Windows.Forms.ComboBox();
-            this.RL4 = new Zxui.ColorLabel();
-            this.RL3 = new Zxui.ColorLabel();
-            this.RL2 = new Zxui.ColorLabel();
-            this.RL1 = new Zxui.ColorLabel();
-            this.IL4 = new Zxui.ColorLabel();
-            this.IL3 = new Zxui.ColorLabel();
-            this.IL2 = new Zxui.ColorLabel();
-            this.IL1 = new Zxui.ColorLabel();
+            this.RL4 = new System.Windows.Forms.Label();
+            this.RL3 = new System.Windows.Forms.Label();
+            this.RL2 = new System.Windows.Forms.Label();
+            this.RL1 = new System.Windows.Forms.Label();
+            this.IL4 = new System.Windows.Forms.Label();
+            this.IL3 = new System.Windows.Forms.Label();
+            this.IL2 = new System.Windows.Forms.Label();
+            this.IL1 = new System.Windows.Forms.Label();
             this.level = new Result.Result();
             this.labelCom = new System.Windows.Forms.Label();
             this.radioButtonIL = new System.Windows.Forms.RadioButton();
@@ -59,16 +59,18 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnMini
             // 
             this.btnMini.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMini.BackgroundImage = global::jmILRL.Properties.Resources._3btn_mini1;
-            this.btnMini.Location = new System.Drawing.Point(719, 8);
+            this.btnMini.Location = new System.Drawing.Point(661, 8);
             this.btnMini.Name = "btnMini";
             this.btnMini.Size = new System.Drawing.Size(32, 23);
             this.btnMini.TabIndex = 6;
@@ -80,7 +82,7 @@
             this.btnEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEx1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnEx1.EnterColor = System.Drawing.Color.Red;
-            this.btnEx1.Location = new System.Drawing.Point(749, 11);
+            this.btnEx1.Location = new System.Drawing.Point(697, 11);
             this.btnEx1.Name = "btnEx1";
             this.btnEx1.Size = new System.Drawing.Size(20, 20);
             this.btnEx1.TabIndex = 9;
@@ -97,7 +99,7 @@
             this.btnTest.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnTest.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTest.ForeColor = System.Drawing.Color.Black;
-            this.btnTest.Location = new System.Drawing.Point(604, 284);
+            this.btnTest.Location = new System.Drawing.Point(560, 281);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(89, 32);
             this.btnTest.TabIndex = 12;
@@ -192,7 +194,7 @@
             this.btnSave.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(604, 342);
+            this.btnSave.Location = new System.Drawing.Point(560, 339);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 32);
             this.btnSave.TabIndex = 12;
@@ -234,9 +236,7 @@
             // RL4
             // 
             this.RL4.AutoSize = true;
-            this.RL4.Beyong = false;
             this.RL4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL4.Lever = 0D;
             this.RL4.Location = new System.Drawing.Point(365, 31);
             this.RL4.Name = "RL4";
             this.RL4.Size = new System.Drawing.Size(32, 16);
@@ -246,9 +246,7 @@
             // RL3
             // 
             this.RL3.AutoSize = true;
-            this.RL3.Beyong = false;
             this.RL3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL3.Lever = 0D;
             this.RL3.Location = new System.Drawing.Point(252, 31);
             this.RL3.Name = "RL3";
             this.RL3.Size = new System.Drawing.Size(32, 16);
@@ -258,9 +256,7 @@
             // RL2
             // 
             this.RL2.AutoSize = true;
-            this.RL2.Beyong = false;
             this.RL2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL2.Lever = 0D;
             this.RL2.Location = new System.Drawing.Point(146, 31);
             this.RL2.Name = "RL2";
             this.RL2.Size = new System.Drawing.Size(32, 16);
@@ -270,9 +266,7 @@
             // RL1
             // 
             this.RL1.AutoSize = true;
-            this.RL1.Beyong = false;
             this.RL1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL1.Lever = 0D;
             this.RL1.Location = new System.Drawing.Point(43, 31);
             this.RL1.Name = "RL1";
             this.RL1.Size = new System.Drawing.Size(32, 16);
@@ -282,9 +276,7 @@
             // IL4
             // 
             this.IL4.AutoSize = true;
-            this.IL4.Beyong = false;
             this.IL4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL4.Lever = 0D;
             this.IL4.Location = new System.Drawing.Point(365, 31);
             this.IL4.Name = "IL4";
             this.IL4.Size = new System.Drawing.Size(32, 16);
@@ -294,9 +286,7 @@
             // IL3
             // 
             this.IL3.AutoSize = true;
-            this.IL3.Beyong = false;
             this.IL3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL3.Lever = 0D;
             this.IL3.Location = new System.Drawing.Point(252, 31);
             this.IL3.Name = "IL3";
             this.IL3.Size = new System.Drawing.Size(32, 16);
@@ -306,9 +296,7 @@
             // IL2
             // 
             this.IL2.AutoSize = true;
-            this.IL2.Beyong = false;
             this.IL2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL2.Lever = 0D;
             this.IL2.Location = new System.Drawing.Point(146, 31);
             this.IL2.Name = "IL2";
             this.IL2.Size = new System.Drawing.Size(32, 16);
@@ -318,9 +306,7 @@
             // IL1
             // 
             this.IL1.AutoSize = true;
-            this.IL1.Beyong = false;
             this.IL1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL1.Lever = 0D;
             this.IL1.Location = new System.Drawing.Point(43, 31);
             this.IL1.Name = "IL1";
             this.IL1.Size = new System.Drawing.Size(32, 16);
@@ -407,12 +393,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "RL";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(573, 8);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox2.TabIndex = 97;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
+            this.pictureBox2.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(784, 491);
+            this.ClientSize = new System.Drawing.Size(732, 491);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
@@ -446,6 +445,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,14 +468,23 @@
         private System.Windows.Forms.ComboBox comboBoxPort;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private Zxui.ColorLabel RL4;
-        private Zxui.ColorLabel RL3;
-        private Zxui.ColorLabel RL2;
-        private Zxui.ColorLabel RL1;
-        private Zxui.ColorLabel IL4;
-        private Zxui.ColorLabel IL3;
-        private Zxui.ColorLabel IL2;
-        private Zxui.ColorLabel IL1;
+        //private Zxui.ColorLabel RL4;
+        //private Zxui.ColorLabel RL3;
+        //private Zxui.ColorLabel RL2;
+        //private Zxui.ColorLabel RL1;
+        //private Zxui.ColorLabel IL4;
+        //private Zxui.ColorLabel IL3;
+        //private Zxui.ColorLabel IL2;
+        //private Zxui.ColorLabel IL1;
+
+        private System.Windows.Forms.Label RL4;
+        private System.Windows.Forms.Label RL3;
+        private System.Windows.Forms.Label RL2;
+        private System.Windows.Forms.Label RL1;
+        private System.Windows.Forms.Label IL4;
+        private System.Windows.Forms.Label IL3;
+        private System.Windows.Forms.Label IL2;
+        private System.Windows.Forms.Label IL1;
         private Result.Result level;
         private System.Windows.Forms.Label labelCom;
         private System.Windows.Forms.RadioButton radioButtonIL;
@@ -483,6 +492,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

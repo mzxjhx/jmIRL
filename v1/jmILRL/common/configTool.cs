@@ -70,7 +70,7 @@ namespace jmILRL.common
             bool fl = false;
             for (int i = 0; i < port; i++)
             {
-                if (fbt.IL[i] > level)
+                if (fbt.IL[i] > 10 && fbt.IL[i] > level)
                 {
                     fl = true;
                     fbt.Level = "不合格";
@@ -92,7 +92,7 @@ namespace jmILRL.common
             bool fl = false;
             for (int i = 0; i < port; i++)
             {
-                if (fbt.IL[i] < level)
+                if (fbt.RL[i] > 10 && fbt.IL[i] < level)
                 {
                     fl = true;
                     fbt.Level = "不合格";
