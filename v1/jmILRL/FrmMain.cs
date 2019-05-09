@@ -42,8 +42,8 @@ namespace jmILRL
 
         private int curPort = 1, totalPort = 2;
 
-        private Label[] il = new Label[4];
-        private Label[] rl = new Label[4];
+        private Label[] labelIL = new Label[4];
+        private Label[] labelRL = new Label[4];
 
         Timer timer = new Timer();
         /// <summary>
@@ -53,11 +53,11 @@ namespace jmILRL
         /// <summary>
         /// 10次数组取最值
         /// </summary>
-        private float[] ILs = new float[10];
+        private float[] ilstmp = new float[10];
         /// <summary>
         /// 10次数组取最值
         /// </summary>
-        private float[] RLs = new float[10];
+        private float[] rlstmp = new float[10];
 
         private float ilLevel = 0,rlLevel=0;
 
@@ -66,7 +66,7 @@ namespace jmILRL
             InitializeComponent();
             _isResize = false;
             _isDBMax = false;
-            //this.WindowState = FormWindowState.Maximized;
+
         }       
 
         private void btnMini_Click(object sender, EventArgs e)
@@ -144,23 +144,23 @@ namespace jmILRL
         }
 
         private void LabelInit() {
-            for (int i = 0; i < il.Length; i++)
+            for (int i = 0; i < labelIL.Length; i++)
             {
-                il[i] = new Label();
+                labelIL[i] = new Label();
             }
-            il[0] = IL1;
-            il[1] = IL2;
-            il[2] = IL3;
-            il[3] = IL4;
+            labelIL[0] = IL1;
+            labelIL[1] = IL2;
+            labelIL[2] = IL3;
+            labelIL[3] = IL4;
 
-            for (int i = 0; i < rl.Length; i++)
+            for (int i = 0; i < labelRL.Length; i++)
             {
-                rl[i] = new Label();
+                labelRL[i] = new Label();
             }
-            rl[0] = RL1;
-            rl[1] = RL2;
-            rl[2] = RL3;
-            rl[3] = RL4;
+            labelRL[0] = RL1;
+            labelRL[1] = RL2;
+            labelRL[2] = RL3;
+            labelRL[3] = RL4;
         }
 
         /// <summary>
@@ -175,24 +175,23 @@ namespace jmILRL
                 string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
                 if (radioButtonIL.Checked)
                 {
-                    il[curPort].Text = tmp[0];
-                    ILs[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    labelIL[curPort].Text = tmp[0];
+                    ilstmp[timerCount] = float.Parse(Tools.killdB(tmp[0]));
                     //循环次数到
-                    if (timerCount == ILs.Length - 1) {
-                        float tt = Tools.getMin(ILs);
-                        il[curPort].Text = tt + "dB";
+                    if (timerCount == ilstmp.Length - 1) {
+                        float tt = Tools.getMin(ilstmp);
+                        labelIL[curPort].Text = tt + "dB";
                         fbt.IL[curPort - 1] = tt;
                         level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
-
                     }
                 }
                 else {
-                    rl[curPort].Text = tmp[0];
-                    RLs[timerCount] = float.Parse(Tools.killdB(tmp[0]));
+                    labelRL[curPort].Text = tmp[0];
+                    rlstmp[timerCount] = float.Parse(Tools.killdB(tmp[0]));
                     //循环次数到
-                    if (timerCount == RLs.Length - 1) {
-                        float tt = Tools.getMin(RLs);
-                        rl[curPort].Text = tt + "dB";
+                    if (timerCount == rlstmp.Length - 1) {
+                        float tt = Tools.getMin(rlstmp);
+                        labelRL[curPort].Text = tt + "dB";
                         fbt.RL[curPort - 1] = tt;
                         level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
                     }
