@@ -99,8 +99,18 @@ namespace jmILRL
                 if (timerCount > 9)
                 {
                     timerCount = 0;
-                    timer.Enabled = false;
-                    btnTest.Enabled = true;
+                    //timer.Enabled = false;
+                    //btnTest.Enabled = true;
+                    if (MessageBox.Show("是否测下一步骤?", "提示", MessageBoxButtons.YesNo) == DialogResult.OK)
+                    {
+                        timer.Enabled = true;
+                        btnTest.Enabled = false;
+                        curPort++;
+                    }
+                    else {
+                        timer.Enabled = false;
+                        btnTest.Enabled = true;
+                    }
                 }
                 else {
                     rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
