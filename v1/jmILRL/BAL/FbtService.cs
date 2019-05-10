@@ -13,19 +13,25 @@ namespace jmILRL.BAL
     /// </summary>
     public class FBTService
     {
+        MysqlTools helper = new MysqlTools();
+        public FBTService() {
+
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public int addNewFBT(FBT fbt)
         {
-
-            return MysqlHelper.execSql(@"insert into t_IRL values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@RL1,@RL2,@RL3)",
+            
+            return helper.execSql(@"insert into t_IRL(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,RL1,RL2,RL3,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@RL1,@RL2,@RL3,@level,@port_type)",
                 new MySqlParameter[]{
                     new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
                     new MySqlParameter("@staff",MySqlDbType.VarString){Value = fbt.staff},
                     new MySqlParameter("@create_time",MySqlDbType.DateTime){Value = DateTime.Now},
+                    new MySqlParameter("@port_type",MySqlDbType.VarChar){Value = fbt.PortType},
+                    new MySqlParameter("@level",MySqlDbType.UByte){Value = fbt.Level},
                     new MySqlParameter("@IL1",MySqlDbType.Float){Value = fbt.IL[0]},
                     new MySqlParameter("@IL2",MySqlDbType.Float){Value = fbt.IL[1]},
                     new MySqlParameter("@IL3",MySqlDbType.Float){Value = fbt.IL[2]},
@@ -60,35 +66,43 @@ namespace jmILRL.BAL
             string sql = "update t_IRL set " +
                          " batch_number=@batch_number " +
                          " where serial_number=@serial_number ";
-            return MysqlHelper.execSql(sql, param);
+            return helper.execSql(sql, param);
+        }
+        /// <summary>
+        /// 判断sn号是否已经存在
+        /// </summary>
+        /// <returns></returns>
+        public bool exist(string sn)
+        {
+
+            return helper.getCount("select count(*) from t_IRL where serial_number=@sn", new MySqlParameter[]{
+                    new MySqlParameter("@sn",MySqlDbType.VarChar){Value = sn},
+                }) > 0;
+        }
+        /// <summary>
+        /// 分页查找
+        /// </summary>
+        /// <returns></returns>
+        public DataTable getTableByPage(string sql, MySqlParameter[] param)
+        {
+
+            return helper.getDataTable(sql, param);
+
+        }
+
+        public int getCount(string sql, MySqlParameter[] param)
+        {
+            return helper.getCount(sql, param);
         }
 
         /// <summary>
-        /// 分页查找菜单
+        /// 分页查找
         /// </summary>
         /// <returns></returns>
-        public DataTable getFBTByPage(string sql,int page,ref int total)
+        public DataTable getTableByPage(string sql)
         {
-            List<FBT> list = new List<FBT>();
-            DataTable dt = MysqlHelper.getDataTable(sql, null);
-            MySqlParameter[] param = {
-                    new MySqlParameter("@page",MySqlDbType.Int16){Value =page},
-                    new MySqlParameter("@offset",MySqlDbType.Int16){Value = 10},
-            };
-            total = MysqlHelper.getCount("select count(*) from t_IRL limit @page , @offset", param);
-            return dt;
-        }
 
-
-        /// <summary>
-        /// 分页查找菜单
-        /// </summary>
-        /// <returns></returns>
-        public DataTable getFoods(string sql)
-        {
-            List<FBT> list = new List<FBT>();
-            DataTable dt = MysqlHelper.getDataTable(sql, null);
-            return dt;
+            return helper.getDataTable(sql, null);
         }
     }
 }

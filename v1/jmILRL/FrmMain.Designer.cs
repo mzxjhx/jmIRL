@@ -59,11 +59,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxSet = new System.Windows.Forms.PictureBox();
+            this.pictureBoxReview = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReview)).BeginInit();
             this.SuspendLayout();
             // 
             // btnMini
@@ -393,17 +395,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "RL";
             // 
-            // pictureBox2
+            // pictureBoxSet
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(573, 8);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox2.TabIndex = 97;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
-            this.pictureBox2.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
+            this.pictureBoxSet.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxSet.Image")));
+            this.pictureBoxSet.Location = new System.Drawing.Point(573, 8);
+            this.pictureBoxSet.Name = "pictureBoxSet";
+            this.pictureBoxSet.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxSet.TabIndex = 97;
+            this.pictureBoxSet.TabStop = false;
+            this.pictureBoxSet.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.pictureBoxSet.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
+            this.pictureBoxSet.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
+            // 
+            // pictureBoxReview
+            // 
+            this.pictureBoxReview.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxReview.Image")));
+            this.pictureBoxReview.Location = new System.Drawing.Point(612, 8);
+            this.pictureBoxReview.Name = "pictureBoxReview";
+            this.pictureBoxReview.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxReview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxReview.TabIndex = 98;
+            this.pictureBoxReview.TabStop = false;
+            this.pictureBoxReview.Click += new System.EventHandler(this.pictureBoxReview_Click);
             // 
             // FrmMain
             // 
@@ -411,7 +424,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(732, 491);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBoxReview);
+            this.Controls.Add(this.pictureBoxSet);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
@@ -445,7 +459,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxReview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -492,7 +507,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBoxSet;
+        private System.Windows.Forms.PictureBox pictureBoxReview;
     }
 }
 

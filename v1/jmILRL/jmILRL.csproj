@@ -113,6 +113,12 @@
     <Compile Include="FormFileDown.Designer.cs">
       <DependentUpon>FormFileDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sections\FormReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sections\FormReview.designer.cs">
+      <DependentUpon>FormReview.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     <EmbeddedResource Include="FormFileDown.resx">
       <DependentUpon>FormFileDown.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sections\FormReview.resx">
+      <DependentUpon>FormReview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -235,9 +244,7 @@
   <ItemGroup>
     <None Include="Resources\btn-normal.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sections\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>

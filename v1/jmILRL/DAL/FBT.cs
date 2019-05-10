@@ -31,11 +31,11 @@ namespace jmILRL.DAL
         /// </summary>
         public String PortType { get; set; }
 
-        private string _level = "合格";
+        private int _level = 1;
         /// <summary>
-        /// 等级
+        /// 等级:0-不合格，1-合格。默认合格
         /// </summary>
-        public String Level { get { return _level; } set { this._level = value; } }
+        public int Level { get { return _level; } set { this._level = value; } }
 
         /// <summary>
         /// 默认构造函数，IL、RL均=4

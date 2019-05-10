@@ -80,7 +80,8 @@ namespace jmILRL.UI
                 btn[i].EnterColor = Color.FromArgb(0xe5, 0xe5, 0xe5);
                 btn[i].ClickColor = this.BackColor;
 
-                btn[i].ForeColor = Color.FromArgb(0x5d, 0x5d, 0x5d);
+                btn[i].ForeColor = Color.FromArgb(0,0,0);
+                btn[i].Font = this.Font;
                 btn[i].Click += btn_Click;
 
                 panelbtn.Controls.Add(btn[i]);

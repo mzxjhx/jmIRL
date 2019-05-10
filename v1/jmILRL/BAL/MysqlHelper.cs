@@ -12,17 +12,20 @@ namespace jmILRL.BAL
     /// <summary>
     /// 
     /// </summary>
-    public class MysqlHelper
+    public class MysqlTools
     {
-        private static string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_IRL;Charset=utf8";//连接MySQL的字符串
-        private static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        private string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_IRL;Charset=utf8";//连接MySQL的字符串
+        private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        public MysqlTools() {
+            sqlcon = config.AppSettings.Settings["connString"].Value;
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static int insert(string sql, MySqlParameter[] param)
+        public int insert(string sql, MySqlParameter[] param)
         {
             sqlcon = config.AppSettings.Settings["connString"].Value;
             Console.WriteLine(string.Format(">>>>>>>>>>>insert sql={0}", sql));
@@ -69,7 +72,7 @@ namespace jmILRL.BAL
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static int execSql(string sql, MySqlParameter[] param)
+        public int execSql(string sql, MySqlParameter[] param)
         {
 
             int res = 0;
@@ -111,7 +114,7 @@ namespace jmILRL.BAL
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static DataTable getDataTable(string sql, MySqlParameter[] param)
+        public DataTable getDataTable(string sql, MySqlParameter[] param)
         {
             Console.WriteLine(string.Format(">>>>>>>>>>>getDataTable  sql={0}", sql));
             
@@ -153,7 +156,7 @@ namespace jmILRL.BAL
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static int getCount(string sql, MySqlParameter[] param)
+        public int getCount(string sql, MySqlParameter[] param)
         {
             Console.WriteLine(string.Format(">>>>>>>>>>>getCount = {0}", sql));
             int count = 0;

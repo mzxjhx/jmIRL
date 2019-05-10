@@ -73,7 +73,7 @@ namespace jmILRL.common
                 if (fbt.IL[i] > 10 && fbt.IL[i] > level)
                 {
                     fl = true;
-                    fbt.Level = "不合格";
+                    fbt.Level = 0;
                     break;
                 }                    
             }
@@ -95,7 +95,7 @@ namespace jmILRL.common
                 if (fbt.RL[i] > 10 && fbt.IL[i] < level)
                 {
                     fl = true;
-                    fbt.Level = "不合格";
+                    fbt.Level = 0;
                     break;
                 }
             }

@@ -246,13 +246,16 @@ namespace jmILRL
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
-            npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
-            /*
-           fbtService.addNewFBT(fbt);
-           */
+            if (fbtService.exist(fbt.serialNumber))
+            {
+                //已存在SN号
+
+            }
+            else {
+                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+                fbtService.addNewFBT(fbt);
+            }           
         }
-
-
 
         private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -285,12 +288,24 @@ namespace jmILRL
 
         private void pictureBox2_MouseHover(object sender, EventArgs e)
         {
-            pictureBox2.BackColor = Color.FromArgb(155, 0, 155, 0);
+            pictureBoxSet.BackColor = Color.FromArgb(155, 0, 155, 0);
         }
 
         private void pictureBox2_MouseLeave(object sender, EventArgs e)
         {
-            pictureBox2.BackColor = Color.Transparent;
+            pictureBoxSet.BackColor = Color.Transparent;
+        }
+
+        /// <summary>
+        /// 数据库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBoxReview_Click(object sender, EventArgs e)
+        {
+            //new Sections.FormReview().ShowDialog();
+            Sections.FormReview frm = new Sections.FormReview();
+            frm.ShowDialog();
         }
 
         private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
