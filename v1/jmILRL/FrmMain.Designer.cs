@@ -61,6 +61,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBoxSet = new System.Windows.Forms.PictureBox();
             this.pictureBoxReview = new System.Windows.Forms.PictureBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -239,7 +240,7 @@
             // 
             this.RL4.AutoSize = true;
             this.RL4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL4.Location = new System.Drawing.Point(365, 31);
+            this.RL4.Location = new System.Drawing.Point(392, 31);
             this.RL4.Name = "RL4";
             this.RL4.Size = new System.Drawing.Size(32, 16);
             this.RL4.TabIndex = 1;
@@ -249,7 +250,7 @@
             // 
             this.RL3.AutoSize = true;
             this.RL3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL3.Location = new System.Drawing.Point(252, 31);
+            this.RL3.Location = new System.Drawing.Point(276, 31);
             this.RL3.Name = "RL3";
             this.RL3.Size = new System.Drawing.Size(32, 16);
             this.RL3.TabIndex = 2;
@@ -269,7 +270,7 @@
             // 
             this.RL1.AutoSize = true;
             this.RL1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL1.Location = new System.Drawing.Point(43, 31);
+            this.RL1.Location = new System.Drawing.Point(29, 31);
             this.RL1.Name = "RL1";
             this.RL1.Size = new System.Drawing.Size(32, 16);
             this.RL1.TabIndex = 4;
@@ -279,7 +280,7 @@
             // 
             this.IL4.AutoSize = true;
             this.IL4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL4.Location = new System.Drawing.Point(365, 31);
+            this.IL4.Location = new System.Drawing.Point(394, 31);
             this.IL4.Name = "IL4";
             this.IL4.Size = new System.Drawing.Size(32, 16);
             this.IL4.TabIndex = 0;
@@ -289,7 +290,7 @@
             // 
             this.IL3.AutoSize = true;
             this.IL3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL3.Location = new System.Drawing.Point(252, 31);
+            this.IL3.Location = new System.Drawing.Point(276, 31);
             this.IL3.Name = "IL3";
             this.IL3.Size = new System.Drawing.Size(32, 16);
             this.IL3.TabIndex = 0;
@@ -309,7 +310,7 @@
             // 
             this.IL1.AutoSize = true;
             this.IL1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL1.Location = new System.Drawing.Point(43, 31);
+            this.IL1.Location = new System.Drawing.Point(27, 31);
             this.IL1.Name = "IL1";
             this.IL1.Size = new System.Drawing.Size(32, 16);
             this.IL1.TabIndex = 0;
@@ -318,7 +319,7 @@
             // level
             // 
             this.level.Fontsize = 16;
-            this.level.Location = new System.Drawing.Point(585, 83);
+            this.level.Location = new System.Drawing.Point(593, 83);
             this.level.Name = "level";
             this.level.ShowResult = Result.result.none;
             this.level.Size = new System.Drawing.Size(108, 73);
@@ -375,7 +376,7 @@
             this.groupBox1.Controls.Add(this.IL1);
             this.groupBox1.Controls.Add(this.IL3);
             this.groupBox1.Controls.Add(this.IL4);
-            this.groupBox1.Location = new System.Drawing.Point(42, 57);
+            this.groupBox1.Location = new System.Drawing.Point(24, 57);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(489, 64);
             this.groupBox1.TabIndex = 95;
@@ -388,7 +389,7 @@
             this.groupBox2.Controls.Add(this.RL1);
             this.groupBox2.Controls.Add(this.RL2);
             this.groupBox2.Controls.Add(this.RL3);
-            this.groupBox2.Location = new System.Drawing.Point(42, 174);
+            this.groupBox2.Location = new System.Drawing.Point(24, 174);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(489, 72);
             this.groupBox2.TabIndex = 96;
@@ -416,7 +417,16 @@
             this.pictureBoxReview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxReview.TabIndex = 98;
             this.pictureBoxReview.TabStop = false;
+            this.pictureBoxReview.Visible = false;
             this.pictureBoxReview.Click += new System.EventHandler(this.pictureBoxReview_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(185, 452);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(541, 33);
+            this.richTextBox1.TabIndex = 99;
+            this.richTextBox1.Text = "";
             // 
             // FrmMain
             // 
@@ -424,6 +434,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(732, 491);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBoxReview);
             this.Controls.Add(this.pictureBoxSet);
             this.Controls.Add(this.groupBox2);
@@ -509,6 +520,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBoxSet;
         private System.Windows.Forms.PictureBox pictureBoxReview;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

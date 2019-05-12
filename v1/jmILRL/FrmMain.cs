@@ -99,15 +99,23 @@ namespace jmILRL
                 if (timerCount > 9)
                 {
                     timerCount = 0;
-                    //timer.Enabled = false;
-                    //btnTest.Enabled = true;
-                    if (MessageBox.Show("是否测下一步骤?", "提示", MessageBoxButtons.YesNo) == DialogResult.OK)
+                    timer.Enabled = false;
+                    btnTest.Enabled = true;
+                    if (MessageBox.Show("是否测下一步骤?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
+                        richTextBox1.Text= "继续自动测试下一步,当前步骤：" + curPort;
                         timer.Enabled = true;
                         btnTest.Enabled = false;
                         curPort++;
+                        if (curPort == totalPort) {
+                            timer.Enabled = false;
+                            btnTest.Enabled = true;
+                            toSave();
+                            curPort = 0;
+                        }
                     }
                     else {
+                        richTextBox1.Text = "不继续测试下一步";
                         timer.Enabled = false;
                         btnTest.Enabled = true;
                     }
@@ -192,25 +200,26 @@ namespace jmILRL
                 string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
                 if (radioButtonIL.Checked)
                 {
-                    labelIL[curPort].Text = String.Format("IL{0}: {1} dB ",curPort, Tools.killdB(tmp[0]));
+                    labelIL[curPort].Text = String.Format("IL{0}:{1} dB ",curPort+ 1, Tools.killdB(tmp[0]));
+
                     ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
                     //循环次数到
                     if (flag) {
                         flag = !flag;
                         float tt = Tools.getMin(ilstmp);
-                        labelIL[curPort].Text = tt + "dB";
+                        labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt); 
                         fbt.IL[curPort] = tt;
                         level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                     }
                 }
                 else {
-                    labelRL[curPort].Text = String.Format("RL{0}: {1} dB ", curPort, Tools.killdB(tmp[0]));
+                    labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
                     rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
                     //循环次数到
                     if (flag) {
                         flag = !flag;
                         float tt = Tools.getMin(rlstmp);
-                        labelRL[curPort].Text = tt + "dB";
+                        labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
                         fbt.RL[curPort] = tt;
                         level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
                     }
@@ -238,7 +247,15 @@ namespace jmILRL
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (serialNumber.Text.Trim() == "") {
+            toSave();
+        }
+
+        /// <summary>
+        /// 保存方法
+        /// </summary>
+        private void toSave() {
+            if (serialNumber.Text.Trim() == "")
+            {
                 MessageBox.Show("请填写SN号");
                 return;
             }
@@ -246,15 +263,21 @@ namespace jmILRL
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
-            if (fbtService.exist(fbt.serialNumber))
-            {
-                //已存在SN号
-
-            }
-            else {
-                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
-                fbtService.addNewFBT(fbt);
-            }           
+            //if (fbtService.exist(fbt.serialNumber))
+            //{
+            //    //已存在SN号
+            //    if(MessageBox.Show("该SN号已存在，是否覆盖？") == DialogResult.OK){
+            //        fbtService.update(fbt);
+            //        npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+            //    }
+            //}
+            //else {
+            //    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+            //    fbtService.addNewFBT(fbt);
+            //}
+            npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+            serialNumber.Text = "";
+            MessageBox.Show("数据已保存");
         }
 
         private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)

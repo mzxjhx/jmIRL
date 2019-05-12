@@ -51,9 +51,12 @@ namespace jmILRL.BAL
         public int update(FBT fbt)
         {
             MySqlParameter[] param = {
-                    new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value =fbt.serialNumber},
-                    new MySqlParameter("@batch_number",MySqlDbType.VarChar){Value = fbt.batchNumber},
-                    new MySqlParameter("@staff",MySqlDbType.Decimal){Value = fbt.staff},
+new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
+                    new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
+                    new MySqlParameter("@staff",MySqlDbType.VarString){Value = fbt.staff},
+                    new MySqlParameter("@create_time",MySqlDbType.DateTime){Value = DateTime.Now},
+                    new MySqlParameter("@port_type",MySqlDbType.VarChar){Value = fbt.PortType},
+                    new MySqlParameter("@level",MySqlDbType.UByte){Value = fbt.Level},
                     new MySqlParameter("@IL1",MySqlDbType.Float){Value = fbt.IL[0]},
                     new MySqlParameter("@IL2",MySqlDbType.Float){Value = fbt.IL[1]},
                     new MySqlParameter("@IL3",MySqlDbType.Float){Value = fbt.IL[2]},
@@ -64,7 +67,7 @@ namespace jmILRL.BAL
                     new MySqlParameter("@RL4",MySqlDbType.Float){Value = fbt.RL[3]},
                                      };
             string sql = "update t_IRL set " +
-                         " batch_number=@batch_number " +
+                         " IL1=@IL1,IL2=@IL2,IL3=@IL3,IL4=@IL4,RL1=@RL1,RL2=@RL2,RL3=@RL3,RL4=@RL4,level=@level,create_time=@create_time,staff=@staff,port_type=@port_type,batch_number=@batch_number " +
                          " where serial_number=@serial_number ";
             return helper.execSql(sql, param);
         }
