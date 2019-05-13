@@ -24,7 +24,7 @@ namespace jmILRL.BAL
         public int addNewFBT(FBT fbt)
         {
             
-            return helper.execSql(@"insert into t_IRL(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,RL1,RL2,RL3,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@RL1,@RL2,@RL3,@level,@port_type)",
+            return helper.execSql(@"insert into t_irl(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,RL1,RL2,RL3,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@RL1,@RL2,@RL3,@level,@port_type)",
                 new MySqlParameter[]{
                     new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
@@ -66,7 +66,7 @@ new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumbe
                     new MySqlParameter("@RL3",MySqlDbType.Float){Value = fbt.RL[2]},
                     new MySqlParameter("@RL4",MySqlDbType.Float){Value = fbt.RL[3]},
                                      };
-            string sql = "update t_IRL set " +
+            string sql = "update t_irl set " +
                          " IL1=@IL1,IL2=@IL2,IL3=@IL3,IL4=@IL4,RL1=@RL1,RL2=@RL2,RL3=@RL3,RL4=@RL4,level=@level,create_time=@create_time,staff=@staff,port_type=@port_type,batch_number=@batch_number " +
                          " where serial_number=@serial_number ";
             return helper.execSql(sql, param);
@@ -78,7 +78,7 @@ new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumbe
         public bool exist(string sn)
         {
 
-            return helper.getCount("select count(*) from t_IRL where serial_number=@sn", new MySqlParameter[]{
+            return helper.getCount("select count(*) from t_irl where serial_number=@sn", new MySqlParameter[]{
                     new MySqlParameter("@sn",MySqlDbType.VarChar){Value = sn},
                 }) > 0;
         }

@@ -5,6 +5,8 @@ using System.Text;
 using System.IO.Ports;
 //using FormUI;
 using System.Windows.Forms;
+
+
 namespace RS232
 {
     /// <summary>
@@ -124,6 +126,7 @@ namespace RS232
 
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            System.Threading.Thread.Sleep(100);
             int length = _serialPort.BytesToRead;
             byte[] rxdata = new byte[length];
             _serialPort.Read(rxdata, 0, length);

@@ -103,7 +103,6 @@ namespace jmILRL
                     btnTest.Enabled = true;
                     if (MessageBox.Show("是否测下一步骤?", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        richTextBox1.Text= "继续自动测试下一步,当前步骤：" + curPort;
                         timer.Enabled = true;
                         btnTest.Enabled = false;
                         curPort++;
@@ -115,7 +114,6 @@ namespace jmILRL
                         }
                     }
                     else {
-                        richTextBox1.Text = "不继续测试下一步";
                         timer.Enabled = false;
                         btnTest.Enabled = true;
                     }
@@ -276,33 +274,38 @@ namespace jmILRL
             //    fbtService.addNewFBT(fbt);
             //}
             npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
-            serialNumber.Text = "";
+            serialNumber.Text = serialNumber.Text.Trim().Length > 3 ? serialNumber.Text.Trim().Substring(0, serialNumber.Text.Trim().Length - 3) : serialNumber.Text.Trim();
             MessageBox.Show("数据已保存");
         }
 
         private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxPort.Items.Clear();
-            for (int i = 0; i < comboBoxPortType.SelectedIndex + 2; i++)
+            for (int i = 0; i < comboBoxPortType.SelectedIndex + 1; i++)
             {
                 comboBoxPort.Items.Add(i + 1);
             }
             switch (comboBoxPortType.SelectedIndex)
             {
+
                 case 0:
+                    IL2.Text = IL3.Text = IL4.Text = "";
+                    RL2.Text = RL3.Text = RL4.Text = "";
+                    totalPort = 1;
+                    break;
+                case 1:
                     IL3.Text = IL4.Text = "";
                     RL3.Text = RL4.Text = "";
                     totalPort = 2;
                     break;
-                case 1:
+                case 2:
                     IL4.Text = "";
                     RL4.Text = "";
                     totalPort = 3;
                     break;
-                case 2:
+                case 3:
                     totalPort = 4;
-                    break
-                        ;
+                    break;
                 default:
                     totalPort = 2;
                     break;

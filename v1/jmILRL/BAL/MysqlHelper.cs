@@ -14,7 +14,8 @@ namespace jmILRL.BAL
     /// </summary>
     public class MysqlTools
     {
-        private string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_IRL;Charset=utf8";//连接MySQL的字符串
+        //private string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_IRL;Charset=utf8";//连接MySQL的字符串
+        private string sqlcon="server=192.168.2.150;User Id = root; password=admin;Database=rayzer_irl;Charset=utf8";
         private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public MysqlTools() {
             sqlcon = config.AppSettings.Settings["connString"].Value;
