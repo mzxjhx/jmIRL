@@ -92,7 +92,7 @@ namespace jmILRL.common
             bool fl = false;
             for (int i = 0; i < port; i++)
             {
-                if (fbt.RL[i] > 10 && fbt.IL[i] < level)
+                if (fbt.RL[i] > 10 && fbt.RL[i] < level)
                 {
                     fl = true;
                     fbt.Level = 0;

@@ -261,19 +261,21 @@ namespace jmILRL
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
-            //if (fbtService.exist(fbt.serialNumber))
-            //{
-            //    //已存在SN号
-            //    if(MessageBox.Show("该SN号已存在，是否覆盖？") == DialogResult.OK){
-            //        fbtService.update(fbt);
-            //        npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
-            //    }
-            //}
-            //else {
-            //    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
-            //    fbtService.addNewFBT(fbt);
-            //}
-            npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+            if (fbtService.exist(fbt.serialNumber))
+            {
+                //已存在SN号
+                if (MessageBox.Show("该SN号已存在，是否覆盖？") == DialogResult.OK)
+                {
+                    fbtService.update(fbt);
+                    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+                }
+            }
+            else
+            {
+                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+                fbtService.addNewFBT(fbt);
+            }
+            //npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
             serialNumber.Text = serialNumber.Text.Trim().Length > 3 ? serialNumber.Text.Trim().Substring(0, serialNumber.Text.Trim().Length - 3) : serialNumber.Text.Trim();
             MessageBox.Show("数据已保存");
         }

@@ -17,8 +17,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `t_IRL`
 -- ----------------------------
-DROP TABLE IF EXISTS `t_IRL`;
-CREATE TABLE `t_IRL` (
+DROP TABLE IF EXISTS `t_irl`;
+CREATE TABLE `t_irl` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `serial_number` varchar(32) NOT NULL,
   `batch_number` varchar(32) NOT NULL,
@@ -41,5 +41,5 @@ CREATE TABLE `t_IRL` (
 -- ----------------------------
 -- Records of t_IRL
 -- ----------------------------
-INSERT INTO t_IRL VALUES ('1', 'rz20190505', 'asbe001', '2019-05-10 19:53:52', 'rz0015', '1', '55.1', '50.2', '55.0', '51.0', '56.0', '57.0', '66.0', '85.0', null);
-INSERT INTO t_IRL VALUES ('2', 'rz20190505', 'asbe002', '2019-05-10 19:54:43', 'rz0010', '1', '53.1', '45.2', '55.7', '51.6', '58.0', '57.0', '66.0', '85.0', null);
+INSERT INTO t_irl VALUES ('1', 'rz20190505', 'asbe001', '2019-05-10 19:53:52', 'rz0015', '1', '55.1', '50.2', '55.0', '51.0', '56.0', '57.0', '66.0', '85.0', null);
+INSERT INTO t_irl VALUES ('2', 'rz20190505', 'asbe002', '2019-05-10 19:54:43', 'rz0010', '1', '53.1', '45.2', '55.7', '51.6', '58.0', '57.0', '66.0', '85.0', null);
