@@ -14,6 +14,7 @@ using System.Configuration;
 using System.IO;
 using Zxui;
 using System.Text.RegularExpressions;
+using jmILRL.Class;
 
 /// <summary>
 /// 
@@ -60,8 +61,14 @@ namespace jmILRL
         /// 10次数组取最值
         /// </summary>
         private float[] rlstmp = new float[10];
-
+        /// <summary>
+        /// 阈值
+        /// </summary>
         private float ilLevel = 0,rlLevel=0;
+        /// <summary>
+        /// 串口协议枚举
+        /// </summary>
+        private PortBand portBand = PortBand.Zwd;
 
         public FrmMain()
         {
@@ -187,45 +194,108 @@ namespace jmILRL
         }
 
         /// <summary>
-        /// 2019-4-26 
+        /// 2019-4-26
+        /// 串口接收
         /// </summary>
         /// <param name="bs"></param>
         void Rs232_DataRec(byte[] bs)
         {
             try
             {
-                string str = System.Text.Encoding.Default.GetString(bs);
-                string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
-                if (radioButtonIL.Checked)
-                {
-                    labelIL[curPort].Text = String.Format("IL{0}:{1} dB ",curPort+ 1, Tools.killdB(tmp[0]));
+                zwdProcess(bs);
+                //if (portBand == PortBand.Zwd)
+                //    zwdProcess(bs);
+                //else if (portBand == PortBand.Hongshan)
+                //    hongShanProcess(bs);
 
-                    ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
-                    //循环次数到
-                    if (flag) {
-                        flag = !flag;
-                        float tt = Tools.getMin(ilstmp);
-                        labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt); 
-                        fbt.IL[curPort] = tt;
-                        level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
-                    }
-                }
-                else {
-                    labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
-                    rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
-                    //循环次数到
-                    if (flag) {
-                        flag = !flag;
-                        float tt = Tools.getMin(rlstmp);
-                        labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
-                        fbt.RL[curPort] = tt;
-                        level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
-                    }
-                }
-                
+
             }
             catch (Exception)
             {
+            }
+        }
+
+        /// <summary>
+        /// 字符串协议处理
+        /// </summary>
+        /// <param name="bs"></param>
+        private void zwdProcess(byte[] bs) {
+            string str = System.Text.Encoding.Default.GetString(bs);
+            string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
+            if (radioButtonIL.Checked)
+            {
+                labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
+
+                ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
+                //循环次数到
+                if (flag)
+                {
+                    flag = !flag;
+                    float tt = Tools.getMin(ilstmp);
+                    labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
+                    fbt.IL[curPort] = tt;
+                    level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
+                }
+            }
+            else
+            {
+                labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
+                rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
+                //循环次数到
+                if (flag)
+                {
+                    flag = !flag;
+                    float tt = Tools.getMin(rlstmp);
+                    labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
+                    fbt.RL[curPort] = tt;
+                    level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 字节数组协议处理
+        /// 1310-4,8 1490-12,16 1550-20,24
+        /// </summary>
+        /// <param name="bs"></param>
+        private void hongShanProcess(byte[] rec) {
+            if (rec.Length == 0) return;
+            if (rec[2] != 0x51 ) //非上传指令
+            {
+                return;
+            }
+
+            if (rec[28] == 0) //踏板无动作
+            {
+                return;
+            }
+            int sum = 0;
+            for (int i = 0; i < rec.Length - 2; i++)
+            {
+                sum += rec[i];
+            }
+            sum = ~sum;
+            sum += 1;
+            if (rec[rec.Length - 2] != (byte)sum) return;   //校验不合格
+
+            ilstmp[timerCount++] = BitConverter.ToSingle(rec, 20);
+            rlstmp[timerCount++] = BitConverter.ToSingle(rec, 24);
+
+            labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 20));
+            labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 24));
+            //循环次数到
+            if (flag)
+            {
+                flag = !flag;
+                float tt = Tools.getMin(ilstmp);
+                labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
+                fbt.IL[curPort] = tt;
+                level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
+
+                tt = Tools.getMin(rlstmp);
+                labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
+                fbt.RL[curPort] = tt;
+                level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
             }
         }
 
@@ -252,12 +322,12 @@ namespace jmILRL
         /// 保存方法
         /// </summary>
         private void toSave() {
-            if (serialNumber.Text.Trim() == "")
+            if (serialNumber_pre.Text.Trim() == "" || serialNumber_pix.Text.Trim() == "")
             {
                 MessageBox.Show("请填写SN号");
                 return;
             }
-            fbt.serialNumber = serialNumber.Text.Trim();
+            fbt.serialNumber = serialNumber_pre.Text.Trim() + serialNumber_pix.Text.Trim();
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
@@ -267,19 +337,23 @@ namespace jmILRL
                 if (MessageBox.Show("该SN号已存在，是否覆盖？") == DialogResult.OK)
                 {
                     fbtService.update(fbt);
-                    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+                    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt);
                 }
             }
             else
             {
-                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
+                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt);
                 fbtService.addNewFBT(fbt);
             }
-            //npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber.Text + ".xls"), fbt);
-            serialNumber.Text = serialNumber.Text.Trim().Length > 3 ? serialNumber.Text.Trim().Substring(0, serialNumber.Text.Trim().Length - 3) : serialNumber.Text.Trim();
+            serialNumber_pix.Text = "";
             MessageBox.Show("数据已保存");
         }
 
+        /// <summary>
+        /// 选端口类型
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBoxPortType_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxPort.Items.Clear();

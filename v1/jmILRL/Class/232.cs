@@ -22,6 +22,22 @@ namespace RS232
         int _times = 5;
 
         /// <summary>
+        /// 红杉设备通讯连接命令
+        /// </summary>
+        private byte[] Con = new byte[]
+        {
+            0x61,0x03,0x01,0x9b,0x01
+        };
+
+        /// <summary>
+        /// 断开串口连接
+        /// </summary>
+        private byte[] Off = new byte[]
+        {
+            0x61,0x03,0xf0,0xca,0x01
+        };
+
+        /// <summary>
         /// 是否开启定时发送
         /// </summary>
         public bool Enable
@@ -211,6 +227,16 @@ namespace RS232
         public void Write(byte[] rx)
         {
             _serialPort.Write(rx, 0, rx.Length);
+        }
+
+        public void BeginToConnect()
+        {
+            _serialPort.Write(Con, 0, Con.Length);
+        }
+
+        public void ConnectOFF()
+        {
+            _serialPort.Write(Off, 0, Off.Length);
         }
     }
 }

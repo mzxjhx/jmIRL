@@ -37,7 +37,7 @@
             this.comboBoxPortType = new System.Windows.Forms.ComboBox();
             this.label37 = new System.Windows.Forms.Label();
             this.batchNumber = new System.Windows.Forms.TextBox();
-            this.serialNumber = new System.Windows.Forms.TextBox();
+            this.serialNumber_pre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new jmILRL.UI.SignleButton();
@@ -61,6 +61,7 @@
             this.RL1 = new System.Windows.Forms.Label();
             this.RL4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.serialNumber_pix = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
@@ -72,7 +73,7 @@
             // 
             this.btnMini.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMini.BackgroundImage = global::jmILRL.Properties.Resources._3btn_mini1;
-            this.btnMini.Location = new System.Drawing.Point(1058, 8);
+            this.btnMini.Location = new System.Drawing.Point(1116, 8);
             this.btnMini.Name = "btnMini";
             this.btnMini.Size = new System.Drawing.Size(32, 23);
             this.btnMini.TabIndex = 6;
@@ -84,7 +85,7 @@
             this.btnEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEx1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnEx1.EnterColor = System.Drawing.Color.Red;
-            this.btnEx1.Location = new System.Drawing.Point(1094, 11);
+            this.btnEx1.Location = new System.Drawing.Point(1152, 11);
             this.btnEx1.Name = "btnEx1";
             this.btnEx1.Size = new System.Drawing.Size(20, 20);
             this.btnEx1.TabIndex = 9;
@@ -101,7 +102,7 @@
             this.btnTest.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnTest.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTest.ForeColor = System.Drawing.Color.Black;
-            this.btnTest.Location = new System.Drawing.Point(769, 530);
+            this.btnTest.Location = new System.Drawing.Point(781, 518);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(89, 32);
             this.btnTest.TabIndex = 12;
@@ -112,7 +113,7 @@
             // textBoxID
             // 
             this.textBoxID.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxID.Location = new System.Drawing.Point(910, 442);
+            this.textBoxID.Location = new System.Drawing.Point(910, 316);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(189, 50);
             this.textBoxID.TabIndex = 88;
@@ -121,7 +122,7 @@
             // 
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label39.Location = new System.Drawing.Point(797, 449);
+            this.label39.Location = new System.Drawing.Point(797, 323);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(110, 37);
             this.label39.TabIndex = 87;
@@ -137,7 +138,7 @@
             "1X2",
             "1X3",
             "1X4"});
-            this.comboBoxPortType.Location = new System.Drawing.Point(910, 388);
+            this.comboBoxPortType.Location = new System.Drawing.Point(910, 267);
             this.comboBoxPortType.Name = "comboBoxPortType";
             this.comboBoxPortType.Size = new System.Drawing.Size(189, 45);
             this.comboBoxPortType.TabIndex = 84;
@@ -147,7 +148,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label37.Location = new System.Drawing.Point(723, 387);
+            this.label37.Location = new System.Drawing.Point(723, 266);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(184, 37);
             this.label37.TabIndex = 83;
@@ -156,24 +157,24 @@
             // batchNumber
             // 
             this.batchNumber.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.batchNumber.Location = new System.Drawing.Point(910, 270);
+            this.batchNumber.Location = new System.Drawing.Point(910, 372);
             this.batchNumber.Name = "batchNumber";
             this.batchNumber.Size = new System.Drawing.Size(189, 50);
             this.batchNumber.TabIndex = 81;
             // 
-            // serialNumber
+            // serialNumber_pre
             // 
-            this.serialNumber.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.serialNumber.Location = new System.Drawing.Point(910, 329);
-            this.serialNumber.Name = "serialNumber";
-            this.serialNumber.Size = new System.Drawing.Size(189, 50);
-            this.serialNumber.TabIndex = 82;
+            this.serialNumber_pre.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.serialNumber_pre.Location = new System.Drawing.Point(910, 435);
+            this.serialNumber_pre.Name = "serialNumber_pre";
+            this.serialNumber_pre.Size = new System.Drawing.Size(176, 50);
+            this.serialNumber_pre.TabIndex = 82;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(796, 331);
+            this.label1.Location = new System.Drawing.Point(796, 438);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 37);
             this.label1.TabIndex = 79;
@@ -183,7 +184,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(797, 275);
+            this.label2.Location = new System.Drawing.Point(797, 377);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 37);
             this.label2.TabIndex = 80;
@@ -197,7 +198,7 @@
             this.btnSave.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(942, 530);
+            this.btnSave.Location = new System.Drawing.Point(942, 518);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 32);
             this.btnSave.TabIndex = 12;
@@ -419,13 +420,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "RL";
             // 
+            // serialNumber_pix
+            // 
+            this.serialNumber_pix.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.serialNumber_pix.Location = new System.Drawing.Point(1092, 435);
+            this.serialNumber_pix.Name = "serialNumber_pix";
+            this.serialNumber_pix.Size = new System.Drawing.Size(86, 50);
+            this.serialNumber_pix.TabIndex = 82;
+            // 
             // FrmMain
             // 
             this.AcceptButton = this.btnTest;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1129, 583);
+            this.ClientSize = new System.Drawing.Size(1187, 583);
             this.Controls.Add(this.pictureBoxReview);
             this.Controls.Add(this.pictureBoxSet);
             this.Controls.Add(this.groupBox2);
@@ -443,7 +452,8 @@
             this.Controls.Add(this.comboBoxPortType);
             this.Controls.Add(this.label37);
             this.Controls.Add(this.batchNumber);
-            this.Controls.Add(this.serialNumber);
+            this.Controls.Add(this.serialNumber_pix);
+            this.Controls.Add(this.serialNumber_pre);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSave);
@@ -478,7 +488,7 @@
         private System.Windows.Forms.ComboBox comboBoxPortType;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox batchNumber;
-        private System.Windows.Forms.TextBox serialNumber;
+        private System.Windows.Forms.TextBox serialNumber_pre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private UI.SignleButton btnSave;
@@ -502,6 +512,7 @@
         private System.Windows.Forms.Label RL1;
         private System.Windows.Forms.Label RL4;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox serialNumber_pix;
     }
 }
 

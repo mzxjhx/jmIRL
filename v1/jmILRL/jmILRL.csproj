@@ -101,6 +101,7 @@
     <Compile Include="BAL\FbtService.cs" />
     <Compile Include="BAL\MysqlHelper.cs" />
     <Compile Include="Class\232.cs" />
+    <Compile Include="Class\enum.cs" />
     <Compile Include="common\configTool.cs" />
     <Compile Include="common\enums.cs" />
     <Compile Include="common\ini.cs" />
