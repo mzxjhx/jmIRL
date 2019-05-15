@@ -347,6 +347,8 @@ namespace jmILRL
             }
             serialNumber_pix.Text = "";
             MessageBox.Show("数据已保存");
+            fbt = new FBT();
+            curPort = 0;
         }
 
         /// <summary>

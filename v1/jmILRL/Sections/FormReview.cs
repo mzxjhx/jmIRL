@@ -39,7 +39,7 @@ namespace jmILRL.Sections
         /// <summary>
         /// 导出Excel时，不带分页
         /// </summary>
-        string sqlToExcel = "select * from t_IRL";
+        string sqlToExcel = "select * from t_irl";
 
         string sqlStr = "";
 
@@ -61,10 +61,10 @@ namespace jmILRL.Sections
         {
             int total = 0;
             List<MySqlParameter> list = new List<MySqlParameter>();
-            sqlStr = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%m') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4  FROM t_IRL  where 1=1";
+            sqlStr = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4  FROM t_irl  where 1=1";
 
 
-            string sqlCount = "select count(*) from t_IRL f where 1=1 ";
+            string sqlCount = "select count(*) from t_irl f where 1=1 ";
             if (checkBoxPN.Checked) {
                 sqlStr += " and batch_number=@batch_number";
                 sqlCount += " and batch_number=@batch_number";
@@ -141,7 +141,7 @@ namespace jmILRL.Sections
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             isSearch = false;
-            sqlToExcel = "select * from t_IRL";
+            sqlToExcel = "select * from t_irl";
             getRecordBypage(1);
         }
     }

@@ -167,7 +167,7 @@
             this.serialNumber_pre.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.serialNumber_pre.Location = new System.Drawing.Point(910, 435);
             this.serialNumber_pre.Name = "serialNumber_pre";
-            this.serialNumber_pre.Size = new System.Drawing.Size(176, 50);
+            this.serialNumber_pre.Size = new System.Drawing.Size(143, 50);
             this.serialNumber_pre.TabIndex = 82;
             // 
             // label1
@@ -279,11 +279,11 @@
             // 
             // level
             // 
-            this.level.Fontsize = 16;
+            this.level.Fontsize = 32;
             this.level.Location = new System.Drawing.Point(785, 83);
             this.level.Name = "level";
             this.level.ShowResult = Result.result.none;
-            this.level.Size = new System.Drawing.Size(108, 73);
+            this.level.Size = new System.Drawing.Size(170, 87);
             this.level.TabIndex = 0;
             this.level.Title = "测试结果：";
             // 
@@ -423,9 +423,9 @@
             // serialNumber_pix
             // 
             this.serialNumber_pix.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.serialNumber_pix.Location = new System.Drawing.Point(1092, 435);
+            this.serialNumber_pix.Location = new System.Drawing.Point(1059, 435);
             this.serialNumber_pix.Name = "serialNumber_pix";
-            this.serialNumber_pix.Size = new System.Drawing.Size(86, 50);
+            this.serialNumber_pix.Size = new System.Drawing.Size(119, 50);
             this.serialNumber_pix.TabIndex = 82;
             // 
             // FrmMain

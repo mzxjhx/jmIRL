@@ -43,7 +43,6 @@ namespace jmILRL.DAL
         public FBT() {
             IL = new float[4];
             RL = new float[4];
-            IL[0] = IL[1] = IL[2] = IL[3] = 100;
         }
 
         /// <summary>
