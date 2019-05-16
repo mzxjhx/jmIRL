@@ -21,6 +21,8 @@ namespace jmILRL.Sections
         }
 
         FBTService mysqlService = new FBTService();
+		
+		List<MySqlParameter> listExcel = new List<MySqlParameter>();
 
         private void FormReview_Load(object sender, EventArgs e)
         {
@@ -90,6 +92,7 @@ namespace jmILRL.Sections
                 list.Add(new MySqlParameter("@staff", MySqlDbType.VarChar) { Value = textBoxstaff.Text.Trim() });
             }
             sqlToExcel = sqlStr;
+			listExcel = list;
             sqlStr += " ORDER BY create_time DESC LIMIT @page,@offset";
 
             total = mysqlService.getCount(sqlCount, list.ToArray());
@@ -123,12 +126,13 @@ namespace jmILRL.Sections
                 sfd.Filter = "(*.xls)|*.xls";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    DataTable dt = mysqlService.getTableByPage(sqlToExcel);
+                    DataTable dt = mysqlService.getTableByPage(sqlToExcel,listExcel.ToArray());
 
                     FormFileDown down = new FormFileDown();
                     down.FileName = sfd.FileName;
                     down.Datas = dt;
                     down.ShowDialog();
+					listExcel = null;
                 }
             }
         }

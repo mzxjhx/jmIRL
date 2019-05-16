@@ -24,14 +24,14 @@ namespace jmILRL.BAL
         public int addNewFBT(FBT fbt)
         {
             
-            return helper.execSql(@"insert into t_irl(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,RL1,RL2,RL3,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@RL1,@RL2,@RL3,@level,@port_type)",
+            return helper.execSql(@"insert into t_irl(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@IL4,@RL1,@RL2,@RL3,@RL4,@level,@port_type)",
                 new MySqlParameter[]{
                     new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
                     new MySqlParameter("@staff",MySqlDbType.VarString){Value = fbt.staff},
                     new MySqlParameter("@create_time",MySqlDbType.DateTime){Value = DateTime.Now},
                     new MySqlParameter("@port_type",MySqlDbType.VarChar){Value = fbt.PortType},
-                    new MySqlParameter("@level",MySqlDbType.UByte){Value = fbt.Level},
+                    new MySqlParameter("@level",MySqlDbType.Bit){Value = fbt.Level},
                     new MySqlParameter("@IL1",MySqlDbType.Float){Value = fbt.IL[0]},
                     new MySqlParameter("@IL2",MySqlDbType.Float){Value = fbt.IL[1]},
                     new MySqlParameter("@IL3",MySqlDbType.Float){Value = fbt.IL[2]},

@@ -62,6 +62,7 @@
             this.RL4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.serialNumber_pix = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
@@ -428,6 +429,14 @@
             this.serialNumber_pix.Size = new System.Drawing.Size(119, 50);
             this.serialNumber_pix.TabIndex = 82;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(330, 492);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(433, 85);
+            this.richTextBox1.TabIndex = 99;
+            this.richTextBox1.Text = "";
+            // 
             // FrmMain
             // 
             this.AcceptButton = this.btnTest;
@@ -435,6 +444,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(1187, 583);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBoxReview);
             this.Controls.Add(this.pictureBoxSet);
             this.Controls.Add(this.groupBox2);
@@ -513,6 +523,7 @@
         private System.Windows.Forms.Label RL4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox serialNumber_pix;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
