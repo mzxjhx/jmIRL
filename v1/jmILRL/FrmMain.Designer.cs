@@ -116,7 +116,7 @@
             this.textBoxID.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxID.Location = new System.Drawing.Point(910, 316);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(189, 50);
+            this.textBoxID.Size = new System.Drawing.Size(214, 50);
             this.textBoxID.TabIndex = 88;
             // 
             // label39
@@ -141,7 +141,7 @@
             "1X4"});
             this.comboBoxPortType.Location = new System.Drawing.Point(910, 267);
             this.comboBoxPortType.Name = "comboBoxPortType";
-            this.comboBoxPortType.Size = new System.Drawing.Size(189, 45);
+            this.comboBoxPortType.Size = new System.Drawing.Size(214, 45);
             this.comboBoxPortType.TabIndex = 84;
             this.comboBoxPortType.SelectedIndexChanged += new System.EventHandler(this.comboBoxPortType_SelectedIndexChanged);
             // 
@@ -160,7 +160,7 @@
             this.batchNumber.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.batchNumber.Location = new System.Drawing.Point(910, 372);
             this.batchNumber.Name = "batchNumber";
-            this.batchNumber.Size = new System.Drawing.Size(189, 50);
+            this.batchNumber.Size = new System.Drawing.Size(214, 50);
             this.batchNumber.TabIndex = 81;
             // 
             // serialNumber_pre
@@ -234,7 +234,7 @@
             this.comboBoxPort.FormattingEnabled = true;
             this.comboBoxPort.Location = new System.Drawing.Point(910, 216);
             this.comboBoxPort.Name = "comboBoxPort";
-            this.comboBoxPort.Size = new System.Drawing.Size(189, 45);
+            this.comboBoxPort.Size = new System.Drawing.Size(214, 45);
             this.comboBoxPort.TabIndex = 0;
             this.comboBoxPort.SelectedIndexChanged += new System.EventHandler(this.comboBoxPort_SelectedIndexChanged);
             // 

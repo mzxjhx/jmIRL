@@ -38,6 +38,14 @@ namespace RS232
         };
 
         /// <summary>
+        /// 获取数据
+        /// </summary>
+        private byte[] GetData = new byte[]
+        {
+            0x61,0x03,0x50,0x4c,0x01
+        };
+
+        /// <summary>
         /// 是否开启定时发送
         /// </summary>
         public bool Enable
@@ -228,7 +236,6 @@ namespace RS232
         {
             _serialPort.Write(rx, 0, rx.Length);
         }
-
         public void BeginToConnect()
         {
             _serialPort.Write(Con, 0, Con.Length);

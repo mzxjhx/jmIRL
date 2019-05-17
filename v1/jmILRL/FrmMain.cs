@@ -250,11 +250,9 @@ namespace jmILRL
                 {
                     flag = !flag;
                     float tt = Tools.getMin(rlstmp);
-                    labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);/*
+                    labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
                     fbt.RL[curPort] = tt;
-                    level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
-					*/
-					bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
+                    bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
 					level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
 					fbt.Level = isfail == true ? 0 : 1;
                     richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3],fbt.Level);
@@ -302,9 +300,13 @@ namespace jmILRL
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
 
                 tt = Tools.getMin(rlstmp);
-                labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
+
                 fbt.RL[curPort] = tt;
-                level.ShowResult = Tools.isBelow(totalPort, fbt, rlLevel) ? Result.result.failed : Result.result.pass;
+                bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
+                level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
+                fbt.Level = isfail == true ? 0 : 1;
+                richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
+
             }
         }
 
