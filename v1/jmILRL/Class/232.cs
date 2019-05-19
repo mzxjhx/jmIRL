@@ -5,7 +5,7 @@ using System.Text;
 using System.IO.Ports;
 //using FormUI;
 using System.Windows.Forms;
-
+using jmILRL.Class;
 
 namespace RS232
 {
@@ -21,29 +21,7 @@ namespace RS232
         bool _enable = false;
         int _times = 5;
 
-        /// <summary>
-        /// 红杉设备通讯连接命令
-        /// </summary>
-        private byte[] Con = new byte[]
-        {
-            0x61,0x03,0x01,0x9b,0x01
-        };
 
-        /// <summary>
-        /// 断开串口连接
-        /// </summary>
-        private byte[] Off = new byte[]
-        {
-            0x61,0x03,0xf0,0xca,0x01
-        };
-
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        private byte[] GetData = new byte[]
-        {
-            0x61,0x03,0x50,0x4c,0x01
-        };
 
         /// <summary>
         /// 是否开启定时发送
@@ -71,14 +49,6 @@ namespace RS232
         }
 
         /// <summary>
-        /// 操作类的按键
-        /// </summary>
-        public Button Btn
-        {
-            get { return _btn; }
-            set { _btn = value; }
-        }
-        /// <summary>
         /// 一次命令发送是否成功
         /// </summary>
         public bool Finish
@@ -102,10 +72,7 @@ namespace RS232
                 _serialPort.PortName = value;
             }
         }
-        /// <summary>
-        /// 通讯波特率
-        /// </summary>
-        private int _baudRate = 115200;
+
         /// <summary>
         /// 波特率
         /// </summary>
@@ -162,11 +129,10 @@ namespace RS232
 
         #region Event
 
-        public delegate void CallBack(byte[] bs);
         /// <summary>
         /// 获得回传数据
         /// </summary>
-        public event CallBack OnCallBack;
+        public event OnRecHandler OnCallBack;
 
         #endregion
 
@@ -226,7 +192,7 @@ namespace RS232
         {
             _serialPort.Write(ss + "\r\n");
         }
- 
+
         /// <summary>
         /// 发送命令
         /// </summary>
@@ -236,15 +202,7 @@ namespace RS232
         {
             _serialPort.Write(rx, 0, rx.Length);
         }
-        public void BeginToConnect()
-        {
-            _serialPort.Write(Con, 0, Con.Length);
-        }
 
-        public void ConnectOFF()
-        {
-            _serialPort.Write(Off, 0, Off.Length);
-        }
     }
 }
 

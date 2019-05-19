@@ -27,6 +27,8 @@ namespace jmILRL
             textBoxPath.Text = config.AppSettings.Settings["filePath"].Value;
             textBox1.Text = config.AppSettings.Settings["level_IL"].Value;
             textBox2.Text = config.AppSettings.Settings["level_RL"].Value;
+            radioButton1.Checked = config.AppSettings.Settings["portBand"].Value == "zwd" ? true : false;
+            radioButton2.Checked = config.AppSettings.Settings["portBand"].Value == "hongshan" ? true : false;
         }
 
         public EventHandler OnParamChange;
@@ -59,6 +61,7 @@ namespace jmILRL
             Tools.SetConfigValue("filePath", textBoxPath.Text.Trim());
             Tools.SetConfigValue("level_IL", textBox1.Text.Trim());
             Tools.SetConfigValue("level_RL", textBox2.Text.Trim());
+            Tools.SetConfigValue("portBand", radioButton1.Checked ? "zwd" : "hongshan");
             if (OnParamChange != null) {
                 OnParamChange(this, null);
             }

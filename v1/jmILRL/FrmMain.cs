@@ -23,7 +23,7 @@ namespace jmILRL
 {
     public partial class FrmMain : FrmBase
     {
-        Rs232 rs232 = new Rs232();
+        Base232 rs232 = new ZwdPort();
         /// <summary>
         /// 文件保存路径
         /// </summary>
@@ -64,7 +64,7 @@ namespace jmILRL
         /// <summary>
         /// 阈值
         /// </summary>
-        private float ilLevel = 0,rlLevel=0;
+        private float ilLevel = 0, rlLevel = 0;
         /// <summary>
         /// 串口协议枚举
         /// </summary>
@@ -76,7 +76,7 @@ namespace jmILRL
             _isResize = false;
             _isDBMax = false;
 
-        }       
+        }
 
         private void btnMini_Click(object sender, EventArgs e)
         {
@@ -91,8 +91,14 @@ namespace jmILRL
         private void FrmMain_Load(object sender, EventArgs e)
         {
             rs232.OnCallBack += Rs232_DataRec;
-            PortInit();
             ReadConfig();
+            if (portBand == PortBand.Hongshan)
+            {
+                rs232 = new HongShanPort();
+                rs232.OnCallBack += Rs232_DataRec;
+            }
+                
+            PortInit();
             LabelInit();
 
             if (!Directory.Exists(filePath))
@@ -113,20 +119,26 @@ namespace jmILRL
                         timer.Enabled = true;
                         btnTest.Enabled = false;
                         curPort++;
-                        if (curPort == totalPort) {
+                        if (curPort == totalPort)
+                        {
                             timer.Enabled = false;
                             btnTest.Enabled = true;
                             toSave();
                             curPort = 0;
                         }
                     }
-                    else {
+                    else
+                    {
                         timer.Enabled = false;
                         btnTest.Enabled = true;
                     }
                 }
-                else {
-                    rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                else
+                {
+                    if (portBand == PortBand.Zwd)
+                        rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                    else
+                        rs232.Write();
                     if (timerCount == ilstmp.Length - 1)
                         flag = true;
                 }
@@ -134,12 +146,14 @@ namespace jmILRL
 
         }
 
-        private void ReadConfig() {
+        private void ReadConfig()
+        {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             String sqlcon = config.AppSettings.Settings["connString"].Value;
             filePath = config.AppSettings.Settings["filePath"].Value;
             ilLevel = float.Parse(config.AppSettings.Settings["level_IL"].Value);
             rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
+            portBand = config.AppSettings.Settings["portBand"].Value == "zwd" ? PortBand.Zwd : PortBand.Hongshan;
         }
 
         /// <summary>
@@ -150,19 +164,19 @@ namespace jmILRL
             string[] portnames = System.IO.Ports.SerialPort.GetPortNames();
             //foreach (string item in portnames)
             //{
-                
+
             //}
             if (portnames.Length == 0)
             {
                 MessageBox.Show("未找到串口，请确认！");
                 return;
             }
-            else {
+            else
+            {
                 try
                 {
                     rs232.Com = portnames[0];
                     rs232.Open();
-                    labelCom.Text = string.Format("COM：{0}", "已连接");
                 }
                 catch (Exception ex)
                 {
@@ -170,10 +184,11 @@ namespace jmILRL
                 }
 
             }
-            
+
         }
 
-        private void LabelInit() {
+        private void LabelInit()
+        {
             for (int i = 0; i < labelIL.Length; i++)
             {
                 labelIL[i] = new Label();
@@ -198,17 +213,23 @@ namespace jmILRL
         /// 串口接收
         /// </summary>
         /// <param name="bs"></param>
-        void Rs232_DataRec(byte[] bs)
+        public void Rs232_DataRec(byte[] bs)
         {
             try
             {
-                zwdProcess(bs);
-                //if (portBand == PortBand.Zwd)
-                //    zwdProcess(bs);
-                //else if (portBand == PortBand.Hongshan)
-                //    hongShanProcess(bs);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0, len = bs.Length; i < len; i++)
+                {
+                    sb.Append(bs[i].ToString("X2") + " ");
+                }
+                richTextBox1.Text = sb.ToString();
 
-
+                //zwdProcess(bs);
+                if (portBand == PortBand.Zwd)
+                    zwdProcess(bs);
+                else if (portBand == PortBand.Hongshan) {
+                    hongShanProcess(bs);
+                }
             }
             catch (Exception)
             {
@@ -219,7 +240,8 @@ namespace jmILRL
         /// 字符串协议处理
         /// </summary>
         /// <param name="bs"></param>
-        private void zwdProcess(byte[] bs) {
+        private void zwdProcess(byte[] bs)
+        {
             string str = System.Text.Encoding.Default.GetString(bs);
             string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
             if (radioButtonIL.Checked)
@@ -234,11 +256,11 @@ namespace jmILRL
                     float tt = Tools.getMin(ilstmp);
                     labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
                     fbt.IL[curPort] = tt;
-					bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
+                    bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
                     //level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
-					level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
-					fbt.Level = isfail == true ? 0 : 1;
-                    richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},il1={2},il2={3},il3={4},il4={5},等级={6}", totalPort, ilLevel, fbt.IL[0], fbt.IL[1], fbt.IL[2], fbt.IL[3],fbt.Level);
+                    level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
+                    fbt.Level = isfail == true ? 0 : 1;
+                    richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},il1={2},il2={3},il3={4},il4={5},等级={6}", totalPort, ilLevel, fbt.IL[0], fbt.IL[1], fbt.IL[2], fbt.IL[3], fbt.Level);
                 }
             }
             else
@@ -253,9 +275,9 @@ namespace jmILRL
                     labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
                     fbt.RL[curPort] = tt;
                     bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
-					level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
-					fbt.Level = isfail == true ? 0 : 1;
-                    richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3],fbt.Level);
+                    level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
+                    fbt.Level = isfail == true ? 0 : 1;
+                    richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
                 }
             }
         }
@@ -265,17 +287,18 @@ namespace jmILRL
         /// 1310-4,8 1490-12,16 1550-20,24
         /// </summary>
         /// <param name="bs"></param>
-        private void hongShanProcess(byte[] rec) {
+        private void hongShanProcess(byte[] rec)
+        {
             if (rec.Length == 0) return;
-            if (rec[2] != 0x51 ) //非上传指令
-            {
-                return;
-            }
+            //if (rec[2] != 0x51) //非上传指令
+            //{
+            //    return;
+            //}
 
-            if (rec[28] == 0) //踏板无动作
-            {
-                return;
-            }
+            //if (rec[28] == 0) //踏板无动作
+            //{
+            //    return;
+            //}
             int sum = 0;
             for (int i = 0; i < rec.Length - 2; i++)
             {
@@ -284,6 +307,10 @@ namespace jmILRL
             sum = ~sum;
             sum += 1;
             if (rec[rec.Length - 2] != (byte)sum) return;   //校验不合格
+
+            if (rec[2] == 0x02) {
+                labelCom.Text = string.Format("COM：{0}", "已连接");
+            }
 
             ilstmp[timerCount++] = BitConverter.ToSingle(rec, 20);
             rlstmp[timerCount++] = BitConverter.ToSingle(rec, 24);
@@ -332,7 +359,8 @@ namespace jmILRL
         /// <summary>
         /// 保存方法
         /// </summary>
-        private void toSave() {
+        private void toSave()
+        {
             if (serialNumber_pre.Text.Trim() == "" || serialNumber_pix.Text.Trim() == "")
             {
                 MessageBox.Show("请填写SN号");
@@ -422,6 +450,7 @@ namespace jmILRL
             Sections.FormReview frm = new Sections.FormReview();
             frm.ShowDialog();
         }
+
 
         private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
         {
