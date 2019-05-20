@@ -73,6 +73,8 @@ namespace RS232
             }
         }
 
+        private int _baudRate = 9600;
+
         /// <summary>
         /// 波特率
         /// </summary>

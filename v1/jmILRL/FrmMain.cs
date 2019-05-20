@@ -70,6 +70,8 @@ namespace jmILRL
         /// </summary>
         private PortBand portBand = PortBand.Zwd;
 
+        private int reflesh = 500;
+
         public FrmMain()
         {
             InitializeComponent();
@@ -217,12 +219,12 @@ namespace jmILRL
         {
             try
             {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0, len = bs.Length; i < len; i++)
-                {
-                    sb.Append(bs[i].ToString("X2") + " ");
-                }
-                richTextBox1.Text = sb.ToString();
+                //StringBuilder sb = new StringBuilder();
+                //for (int i = 0, len = bs.Length; i < len; i++)
+                //{
+                //    sb.Append(bs[i].ToString("X2") + " ");
+                //}
+                //richTextBox1.Text = sb.ToString();
 
                 //zwdProcess(bs);
                 if (portBand == PortBand.Zwd)
@@ -257,10 +259,9 @@ namespace jmILRL
                     labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
                     fbt.IL[curPort] = tt;
                     bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
-                    //level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                     level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                     fbt.Level = isfail == true ? 0 : 1;
-                    richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},il1={2},il2={3},il3={4},il4={5},等级={6}", totalPort, ilLevel, fbt.IL[0], fbt.IL[1], fbt.IL[2], fbt.IL[3], fbt.Level);
+                    //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},il1={2},il2={3},il3={4},il4={5},等级={6}", totalPort, ilLevel, fbt.IL[0], fbt.IL[1], fbt.IL[2], fbt.IL[3], fbt.Level);
                 }
             }
             else
@@ -277,7 +278,7 @@ namespace jmILRL
                     bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
                     level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                     fbt.Level = isfail == true ? 0 : 1;
-                    richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
+                    //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
                 }
             }
         }
@@ -312,11 +313,12 @@ namespace jmILRL
                 labelCom.Text = string.Format("COM：{0}", "已连接");
             }
 
-            ilstmp[timerCount++] = BitConverter.ToSingle(rec, 20);
-            rlstmp[timerCount++] = BitConverter.ToSingle(rec, 24);
+            rlstmp[timerCount] = BitConverter.ToSingle(rec, 8);
+            ilstmp[timerCount++] = BitConverter.ToSingle(rec, 17);
 
-            labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 20));
-            labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 24));
+            labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 17));
+            labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 8));
+
             //循环次数到
             if (flag)
             {
@@ -325,15 +327,13 @@ namespace jmILRL
                 labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
                 fbt.IL[curPort] = tt;
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
-
+                //回损
                 tt = Tools.getMin(rlstmp);
-
                 fbt.RL[curPort] = tt;
                 bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
-                richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
-
+                //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
             }
         }
 
