@@ -231,11 +231,10 @@ namespace jmILRL
                 if (flag)
                 {
                     flag = !flag;
-                    float tt = Tools.getMin(ilstmp);
+                    float tt = Tools.getMax(ilstmp);
                     labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
                     fbt.IL[curPort] = tt;
 					bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
-                    //level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
 					level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
 					fbt.Level = isfail == true ? 0 : 1;
                     richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},il1={2},il2={3},il3={4},il4={5},等级={6}", totalPort, ilLevel, fbt.IL[0], fbt.IL[1], fbt.IL[2], fbt.IL[3],fbt.Level);
