@@ -249,13 +249,13 @@ namespace jmILRL
             if (radioButtonIL.Checked)
             {
                 labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
-
                 ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
+
                 //循环次数到
                 if (flag)
                 {
                     flag = !flag;
-                    float tt = Tools.getMin(ilstmp);
+                    float tt = Tools.getMax(ilstmp);
                     labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
                     fbt.IL[curPort] = tt;
                     bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
@@ -268,6 +268,7 @@ namespace jmILRL
             {
                 labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
                 rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
+                
                 //循环次数到
                 if (flag)
                 {
@@ -318,18 +319,19 @@ namespace jmILRL
 
             labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 17));
             labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 8));
-
+            
             //循环次数到
             if (flag)
             {
                 flag = !flag;
-                float tt = Tools.getMin(ilstmp);
+                float tt = Tools.getMax(ilstmp);
                 labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
                 fbt.IL[curPort] = tt;
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                 //回损
                 tt = Tools.getMin(rlstmp);
                 fbt.RL[curPort] = tt;
+                labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
                 bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
