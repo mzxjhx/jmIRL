@@ -104,6 +104,7 @@
     <Compile Include="Class\Base232.cs" />
     <Compile Include="Class\enum.cs" />
     <Compile Include="Class\HongShanPort.cs" />
+    <Compile Include="Class\MenuFactory.cs" />
     <Compile Include="Class\ZwdPort.cs" />
     <Compile Include="common\configTool.cs" />
     <Compile Include="common\enums.cs" />
@@ -176,6 +177,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sections\FrmEdit.resx">
+      <DependentUpon>FrmEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Pager.resx">
       <DependentUpon>Pager.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -198,6 +202,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Sections\FrmEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sections\FrmEdit.Designer.cs">
+      <DependentUpon>FrmEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\btnEx.cs">
       <SubType>Component</SubType>

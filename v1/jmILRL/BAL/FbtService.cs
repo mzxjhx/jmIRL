@@ -45,13 +45,13 @@ namespace jmILRL.BAL
         }
 
         /// <summary>
-        /// 编辑菜单项
+        /// 重测
         /// </summary>
         /// <returns></returns>
         public int update(FBT fbt)
         {
             MySqlParameter[] param = {
-new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
+                    new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
                     new MySqlParameter("@staff",MySqlDbType.VarString){Value = fbt.staff},
                     new MySqlParameter("@create_time",MySqlDbType.DateTime){Value = DateTime.Now},
@@ -106,6 +106,25 @@ new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumbe
         {
 
             return helper.getDataTable(sql, null);
+        }
+
+        /// <summary>
+        /// 修改产品信息
+        /// </summary>
+        /// <param name="fbt"></param>
+        /// <returns></returns>
+        public int editInfo(FBT fbt) {
+            MySqlParameter[] param = {
+                    new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
+                    new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
+                    new MySqlParameter("@staff",MySqlDbType.VarString){Value = fbt.staff},
+                    new MySqlParameter("@port_type",MySqlDbType.VarChar){Value = fbt.PortType},
+
+                                     };
+            string sql = "update t_irl set " +
+                         " staff=@staff,port_type=@port_type,batch_number=@batch_number " +
+                         " where serial_number=@serial_number ";
+            return helper.execSql(sql, param);
         }
     }
 }

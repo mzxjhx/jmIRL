@@ -148,5 +148,13 @@ namespace jmILRL.Sections
             sqlToExcel = "select * from t_irl";
             getRecordBypage(1);
         }
+
+        private void dataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right && e.RowIndex >= 0)
+            {
+                dataGridView.ContextMenuStrip = new MenuFactory().GetMenu(dataGridView, e.RowIndex);
+            }
+        }
     }
 }

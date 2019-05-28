@@ -216,6 +216,7 @@
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.Size = new System.Drawing.Size(1133, 518);
             this.dataGridView.TabIndex = 6;
+            this.dataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDown);
             // 
             // panel2
             // 
@@ -243,6 +244,7 @@
             this.pager.FocusTxtColor = System.Drawing.Color.Black;
             this.pager.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pager.Location = new System.Drawing.Point(3, 4);
+            this.pager.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pager.Name = "pager";
             this.pager.NMax = 0;
             this.pager.PageCount = 0;
