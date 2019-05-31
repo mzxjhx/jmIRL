@@ -106,7 +106,7 @@ namespace jmILRL
             if (!Directory.Exists(filePath))
                 Directory.CreateDirectory(filePath);
 
-            timer.Interval = 500;
+            timer.Interval = reflesh;
             timer.Tick += (object s, EventArgs obj) => {
                 if (!rs232.IsOpen)
                     return;
@@ -156,6 +156,7 @@ namespace jmILRL
             ilLevel = float.Parse(config.AppSettings.Settings["level_IL"].Value);
             rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
             portBand = config.AppSettings.Settings["portBand"].Value == "zwd" ? PortBand.Zwd : PortBand.Hongshan;
+            reflesh = int.Parse(config.AppSettings.Settings["reflesh"].Value);
         }
 
         /// <summary>

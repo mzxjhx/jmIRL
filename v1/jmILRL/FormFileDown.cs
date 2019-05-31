@@ -146,8 +146,7 @@ namespace jmILRL
                     //将进度置换成百分比数传给ProgressChanged
                     int percent = (i + 1) * 100 / len;
                     Console.WriteLine(string.Format("ReportProgress i={1} percent={0}", percent,i));
-                    _worker.ReportProgress(percent);
-                    Thread.Sleep(100);  //行数多就不需要加延时了
+                    _worker.ReportProgress(percent);                    
                 }
                 workbook.Write(fs); //写入到excel
                 //以下关闭释放资源

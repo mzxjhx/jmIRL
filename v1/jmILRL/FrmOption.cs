@@ -29,6 +29,7 @@ namespace jmILRL
             textBox2.Text = config.AppSettings.Settings["level_RL"].Value;
             radioButton1.Checked = config.AppSettings.Settings["portBand"].Value == "zwd" ? true : false;
             radioButton2.Checked = config.AppSettings.Settings["portBand"].Value == "hongshan" ? true : false;
+            textBoxreflesh.Text = config.AppSettings.Settings["reflesh"].Value;
         }
 
         public EventHandler OnParamChange;
@@ -43,7 +44,6 @@ namespace jmILRL
         }
 
 
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (textBoxPath.Text.Trim() == "") {
@@ -54,14 +54,21 @@ namespace jmILRL
             string patten = @"^\d{2}(\.\d)?$";
             if (!Regex.IsMatch(textBox1.Text.Trim(), patten) || !Regex.IsMatch(textBox2.Text.Trim(), patten))
             {
-                MessageBox.Show(" 不是有效数字！ ", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                MessageBox.Show(" IL、RL不是有效数字！ ", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 return ;
+            }
+
+            if (!Regex.IsMatch(textBoxreflesh.Text.Trim(), @"^\d{3,4}$"))
+            {
+                MessageBox.Show(" 刷新时间不是有效数字！ ", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                return;
             }
 
             Tools.SetConfigValue("filePath", textBoxPath.Text.Trim());
             Tools.SetConfigValue("level_IL", textBox1.Text.Trim());
             Tools.SetConfigValue("level_RL", textBox2.Text.Trim());
             Tools.SetConfigValue("portBand", radioButton1.Checked ? "zwd" : "hongshan");
+            Tools.SetConfigValue("reflesh", textBoxreflesh.Text.Trim());
             if (OnParamChange != null) {
                 OnParamChange(this, null);
             }
