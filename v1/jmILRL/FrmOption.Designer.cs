@@ -43,6 +43,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxreflesh = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxTimes = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -208,12 +211,44 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "(ms)";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(191, 282);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 16);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "(个)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(30, 280);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 14);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "数据量";
+            // 
+            // textBoxTimes
+            // 
+            this.textBoxTimes.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxTimes.Location = new System.Drawing.Point(85, 275);
+            this.textBoxTimes.Name = "textBoxTimes";
+            this.textBoxTimes.Size = new System.Drawing.Size(100, 26);
+            this.textBoxTimes.TabIndex = 21;
+            // 
             // FrmOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(169)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(463, 320);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBoxTimes);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxreflesh);
@@ -254,5 +289,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxreflesh;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxTimes;
     }
 }

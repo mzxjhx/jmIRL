@@ -51,6 +51,10 @@ namespace jmILRL
         /// 5秒内读10次
         /// </summary>
         private int timerCount = 0;
+        /// <summary>
+        /// 每次读取数据个数
+        /// </summary>
+        private int times = 0;
 
         private bool flag = false;
         /// <summary>
@@ -111,7 +115,7 @@ namespace jmILRL
                 if (!rs232.IsOpen)
                     return;
 
-                if (timerCount > 9)
+                if (timerCount > times)
                 {
                     timerCount = 0;
                     timer.Enabled = false;
@@ -157,6 +161,10 @@ namespace jmILRL
             rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
             portBand = config.AppSettings.Settings["portBand"].Value == "zwd" ? PortBand.Zwd : PortBand.Hongshan;
             reflesh = int.Parse(config.AppSettings.Settings["reflesh"].Value);
+            times = int.Parse(config.AppSettings.Settings["times"].Value);
+
+            ilstmp = new float[times];
+            rlstmp = new float[times];
         }
 
         /// <summary>

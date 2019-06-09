@@ -30,6 +30,7 @@ namespace jmILRL
             radioButton1.Checked = config.AppSettings.Settings["portBand"].Value == "zwd" ? true : false;
             radioButton2.Checked = config.AppSettings.Settings["portBand"].Value == "hongshan" ? true : false;
             textBoxreflesh.Text = config.AppSettings.Settings["reflesh"].Value;
+            textBoxTimes.Text = config.AppSettings.Settings["times"].Value;
         }
 
         public EventHandler OnParamChange;
@@ -58,7 +59,7 @@ namespace jmILRL
                 return ;
             }
 
-            if (!Regex.IsMatch(textBoxreflesh.Text.Trim(), @"^\d{3,4}$"))
+            if (!Regex.IsMatch(textBoxreflesh.Text.Trim(), @"^\d{2,4}$"))
             {
                 MessageBox.Show(" 刷新时间不是有效数字！ ", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 return;
@@ -69,6 +70,7 @@ namespace jmILRL
             Tools.SetConfigValue("level_RL", textBox2.Text.Trim());
             Tools.SetConfigValue("portBand", radioButton1.Checked ? "zwd" : "hongshan");
             Tools.SetConfigValue("reflesh", textBoxreflesh.Text.Trim());
+            Tools.SetConfigValue("times", textBoxTimes.Text.Trim());
             if (OnParamChange != null) {
                 OnParamChange(this, null);
             }
