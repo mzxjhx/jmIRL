@@ -115,7 +115,7 @@ namespace jmILRL
                 if (!rs232.IsOpen)
                     return;
 
-                if (timerCount > times)
+                if (timerCount > times - 1)
                 {
                     timerCount = 0;
                     timer.Enabled = false;
