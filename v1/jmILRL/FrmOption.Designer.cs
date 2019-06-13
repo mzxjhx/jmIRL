@@ -192,6 +192,7 @@
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 19;
             this.label4.Text = "刷新频率";
+            this.label4.Visible = false;
             // 
             // textBoxreflesh
             // 
@@ -200,6 +201,7 @@
             this.textBoxreflesh.Name = "textBoxreflesh";
             this.textBoxreflesh.Size = new System.Drawing.Size(100, 26);
             this.textBoxreflesh.TabIndex = 18;
+            this.textBoxreflesh.Visible = false;
             // 
             // label5
             // 
@@ -210,6 +212,7 @@
             this.label5.Size = new System.Drawing.Size(40, 16);
             this.label5.TabIndex = 20;
             this.label5.Text = "(ms)";
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -220,6 +223,7 @@
             this.label6.Size = new System.Drawing.Size(40, 16);
             this.label6.TabIndex = 23;
             this.label6.Text = "(个)";
+            this.label6.Visible = false;
             // 
             // label7
             // 
@@ -231,6 +235,7 @@
             this.label7.Size = new System.Drawing.Size(49, 14);
             this.label7.TabIndex = 22;
             this.label7.Text = "数据量";
+            this.label7.Visible = false;
             // 
             // textBoxTimes
             // 
@@ -239,6 +244,7 @@
             this.textBoxTimes.Name = "textBoxTimes";
             this.textBoxTimes.Size = new System.Drawing.Size(100, 26);
             this.textBoxTimes.TabIndex = 21;
+            this.textBoxTimes.Visible = false;
             // 
             // FrmOption
             // 

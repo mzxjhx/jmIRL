@@ -62,6 +62,8 @@
             this.RL4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.serialNumber_pix = new System.Windows.Forms.TextBox();
+            this.labelflesh = new System.Windows.Forms.Label();
+            this.labelTimes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
@@ -428,6 +430,26 @@
             this.serialNumber_pix.Size = new System.Drawing.Size(119, 50);
             this.serialNumber_pix.TabIndex = 82;
             // 
+            // labelflesh
+            // 
+            this.labelflesh.AutoSize = true;
+            this.labelflesh.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelflesh.Location = new System.Drawing.Point(206, 540);
+            this.labelflesh.Name = "labelflesh";
+            this.labelflesh.Size = new System.Drawing.Size(77, 14);
+            this.labelflesh.TabIndex = 99;
+            this.labelflesh.Text = "刷新频率：";
+            // 
+            // labelTimes
+            // 
+            this.labelTimes.AutoSize = true;
+            this.labelTimes.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelTimes.Location = new System.Drawing.Point(414, 540);
+            this.labelTimes.Name = "labelTimes";
+            this.labelTimes.Size = new System.Drawing.Size(63, 14);
+            this.labelTimes.TabIndex = 100;
+            this.labelTimes.Text = "数据量：";
+            // 
             // FrmMain
             // 
             this.AcceptButton = this.btnTest;
@@ -435,6 +457,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(1187, 583);
+            this.Controls.Add(this.labelTimes);
+            this.Controls.Add(this.labelflesh);
             this.Controls.Add(this.pictureBoxReview);
             this.Controls.Add(this.pictureBoxSet);
             this.Controls.Add(this.groupBox2);
@@ -513,6 +537,8 @@
         private System.Windows.Forms.Label RL4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox serialNumber_pix;
+        private System.Windows.Forms.Label labelflesh;
+        private System.Windows.Forms.Label labelTimes;
     }
 }
 

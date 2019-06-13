@@ -165,6 +165,9 @@ namespace jmILRL
 
             ilstmp = new float[times];
             rlstmp = new float[times];
+
+            labelflesh.Text = string.Format("刷新频率：{0}ms", reflesh);
+            labelTimes.Text = string.Format("数据量：{0}个", times);
         }
 
         /// <summary>
