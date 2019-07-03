@@ -384,6 +384,8 @@ namespace jmILRL
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
+            string msg = string.Format("保存操作 SN={0},rl1={1},rl2={2},rl3={3},rl4={4}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3]);
+            LogisTrac.WriteInfo(typeof(FrmMain), msg);
             if (fbtService.exist(fbt.serialNumber))
             {
                 //已存在SN号

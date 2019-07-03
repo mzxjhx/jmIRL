@@ -44,6 +44,10 @@
       <HintPath>..\..\..\..\类库\ColorLabel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\log4net-2.0.8-bin-newkey\log4net-2.0.8\bin\net\3.5\release\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\application\MySql.Data.dll</HintPath>
@@ -114,6 +118,7 @@
     <Compile Include="common\configTool.cs" />
     <Compile Include="common\enums.cs" />
     <Compile Include="common\ini.cs" />
+    <Compile Include="common\LogisTrac.cs" />
     <Compile Include="common\NPOIHelper.cs" />
     <Compile Include="common\Win32Enum.cs" />
     <Compile Include="DAL\FBT.cs" />
@@ -199,6 +204,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
+    <None Include="log.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
