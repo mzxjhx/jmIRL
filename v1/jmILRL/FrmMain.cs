@@ -292,6 +292,9 @@ namespace jmILRL
                     level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                     fbt.Level = isfail == true ? 0 : 1;
                     //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
+
+                    string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], curPort);
+                    LogisTrac.WriteInfo(typeof(FrmMain), msg);
                 }
             }
         }
@@ -348,6 +351,9 @@ namespace jmILRL
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
                 //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
+
+                string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3],curPort);
+                LogisTrac.WriteInfo(typeof(FrmMain), msg);
             }
         }
 
@@ -384,8 +390,6 @@ namespace jmILRL
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
-            string msg = string.Format("保存操作 SN={0},rl1={1},rl2={2},rl3={3},rl4={4}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3]);
-            LogisTrac.WriteInfo(typeof(FrmMain), msg);
             if (fbtService.exist(fbt.serialNumber))
             {
                 //已存在SN号
