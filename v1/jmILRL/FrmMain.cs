@@ -47,6 +47,7 @@ namespace jmILRL
         private Label[] labelRL = new Label[4];
 
         Timer timer = new Timer();
+
         /// <summary>
         /// 5秒内读10次
         /// </summary>
@@ -76,6 +77,20 @@ namespace jmILRL
 
         private int reflesh = 500;
 
+        #region 实时数据
+        /// <summary>
+        /// 实时
+        /// </summary>
+        Timer _realTimer = new Timer();
+        /// <summary>
+        /// 该实时RL值要求>30
+        /// </summary>
+        private float _realRL = 0;
+
+        private bool _canTest = true;
+
+        #endregion
+
         public FrmMain()
         {
             InitializeComponent();
@@ -103,7 +118,7 @@ namespace jmILRL
                 rs232 = new HongShanPort();
                 rs232.OnCallBack += Rs232_DataRec;
             }
-                
+
             PortInit();
             LabelInit();
 
@@ -150,8 +165,18 @@ namespace jmILRL
                 }
             };
 
+            //测试保存完，开定时器读实时数据。
+            _realTimer.Interval = 200;
+            _realTimer.Tick += (object s, EventArgs obj) =>
+            {
+                if (!rs232.IsOpen)
+                    return;
+                if (portBand == PortBand.Zwd)
+                    rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                else
+                    rs232.Write();
+            };
         }
-
         private void ReadConfig()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -329,6 +354,15 @@ namespace jmILRL
                 labelCom.Text = string.Format("COM：{0}", "已连接");
             }
 
+            if (_realTimer.Enabled)
+            {
+                _realRL = rlstmp[timerCount] = BitConverter.ToSingle(rec, 8);
+                if (_realRL < 30)
+                    _canTest = true;
+                labelTimes.Text = _realRL + "";
+                return;
+            }
+
             rlstmp[timerCount] = BitConverter.ToSingle(rec, 8);
             ilstmp[timerCount++] = BitConverter.ToSingle(rec, 17);
 
@@ -352,18 +386,20 @@ namespace jmILRL
                 fbt.Level = isfail == true ? 0 : 1;
                 //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
 
-                string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3],curPort);
-                LogisTrac.WriteInfo(typeof(FrmMain), msg);
+                //string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3],curPort);
+                //LogisTrac.WriteInfo(typeof(FrmMain), msg);
             }
         }
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            //if (!rs232.IsOpen)
-            //    return;
-
-            //rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", comboBoxILRL.Text));
+            if (!_canTest)
+            {
+                MessageBox.Show("请融接产品重新测试！");
+                return;
+            }
             timer.Enabled = true;
+            _realTimer.Enabled = false;
         }
 
         /// <summary>
@@ -396,18 +432,21 @@ namespace jmILRL
                 if (MessageBox.Show("该SN号已存在，是否覆盖？") == DialogResult.OK)
                 {
                     fbtService.update(fbt);
-                    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt);
+                    npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt,rlstmp);
                 }
             }
             else
             {
-                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt);
+                npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt, rlstmp);
                 fbtService.addNewFBT(fbt);
             }
             serialNumber_pix.Text = "";
             MessageBox.Show("数据已保存");
             fbt = new FBT();
             curPort = 0;
+
+            _realTimer.Enabled = true;
+            _canTest = false;
         }
 
         /// <summary>

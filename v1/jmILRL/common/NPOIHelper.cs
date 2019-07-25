@@ -40,7 +40,8 @@ namespace jmILRL.common
             this.fileName = fileName;
         }
 
-        public NPOIHelper() {
+        public NPOIHelper()
+        {
 
         }
 
@@ -107,13 +108,14 @@ namespace jmILRL.common
                 return -1;
             }
         }
-		
-		 /// <summary>
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="isFirstRowColumn"></param>
         /// <returns></returns>
-        public DataTable ReadExcel() {
+        public DataTable ReadExcel()
+        {
             ISheet sheet = null;
             DataTable data = new DataTable();
             int startRow = 0;
@@ -125,7 +127,8 @@ namespace jmILRL.common
                     workbook = new HSSFWorkbook(fs);
 
                 sheet = workbook.GetSheetAt(0);
-                if (sheet != null) {
+                if (sheet != null)
+                {
                     IRow firstRow = sheet.GetRow(0);
                     int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
 
@@ -169,7 +172,8 @@ namespace jmILRL.common
 
         }
 
-        public void dataToExcel(string file,FBT fbt) {
+        public void dataToExcel(string file, FBT fbt)
+        {
             ISheet sheet = null;
 
             using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
@@ -229,5 +233,79 @@ namespace jmILRL.common
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="fbt"></param>
+        /// <param name="rls"></param>
+        public void dataToExcel(string file, FBT fbt,float[] rls)
+        {
+            ISheet sheet = null;
+
+            using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+
+                if (file.IndexOf(".xlsx") > 0) // 2007版本
+                    workbook = new XSSFWorkbook();
+                else if (file.IndexOf(".xls") > 0) // 2003版本
+                    workbook = new HSSFWorkbook();
+
+                try
+                {
+                    if (workbook != null)
+                    {
+                        sheet = workbook.CreateSheet("sheet1");
+                    }
+
+                    IRow row = sheet.CreateRow(0);
+                    int col = 0;
+                    row.CreateCell(col++).SetCellValue("制造单号");
+                    row.CreateCell(col++).SetCellValue("SN号");
+                    row.CreateCell(col++).SetCellValue("工号");
+                    row.CreateCell(col++).SetCellValue("日期");
+                    row.CreateCell(col++).SetCellValue("产品类型");
+                    row.CreateCell(col++).SetCellValue("等级");
+                    row.CreateCell(col++).SetCellValue("IL1");
+                    row.CreateCell(col++).SetCellValue("IL2");
+                    row.CreateCell(col++).SetCellValue("IL3");
+                    row.CreateCell(col++).SetCellValue("IL4");
+                    row.CreateCell(col++).SetCellValue("RL1");
+                    row.CreateCell(col++).SetCellValue("RL2");
+                    row.CreateCell(col++).SetCellValue("RL3");
+                    row.CreateCell(col++).SetCellValue("RL4");
+                    row.CreateCell(col++).SetCellValue("rls");
+
+                    row = sheet.CreateRow(1);
+                    col = 0;
+                    row.CreateCell(col++).SetCellValue(fbt.batchNumber);
+                    row.CreateCell(col++).SetCellValue(fbt.serialNumber);
+                    row.CreateCell(col++).SetCellValue(fbt.staff);
+                    row.CreateCell(col++).SetCellValue(DateTime.Now.ToString());
+                    row.CreateCell(col++).SetCellValue(fbt.PortType);
+                    row.CreateCell(col++).SetCellValue(fbt.Level);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[0]);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[1]);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[2]);
+                    row.CreateCell(col++).SetCellValue(fbt.IL[3]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[0]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[1]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[2]);
+                    row.CreateCell(col++).SetCellValue(fbt.RL[3]);
+                    for (int i = 0; i < rls.Length; i++)
+                    {
+                        row.CreateCell(col++).SetCellValue(rls[i]);
+                    }
+
+                    workbook.Write(fs); //写入到excel
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: " + ex.Message);
+                }
+            }
+        }
+
     }
 }

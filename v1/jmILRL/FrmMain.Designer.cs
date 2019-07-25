@@ -448,7 +448,7 @@
             this.labelTimes.Name = "labelTimes";
             this.labelTimes.Size = new System.Drawing.Size(63, 14);
             this.labelTimes.TabIndex = 100;
-            this.labelTimes.Text = "数据量：";
+            this.labelTimes.Text = "实时值：";
             // 
             // FrmMain
             // 
