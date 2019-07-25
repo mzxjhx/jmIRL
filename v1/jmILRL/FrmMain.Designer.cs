@@ -64,6 +64,7 @@
             this.serialNumber_pix = new System.Windows.Forms.TextBox();
             this.labelflesh = new System.Windows.Forms.Label();
             this.labelTimes = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
@@ -339,9 +340,9 @@
             this.groupBox1.Controls.Add(this.IL3);
             this.groupBox1.Controls.Add(this.IL2);
             this.groupBox1.Controls.Add(this.IL4);
-            this.groupBox1.Location = new System.Drawing.Point(25, 69);
+            this.groupBox1.Location = new System.Drawing.Point(35, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(336, 417);
+            this.groupBox1.Size = new System.Drawing.Size(189, 417);
             this.groupBox1.TabIndex = 95;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "IL";
@@ -450,13 +451,22 @@
             this.labelTimes.TabIndex = 100;
             this.labelTimes.Text = "实时值：";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(242, 72);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(107, 414);
+            this.richTextBox1.TabIndex = 101;
+            this.richTextBox1.Text = "";
+            // 
             // FrmMain
             // 
             this.AcceptButton = this.btnTest;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1187, 583);
+            this.ClientSize = new System.Drawing.Size(1187, 632);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.labelTimes);
             this.Controls.Add(this.labelflesh);
             this.Controls.Add(this.pictureBoxReview);
@@ -539,6 +549,7 @@
         private System.Windows.Forms.TextBox serialNumber_pix;
         private System.Windows.Forms.Label labelflesh;
         private System.Windows.Forms.Label labelTimes;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

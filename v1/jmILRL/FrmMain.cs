@@ -385,12 +385,20 @@ namespace jmILRL
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
                 //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
-
-                //string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3],curPort);
-                //LogisTrac.WriteInfo(typeof(FrmMain), msg);
+                StringBuilder sb = new StringBuilder();
+                for(int i=0;i<rlstmp.Length;i++)
+                {
+                    sb.Append(String.Format("RL[{1}]={0}\r\n", rlstmp[i], i + 0));
+                }
+                richTextBox1.Text = sb.ToString();
             }
         }
 
+        /// <summary>
+        /// 测试
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnTest_Click(object sender, EventArgs e)
         {
             if (!_canTest)
@@ -400,6 +408,7 @@ namespace jmILRL
             }
             timer.Enabled = true;
             _realTimer.Enabled = false;
+
         }
 
         /// <summary>
@@ -421,6 +430,10 @@ namespace jmILRL
             {
                 MessageBox.Show("请填写SN号");
                 return;
+            }
+            if(fbt.RL[0] == 0)
+            {
+
             }
             fbt.serialNumber = serialNumber_pre.Text.Trim() + serialNumber_pix.Text.Trim();
             fbt.batchNumber = batchNumber.Text.Trim();
@@ -444,8 +457,9 @@ namespace jmILRL
             MessageBox.Show("数据已保存");
             fbt = new FBT();
             curPort = 0;
-
+            //保存完开启实时定时器
             _realTimer.Enabled = true;
+            //重新融接光纤前不能测试
             _canTest = false;
         }
 
