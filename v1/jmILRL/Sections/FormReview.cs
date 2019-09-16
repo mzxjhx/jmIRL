@@ -91,6 +91,19 @@ namespace jmILRL.Sections
                 sqlCount += " and staff=@staff ";
                 list.Add(new MySqlParameter("@staff", MySqlDbType.VarChar) { Value = textBoxstaff.Text.Trim() });
             }
+
+            if (radioButton2.Checked)
+            {
+                sqlStr += " and level=@level ";
+                sqlCount += " and level=@level ";
+                list.Add(new MySqlParameter("@level", MySqlDbType.Int16) { Value = 1 });
+            }
+            else if (radioButton1.Checked)
+            {
+                sqlStr += " and level=@level ";
+                sqlCount += " and level=@level ";
+                list.Add(new MySqlParameter("@level", MySqlDbType.Int16) { Value = 0 });
+            }
             sqlToExcel = sqlStr;
 			listExcel = list;
             sqlStr += " ORDER BY create_time DESC LIMIT @page,@offset";
@@ -109,6 +122,8 @@ namespace jmILRL.Sections
             }
 
             dataGridView.DataSource = dt;
+
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -155,6 +170,12 @@ namespace jmILRL.Sections
             {
                 dataGridView.ContextMenuStrip = new MenuFactory().GetMenu(dataGridView, e.RowIndex);
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text != "")
+                pager.PageSize = Int16.Parse(comboBox1.Text);
         }
     }
 }

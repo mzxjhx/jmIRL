@@ -388,9 +388,12 @@ namespace jmILRL
                 StringBuilder sb = new StringBuilder();
                 for(int i=0;i<rlstmp.Length;i++)
                 {
-                    sb.Append(String.Format("RL[{1}]={0}\r\n", rlstmp[i], i + 0));
+                    sb.Append(String.Format("time={0}, SN ={1},", DateTime.Now.ToString(), serialNumber_pre.Text + serialNumber_pix.Text));
+                    sb.Append(String.Format("RL[{1}]={0},", rlstmp[i], i));
                 }
-                richTextBox1.Text = sb.ToString();
+                
+                //richTextBox1.Text = sb.ToString();
+                LogisTrac.WriteInfo(typeof(FrmMain), sb.ToString());
             }
         }
 

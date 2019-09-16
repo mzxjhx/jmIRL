@@ -47,7 +47,12 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.pager = new jmILRL.UI.PagerEx();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -73,6 +78,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.radioButton3);
+            this.panel1.Controls.Add(this.radioButton2);
+            this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.checkBoxPN);
             this.panel1.Controls.Add(this.checkBoxStaff);
             this.panel1.Controls.Add(this.checkboxsn);
@@ -103,7 +111,7 @@
             // checkBoxStaff
             // 
             this.checkBoxStaff.AutoSize = true;
-            this.checkBoxStaff.Location = new System.Drawing.Point(400, 43);
+            this.checkBoxStaff.Location = new System.Drawing.Point(400, 46);
             this.checkBoxStaff.Name = "checkBoxStaff";
             this.checkBoxStaff.Size = new System.Drawing.Size(48, 16);
             this.checkBoxStaff.TabIndex = 3;
@@ -140,7 +148,7 @@
             // textBoxstaff
             // 
             this.textBoxstaff.Font = new System.Drawing.Font("宋体", 11F);
-            this.textBoxstaff.Location = new System.Drawing.Point(455, 39);
+            this.textBoxstaff.Location = new System.Drawing.Point(455, 42);
             this.textBoxstaff.Name = "textBoxstaff";
             this.textBoxstaff.Size = new System.Drawing.Size(100, 24);
             this.textBoxstaff.TabIndex = 2;
@@ -220,6 +228,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.pager);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -232,18 +242,45 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F);
-            this.label1.Location = new System.Drawing.Point(306, 10);
+            this.label1.Location = new System.Drawing.Point(492, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 16);
+            this.label1.Size = new System.Drawing.Size(88, 16);
             this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
+            this.label1.Text = "总记录数 =";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("宋体", 11F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "50",
+            "100",
+            "150",
+            "200",
+            "400"});
+            this.comboBox1.Location = new System.Drawing.Point(85, 7);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(75, 23);
+            this.comboBox1.TabIndex = 7;
+            this.comboBox1.Text = "50";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 11F);
+            this.label2.Location = new System.Drawing.Point(17, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 15);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "分页数";
             // 
             // pager
             // 
             this.pager.BackColor = System.Drawing.SystemColors.Control;
             this.pager.FocusTxtColor = System.Drawing.Color.Black;
             this.pager.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pager.Location = new System.Drawing.Point(3, 4);
+            this.pager.Location = new System.Drawing.Point(209, 4);
             this.pager.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pager.Name = "pager";
             this.pager.NMax = 0;
@@ -253,6 +290,38 @@
             this.pager.Size = new System.Drawing.Size(264, 27);
             this.pager.TabIndex = 5;
             this.pager.TxtColor = System.Drawing.Color.FromArgb(((int)(((byte)(93)))), ((int)(((byte)(93)))), ((int)(((byte)(93)))));
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(46, 46);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 16);
+            this.radioButton1.TabIndex = 4;
+            this.radioButton1.Text = "不合格";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(133, 46);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(47, 16);
+            this.radioButton2.TabIndex = 4;
+            this.radioButton2.Text = "合格";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(208, 46);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(47, 16);
+            this.radioButton3.TabIndex = 4;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "全部";
+            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // FormReview
             // 
@@ -294,5 +363,10 @@
         private System.Windows.Forms.TextBox textBoxstaff;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
