@@ -31,7 +31,7 @@ namespace jmILRL.DAL
         /// </summary>
         public String PortType { get; set; }
 
-        private int _level = 1;
+        private int _level = 0;
         /// <summary>
         /// 等级:0-不合格，1-合格。默认合格
         /// </summary>

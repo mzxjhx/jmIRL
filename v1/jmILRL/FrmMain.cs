@@ -386,9 +386,9 @@ namespace jmILRL
                 fbt.Level = isfail == true ? 0 : 1;
                 //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
                 StringBuilder sb = new StringBuilder();
-                for(int i=0;i<rlstmp.Length;i++)
+                sb.Append(String.Format("SN ={0},", serialNumber_pre.Text + serialNumber_pix.Text));
+                for (int i=0;i<rlstmp.Length;i++)
                 {
-                    sb.Append(String.Format("time={0}, SN ={1},", DateTime.Now.ToString(), serialNumber_pre.Text + serialNumber_pix.Text));
                     sb.Append(String.Format("RL[{1}]={0},", rlstmp[i], i));
                 }
                 
@@ -421,6 +421,7 @@ namespace jmILRL
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
+            LogisTrac.WriteInfo(typeof(FrmMain),String.Format("执行保存操作, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
             toSave();
         }
 
@@ -429,6 +430,7 @@ namespace jmILRL
         /// </summary>
         private void toSave()
         {
+            LogisTrac.WriteInfo(typeof(FrmMain), String.Format("进保存, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
             if (serialNumber_pre.Text.Trim() == "" || serialNumber_pix.Text.Trim() == "")
             {
                 MessageBox.Show("请填写SN号");
