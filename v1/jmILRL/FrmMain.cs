@@ -436,9 +436,10 @@ namespace jmILRL
                 MessageBox.Show("请填写SN号");
                 return;
             }
-            if(fbt.RL[0] == 0)
+            if(fbt.RL[0] < 10)
             {
-
+				MessageBox.Show("测试数据异常，存在遗漏情况！");
+				return;
             }
             fbt.serialNumber = serialNumber_pre.Text.Trim() + serialNumber_pix.Text.Trim();
             fbt.batchNumber = batchNumber.Text.Trim();
