@@ -11,6 +11,9 @@ using System.Data.SqlClient;
 using jmILRL.UI;
 using MySql.Data.MySqlClient;
 using jmILRL.BAL;
+using jmILRL.common;
+using System.Configuration;
+
 namespace jmILRL.Sections
 {
     public partial class FormReview : Form
@@ -176,6 +179,22 @@ namespace jmILRL.Sections
         {
             if (comboBox1.Text != "")
                 pager.PageSize = Int16.Parse(comboBox1.Text);
+        }
+
+        private void LoadQuery()
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            String sqlcon = config.AppSettings.Settings["connString"].Value;
+            textBoxSN.Text = config.AppSettings.Settings["query_sn"].Value;
+            textBoxPN.Text = config.AppSettings.Settings["query_danhao"].Value;
+            textBoxstaff.Text = config.AppSettings.Settings["query_workId"].Value;
+        }
+
+        private void FormReview_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Tools.SetConfigValue("query_sn", textBoxSN.Text.Trim());
+            Tools.SetConfigValue("query_danhao", textBoxPN.Text.Trim());
+            Tools.SetConfigValue("query_workId", textBoxstaff.Text.Trim());
         }
     }
 }

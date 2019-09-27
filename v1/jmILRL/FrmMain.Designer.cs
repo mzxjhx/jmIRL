@@ -64,6 +64,7 @@
             this.serialNumber_pix = new System.Windows.Forms.TextBox();
             this.labelflesh = new System.Windows.Forms.Label();
             this.labelTimes = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
@@ -104,7 +105,7 @@
             this.btnTest.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnTest.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTest.ForeColor = System.Drawing.Color.Black;
-            this.btnTest.Location = new System.Drawing.Point(781, 518);
+            this.btnTest.Location = new System.Drawing.Point(781, 521);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(89, 32);
             this.btnTest.TabIndex = 12;
@@ -200,7 +201,7 @@
             this.btnSave.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(942, 518);
+            this.btnSave.Location = new System.Drawing.Point(942, 521);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 32);
             this.btnSave.TabIndex = 12;
@@ -293,7 +294,7 @@
             // 
             this.labelCom.AutoSize = true;
             this.labelCom.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelCom.Location = new System.Drawing.Point(32, 540);
+            this.labelCom.Location = new System.Drawing.Point(32, 602);
             this.labelCom.Name = "labelCom";
             this.labelCom.Size = new System.Drawing.Size(42, 14);
             this.labelCom.TabIndex = 92;
@@ -339,7 +340,7 @@
             this.groupBox1.Controls.Add(this.IL3);
             this.groupBox1.Controls.Add(this.IL2);
             this.groupBox1.Controls.Add(this.IL4);
-            this.groupBox1.Location = new System.Drawing.Point(35, 72);
+            this.groupBox1.Location = new System.Drawing.Point(35, 69);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(326, 417);
             this.groupBox1.TabIndex = 95;
@@ -434,7 +435,7 @@
             // 
             this.labelflesh.AutoSize = true;
             this.labelflesh.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelflesh.Location = new System.Drawing.Point(206, 540);
+            this.labelflesh.Location = new System.Drawing.Point(206, 602);
             this.labelflesh.Name = "labelflesh";
             this.labelflesh.Size = new System.Drawing.Size(77, 14);
             this.labelflesh.TabIndex = 99;
@@ -444,11 +445,19 @@
             // 
             this.labelTimes.AutoSize = true;
             this.labelTimes.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelTimes.Location = new System.Drawing.Point(414, 540);
+            this.labelTimes.Location = new System.Drawing.Point(414, 602);
             this.labelTimes.Name = "labelTimes";
             this.labelTimes.Size = new System.Drawing.Size(63, 14);
             this.labelTimes.TabIndex = 100;
-            this.labelTimes.Text = "实时值：";
+            this.labelTimes.Text = "数据量：";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(35, 503);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(668, 79);
+            this.richTextBox1.TabIndex = 101;
+            this.richTextBox1.Text = "";
             // 
             // FrmMain
             // 
@@ -457,6 +466,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(1187, 632);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.labelTimes);
             this.Controls.Add(this.labelflesh);
             this.Controls.Add(this.pictureBoxReview);
@@ -539,6 +549,7 @@
         private System.Windows.Forms.TextBox serialNumber_pix;
         private System.Windows.Forms.Label labelflesh;
         private System.Windows.Forms.Label labelTimes;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

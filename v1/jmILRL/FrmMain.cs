@@ -366,9 +366,9 @@ namespace jmILRL
             rlstmp[timerCount] = BitConverter.ToSingle(rec, 8);
             ilstmp[timerCount++] = BitConverter.ToSingle(rec, 17);
 
-            labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 17));
-            labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 8));
-            
+            labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 17).ToString("0:00"));
+            labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 8).ToString("0:00"));
+
             //循环次数到
             if (flag)
             {
@@ -393,7 +393,7 @@ namespace jmILRL
                 }
                 
                 //richTextBox1.Text = sb.ToString();
-                LogisTrac.WriteInfo(typeof(FrmMain), sb.ToString());
+
             }
         }
 
@@ -421,7 +421,7 @@ namespace jmILRL
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            LogisTrac.WriteInfo(typeof(FrmMain),String.Format("执行保存操作, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
+            //LogisTrac.WriteInfo(typeof(FrmMain),String.Format("执行保存操作, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
             toSave();
         }
 
@@ -430,7 +430,7 @@ namespace jmILRL
         /// </summary>
         private void toSave()
         {
-            LogisTrac.WriteInfo(typeof(FrmMain), String.Format("进保存, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
+            //LogisTrac.WriteInfo(typeof(FrmMain), String.Format("进保存, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
             if (serialNumber_pre.Text.Trim() == "" || serialNumber_pix.Text.Trim() == "")
             {
                 MessageBox.Show("请填写SN号");
