@@ -285,7 +285,7 @@ namespace jmILRL
             string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
             if (radioButtonIL.Checked)
             {
-                labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
+                labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, Tools.killdB(tmp[0]));
                 ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
 
                 //循环次数到
@@ -293,7 +293,7 @@ namespace jmILRL
                 {
                     flag = !flag;
                     float tt = Tools.getMax(ilstmp);
-                    labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
+                    labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, tt);
                     fbt.IL[curPort] = tt;
                     bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
                     level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
@@ -303,7 +303,7 @@ namespace jmILRL
             }
             else
             {
-                labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, Tools.killdB(tmp[0]));
+                labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, Tools.killdB(tmp[0]));
                 rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
                 
                 //循环次数到
@@ -311,7 +311,7 @@ namespace jmILRL
                 {
                     flag = !flag;
                     float tt = Tools.getMin(rlstmp);
-                    labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
+                    labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
                     fbt.RL[curPort] = tt;
                     bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
                     level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
@@ -319,7 +319,7 @@ namespace jmILRL
                     //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
 
                     string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], curPort);
-                    LogisTrac.WriteInfo(typeof(FrmMain), msg);
+                    //LogisTrac.WriteInfo(typeof(FrmMain), msg);
                 }
             }
         }
@@ -366,21 +366,21 @@ namespace jmILRL
             rlstmp[timerCount] = BitConverter.ToSingle(rec, 8);
             ilstmp[timerCount++] = BitConverter.ToSingle(rec, 17);
 
-            labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 17).ToString("0:00"));
-            labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, BitConverter.ToSingle(rec, 8).ToString("0:00"));
+            labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, BitConverter.ToSingle(rec, 17));
+            labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, BitConverter.ToSingle(rec, 8));
 
             //循环次数到
             if (flag)
             {
                 flag = !flag;
                 float tt = Tools.getMax(ilstmp);
-                labelIL[curPort].Text = String.Format("IL{0}:{1} dB ", curPort + 1, tt);
+                labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, tt);
                 fbt.IL[curPort] = tt;
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                 //回损
                 tt = Tools.getMin(rlstmp);
                 fbt.RL[curPort] = tt;
-                labelRL[curPort].Text = String.Format("RL{0}:{1} dB ", curPort + 1, tt);
+                labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
                 bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
@@ -389,11 +389,9 @@ namespace jmILRL
                 sb.Append(String.Format("SN ={0},", serialNumber_pre.Text + serialNumber_pix.Text));
                 for (int i=0;i<rlstmp.Length;i++)
                 {
-                    sb.Append(String.Format("RL[{1}]={0},", rlstmp[i], i));
-                }
-                
-                //richTextBox1.Text = sb.ToString();
-
+                    sb.Append(String.Format("RL[{1}]={0:F},", rlstmp[i], i));
+                }                
+                richTextBox1.Text = sb.ToString();
             }
         }
 
@@ -425,6 +423,21 @@ namespace jmILRL
             toSave();
         }
 
+        //正常RL值要>10，小于10则存在异常，返回重测
+        private bool checkRL()
+        {
+            bool res = true;
+            for (int i = 0; i < totalPort; i++)
+            {
+                if (fbt.RL[i] < 10)
+                {
+                    res = false;
+                    break;
+                }                   
+            }
+            return res;
+        }
+
         /// <summary>
         /// 保存方法
         /// </summary>
@@ -436,7 +449,7 @@ namespace jmILRL
                 MessageBox.Show("请填写SN号");
                 return;
             }
-            if(fbt.RL[0] < 10)
+            if(!checkRL())
             {
 				MessageBox.Show("测试数据异常，存在遗漏情况！");
 				return;
@@ -448,7 +461,7 @@ namespace jmILRL
             if (fbtService.exist(fbt.serialNumber))
             {
                 //已存在SN号
-                if (MessageBox.Show("该SN号已存在，是否覆盖？") == DialogResult.OK)
+                if (MessageBox.Show("该SN号已存在，是否覆盖？","提醒",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.OK)
                 {
                     fbtService.update(fbt);
                     npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt,rlstmp);

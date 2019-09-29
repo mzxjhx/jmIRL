@@ -1,4 +1,5 @@
-﻿using jmILRL.Sections;
+﻿using jmILRL.BAL;
+using jmILRL.Sections;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace jmILRL
     public class MenuFactory
     {
         ContextMenuStrip menu;
-
+        FBTService mysqlService = new FBTService();
         public ContextMenuStrip GetMenu(DataGridView dgv, int index)
         {
             menu = new ContextMenuStrip();
@@ -34,13 +35,22 @@ namespace jmILRL
             });
             menu.Items.Add(tsmi);
 
-            //tsmi = new ToolStripMenuItem("删除");
-            //tsmi.ImageScaling = ToolStripItemImageScaling.None;
-            //tsmi.Click += new EventHandler((object sender, EventArgs e) =>
-            //{
+            tsmi = new ToolStripMenuItem("删除");
+            tsmi.ImageScaling = ToolStripItemImageScaling.None;
+            tsmi.Click += new EventHandler((object sender, EventArgs e) =>
+            {
+                if(MessageBox.Show("确定要删除该行数据吗？", "提醒", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.OK)
+                {
+                    string id = dgv.Rows[index].Cells["id"].Value.ToString();
+                    if(mysqlService.delete(id) > 0)
+                    {
+                        MessageBox.Show("数据已删除");
+                    }
+                }
 
-            //});
-            //menu.Items.Add(tsmi);
+
+            });
+            menu.Items.Add(tsmi);
 
             return menu;
         }

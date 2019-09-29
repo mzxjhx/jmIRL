@@ -126,5 +126,14 @@ namespace jmILRL.BAL
                          " where serial_number=@serial_number ";
             return helper.execSql(sql, param);
         }
+
+        public int delete(string id)
+        {
+            MySqlParameter[] param = {
+                    new MySqlParameter("@id",MySqlDbType.VarString){Value = id},
+                                     };
+            string sql = "delete from t_irl where id=@id ";
+            return helper.execSql(sql, param);
+        }
     }
 }
