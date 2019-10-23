@@ -17,8 +17,23 @@ namespace jmILRL.BAL
         //private string sqlcon = "server=192.168.164.128;User Id=debian-sys-maint;password=1uHpAC9g9vcoc4tM;Database=t_IRL;Charset=utf8";//连接MySQL的字符串
         private string sqlcon="server=192.168.2.150;User Id = root; password=admin;Database=rayzer_irl;Charset=utf8";
         private Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        public MysqlTools() {
-            sqlcon = config.AppSettings.Settings["connString"].Value;
+
+        public MysqlTools()
+        {
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type">wdm/fbt</param>
+        public MysqlTools(string type) {
+            if(type.ToUpper() == "WDM")
+                sqlcon = config.AppSettings.Settings["WDMconnString"].Value;
+            else
+            {
+                sqlcon = config.AppSettings.Settings["FBTconnString"].Value;
+            }
         }
         /// <summary>
         /// 

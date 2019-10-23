@@ -39,7 +39,7 @@ namespace jmILRL
         /// <summary>
         /// 
         /// </summary>
-        FBTService fbtService = new FBTService();
+        IMysql mysqlService = new FBTService();
 
         private int curPort = 0, totalPort = 2;
 
@@ -157,7 +157,8 @@ namespace jmILRL
                 else
                 {
                     if (portBand == PortBand.Zwd)
-                        rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                        //rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                        rs232.Write(String.Format("SOUR:WAVALL:{0}?", radioButtonIL.Checked ? "IL" : "RL"));
                     else
                         rs232.Write();
                     if (timerCount == ilstmp.Length - 1)
@@ -172,15 +173,15 @@ namespace jmILRL
                 if (!rs232.IsOpen)
                     return;
                 if (portBand == PortBand.Zwd)
-                    rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                    //rs232.Write(String.Format("SOUR:WAV{0}:{1}?", "1550", radioButtonIL.Checked ? "IL" : "RL"));
+                    rs232.Write(String.Format("SOUR:WAVALL:{0}?", radioButtonIL.Checked ? "IL" : "RL"));
                 else
                     rs232.Write();
             };
         }
         private void ReadConfig()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            String sqlcon = config.AppSettings.Settings["connString"].Value;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);            
             filePath = config.AppSettings.Settings["filePath"].Value;
             ilLevel = float.Parse(config.AppSettings.Settings["level_IL"].Value);
             rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
@@ -193,6 +194,16 @@ namespace jmILRL
 
             labelflesh.Text = string.Format("刷新频率：{0}ms", reflesh);
             labelTimes.Text = string.Format("数据量：{0}个", times);
+
+            if(config.AppSettings.Settings["type"].Value.ToUpper() == "WDM")
+            {
+                radioButtonWDM.Checked = true;
+            }
+            else
+            {
+                radioButtonFBT.Checked = true;
+            }
+
         }
 
         /// <summary>
@@ -216,6 +227,7 @@ namespace jmILRL
                 {
                     rs232.Com = portnames[0];
                     rs232.Open();
+                    labelCom.Text = string.Format("COM：{0}", "已连接");
                 }
                 catch (Exception ex)
                 {
@@ -276,52 +288,78 @@ namespace jmILRL
         }
 
         /// <summary>
-        /// 字符串协议处理
+        /// 2019-10-23
+        /// 该设备用于WDM单点测试。取三波长最小值，分别记录波长和数值
         /// </summary>
         /// <param name="bs"></param>
         private void zwdProcess(byte[] bs)
         {
             string str = System.Text.Encoding.Default.GetString(bs);
-            string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
-            if (radioButtonIL.Checked)
-            {
-                labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, Tools.killdB(tmp[0]));
-                ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
+            richTextBox1.Text = string.Format("receive={0} \r\n",str);
+            //string[] tmp = Regex.Split(str, "\r\n", RegexOptions.IgnoreCase);
+            string[] tmp = Regex.Split(str, ",", RegexOptions.IgnoreCase);
+            //if (radioButtonIL.Checked)
+            //{
+            //    labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, Tools.killdB(tmp[0]));
+            //    ilstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
 
-                //循环次数到
-                if (flag)
-                {
-                    flag = !flag;
-                    float tt = Tools.getMax(ilstmp);
-                    labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, tt);
-                    fbt.IL[curPort] = tt;
-                    bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
-                    level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
-                    fbt.Level = isfail == true ? 0 : 1;
-                    //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},il1={2},il2={3},il3={4},il4={5},等级={6}", totalPort, ilLevel, fbt.IL[0], fbt.IL[1], fbt.IL[2], fbt.IL[3], fbt.Level);
-                }
-            }
-            else
+            //    //循环次数到
+            //    if (flag)
+            //    {
+            //        flag = !flag;
+            //        float tt = Tools.getMax(ilstmp);
+            //        labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, tt);
+            //        fbt.IL[curPort] = tt;
+            //        bool isfail = Tools.isBeyond(totalPort, fbt, ilLevel);
+            //        level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
+            //        fbt.Level = isfail == true ? 0 : 1;
+                    
+            //    }
+            //}
+            //else
+            //{
+            float rl0 = float.Parse(Tools.killdB(tmp[0])),
+                rl1 = float.Parse(Tools.killdB(tmp[1])),
+                rl2 = float.Parse(Tools.killdB(tmp[2]));
+            int wave = 1310;
+            if(rl0 > rl1)
             {
-                labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, Tools.killdB(tmp[0]));
-                rlstmp[timerCount++] = float.Parse(Tools.killdB(tmp[0]));
+                wave = 1490;
+                rl0 = rl1;
+            }
+            if(rl0 > rl2)
+            {
+                wave = 1550;
+                rl0 = rl2;
+            }
+            
+            labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, rl0 );
+            rlstmp[timerCount++] = rl0;
                 
-                //循环次数到
-                if (flag)
-                {
-                    flag = !flag;
-                    float tt = Tools.getMin(rlstmp);
-                    labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
-                    fbt.RL[curPort] = tt;
-                    bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
-                    level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
-                    fbt.Level = isfail == true ? 0 : 1;
-                    //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
+            //循环次数到
+            if (flag)
+            {
+                flag = !flag;
 
-                    string msg = string.Format("单次循环 SN={0},rl1={1},rl2={2},rl3={3},rl4={4},出纤={5}", fbt.serialNumber, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], curPort);
-                    //LogisTrac.WriteInfo(typeof(FrmMain), msg);
+                fbt.wave[curPort] = wave;
+                level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
+                //回损取最小值
+                float tt = Tools.getMin(rlstmp);
+                fbt.RL[curPort] = tt;
+                labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
+                bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
+                level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
+                fbt.Level = isfail == true ? 0 : 1;
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append(String.Format("SN ={0},", serialNumber_pre.Text + serialNumber_pix.Text));
+                for (int i = 0; i < rlstmp.Length; i++)
+                {
+                    sb.Append(String.Format("RL[{1}]={0:F},", rlstmp[i], i));
                 }
+                richTextBox1.Text = sb.ToString();
             }
+            //}
         }
 
         /// <summary>
@@ -377,14 +415,14 @@ namespace jmILRL
                 labelIL[curPort].Text = String.Format("IL{0}:{1:F} dB ", curPort + 1, tt);
                 fbt.IL[curPort] = tt;
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
-                //回损
+                //回损取最小值
                 tt = Tools.getMin(rlstmp);
                 fbt.RL[curPort] = tt;
                 labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
                 bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
-                //richTextBox1.Text = string.Format("出纤数={0}, 阈值={1},rl1={2},rl2={3},rl3={4},rl4={5},等级={6}", totalPort, rlLevel, fbt.RL[0], fbt.RL[1], fbt.RL[2], fbt.RL[3], fbt.Level);
+                
                 StringBuilder sb = new StringBuilder();
                 sb.Append(String.Format("SN ={0},", serialNumber_pre.Text + serialNumber_pix.Text));
                 for (int i=0;i<rlstmp.Length;i++)
@@ -458,19 +496,19 @@ namespace jmILRL
             fbt.batchNumber = batchNumber.Text.Trim();
             fbt.staff = textBoxID.Text.Trim();
             fbt.PortType = comboBoxPortType.Text;
-            if (fbtService.exist(fbt.serialNumber))
+            if (mysqlService.exist(fbt.serialNumber))
             {
                 //已存在SN号
                 if (MessageBox.Show("该SN号已存在，是否覆盖？","提醒",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    fbtService.update(fbt);
+                    mysqlService.update(fbt);
                     npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt,rlstmp);
                 }
             }
             else
             {
                 npoiHelper.dataToExcel(Path.Combine(filePath, serialNumber_pre.Text + ".xls"), fbt, rlstmp);
-                fbtService.addNewFBT(fbt);
+                mysqlService.addNewFBT(fbt);
             }
             serialNumber_pix.Text = "";
             MessageBox.Show("数据已保存");
@@ -543,6 +581,20 @@ namespace jmILRL
             frm.ShowDialog();
         }
 
+        private void radioButtonWDM_Click(object sender, EventArgs e)
+        {
+            mysqlService = new WDMService();
+            Tools.SetConfigValue("type", "WDM");
+
+        }
+
+        private void radioButtonFBT_Click(object sender, EventArgs e)
+        {
+
+            mysqlService = new FBTService();
+            Tools.SetConfigValue("type", "FBT");
+
+        }
 
         private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
         {

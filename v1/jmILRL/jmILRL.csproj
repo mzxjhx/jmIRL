@@ -108,7 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BAL\FbtService.cs" />
+    <Compile Include="BAL\IMysql.cs" />
     <Compile Include="BAL\MysqlHelper.cs" />
+    <Compile Include="BAL\WDMService.cs" />
     <Compile Include="Class\232.cs" />
     <Compile Include="Class\Base232.cs" />
     <Compile Include="Class\enum.cs" />

@@ -27,6 +27,10 @@ namespace jmILRL.DAL
 
         public float[] RL { get; set; }
         /// <summary>
+        /// 波长
+        /// </summary>
+        public int[] wave { get; set; }
+        /// <summary>
         /// 端口类型
         /// </summary>
         public String PortType { get; set; }
@@ -44,8 +48,9 @@ namespace jmILRL.DAL
         /// 默认构造函数，IL、RL均=4
         /// </summary>
         public FBT() {
-            IL = new float[4];
-            RL = new float[4];
+            IL = new float[6];
+            RL = new float[6];
+            wave = new int[6];
         }
 
         /// <summary>
@@ -55,6 +60,7 @@ namespace jmILRL.DAL
         public FBT(int n) {
             IL = new float[n];
             RL = new float[n];
+            wave = new int[n];
         }
 
     }
