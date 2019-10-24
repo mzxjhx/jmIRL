@@ -197,11 +197,11 @@ namespace jmILRL
 
             if(config.AppSettings.Settings["type"].Value.ToUpper() == "WDM")
             {
-                radioButtonWDM.Checked = true;
+                mysqlService = new WDMService();
             }
             else
             {
-                radioButtonFBT.Checked = true;
+                mysqlService = new FBTService();
             }
 
         }
@@ -335,7 +335,16 @@ namespace jmILRL
             
             labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, rl0 );
             rlstmp[timerCount++] = rl0;
-                
+
+            if (_realTimer.Enabled)
+            {
+                _realRL = rlstmp[timerCount] = rl0;
+                if (_realRL < 30)
+                    _canTest = true;
+                labelTimes.Text = _realRL + "";
+                return;
+            }
+
             //循环次数到
             if (flag)
             {
@@ -579,21 +588,6 @@ namespace jmILRL
             //new Sections.FormReview().ShowDialog();
             Sections.FormReview frm = new Sections.FormReview();
             frm.ShowDialog();
-        }
-
-        private void radioButtonWDM_Click(object sender, EventArgs e)
-        {
-            mysqlService = new WDMService();
-            Tools.SetConfigValue("type", "WDM");
-
-        }
-
-        private void radioButtonFBT_Click(object sender, EventArgs e)
-        {
-
-            mysqlService = new FBTService();
-            Tools.SetConfigValue("type", "FBT");
-
         }
 
         private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)

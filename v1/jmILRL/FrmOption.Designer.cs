@@ -46,7 +46,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxTimes = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButtonWDM = new System.Windows.Forms.RadioButton();
+            this.radioButtonFBT = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -177,7 +181,7 @@
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Location = new System.Drawing.Point(26, 102);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(243, 63);
+            this.groupBox1.Size = new System.Drawing.Size(171, 69);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "仪器品牌";
@@ -246,12 +250,50 @@
             this.textBoxTimes.TabIndex = 21;
             this.textBoxTimes.Visible = false;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButtonWDM);
+            this.groupBox3.Controls.Add(this.radioButtonFBT);
+            this.groupBox3.Location = new System.Drawing.Point(230, 102);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(158, 69);
+            this.groupBox3.TabIndex = 106;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "产品类型";
+            // 
+            // radioButtonWDM
+            // 
+            this.radioButtonWDM.AutoSize = true;
+            this.radioButtonWDM.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButtonWDM.Location = new System.Drawing.Point(86, 27);
+            this.radioButtonWDM.Name = "radioButtonWDM";
+            this.radioButtonWDM.Size = new System.Drawing.Size(50, 20);
+            this.radioButtonWDM.TabIndex = 104;
+            this.radioButtonWDM.Text = "WDM";
+            this.radioButtonWDM.UseVisualStyleBackColor = true;
+            this.radioButtonWDM.Click += new System.EventHandler(this.radioButtonWDM_Click);
+            // 
+            // radioButtonFBT
+            // 
+            this.radioButtonFBT.AutoSize = true;
+            this.radioButtonFBT.Checked = true;
+            this.radioButtonFBT.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.radioButtonFBT.Location = new System.Drawing.Point(23, 27);
+            this.radioButtonFBT.Name = "radioButtonFBT";
+            this.radioButtonFBT.Size = new System.Drawing.Size(50, 20);
+            this.radioButtonFBT.TabIndex = 103;
+            this.radioButtonFBT.TabStop = true;
+            this.radioButtonFBT.Text = "FBT";
+            this.radioButtonFBT.UseVisualStyleBackColor = true;
+            this.radioButtonFBT.Click += new System.EventHandler(this.radioButtonFBT_Click);
+            // 
             // FrmOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(169)))), ((int)(((byte)(253)))));
             this.ClientSize = new System.Drawing.Size(463, 320);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBoxTimes);
@@ -273,6 +315,8 @@
             this.Text = "选项";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,5 +342,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxTimes;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButtonWDM;
+        private System.Windows.Forms.RadioButton radioButtonFBT;
     }
 }

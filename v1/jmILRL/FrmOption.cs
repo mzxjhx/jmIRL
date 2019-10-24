@@ -31,6 +31,15 @@ namespace jmILRL
             radioButton2.Checked = config.AppSettings.Settings["portBand"].Value == "hongshan" ? true : false;
             textBoxreflesh.Text = config.AppSettings.Settings["reflesh"].Value;
             textBoxTimes.Text = config.AppSettings.Settings["times"].Value;
+
+            if (config.AppSettings.Settings["type"].Value.ToUpper() == "WDM")
+            {
+                radioButtonWDM.Checked = true;
+            }
+            else
+            {
+                radioButtonFBT.Checked = true;
+            }
         }
 
         public EventHandler OnParamChange;
@@ -43,7 +52,15 @@ namespace jmILRL
                     this.textBoxPath.Text = fbd.SelectedPath;
             }
         }
+        private void radioButtonWDM_Click(object sender, EventArgs e)
+        {            
+            Tools.SetConfigValue("type", "WDM");
+        }
 
+        private void radioButtonFBT_Click(object sender, EventArgs e)
+        {            
+            Tools.SetConfigValue("type", "FBT");
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {

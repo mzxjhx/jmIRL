@@ -43,7 +43,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public int insert(string sql, MySqlParameter[] param)
         {
-            sqlcon = config.AppSettings.Settings["connString"].Value;
+
             Console.WriteLine(string.Format(">>>>>>>>>>>insert sql={0}", sql));
             int res = 0;
             using (MySqlConnection conn = new MySqlConnection(sqlcon))

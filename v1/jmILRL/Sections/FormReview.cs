@@ -23,12 +23,22 @@ namespace jmILRL.Sections
             InitializeComponent();
         }
 
-        FBTService mysqlService = new FBTService();
+        IMysql mysqlService = new FBTService();
 		
 		List<MySqlParameter> listExcel = new List<MySqlParameter>();
 
         private void FormReview_Load(object sender, EventArgs e)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (config.AppSettings.Settings["type"].Value.ToUpper() == "WDM")
+            {
+                mysqlService = new WDMService();
+            }
+            else
+            {
+                mysqlService = new FBTService();
+            }
+
             pager.PageCount = 1;
             pager.PageSize = 50;
             pager.Bind();
