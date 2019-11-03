@@ -88,12 +88,14 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public DataTable getTableByPage(string sql, MySqlParameter[] param)
         {
-            return helper.getDataTable(sql, param);
+            string str = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,id  FROM t_irl  where 1=1 ";
+            return helper.getDataTable(str + sql, param);
         }
 
         public int getCount(string sql, MySqlParameter[] param)
         {
-            return helper.getCount(sql, param);
+            string str = "select count(*) from t_irl f where 1=1 ";
+            return helper.getCount( str + sql, param);
         }
 
         /// <summary>

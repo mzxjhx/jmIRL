@@ -490,16 +490,16 @@ namespace jmILRL
         /// </summary>
         private void toSave()
         {
-            //LogisTrac.WriteInfo(typeof(FrmMain), String.Format("进保存, SN={0}", serialNumber_pre.Text + serialNumber_pix.Text));
+            
             if (serialNumber_pre.Text.Trim() == "" || serialNumber_pix.Text.Trim() == "")
             {
                 MessageBox.Show("请填写SN号");
                 return;
-            }
-            if(!checkRL())
+            }            
+            if (!checkRL())
             {
-				MessageBox.Show("测试数据异常，存在遗漏情况！");
-				return;
+                MessageBox.Show("测试数据异常，存在遗漏情况！");
+                return;
             }
             fbt.serialNumber = serialNumber_pre.Text.Trim() + serialNumber_pix.Text.Trim();
             fbt.batchNumber = batchNumber.Text.Trim();
@@ -526,7 +526,8 @@ namespace jmILRL
             //保存完开启实时定时器
             _realTimer.Enabled = true;
             //重新融接光纤前不能测试
-            _canTest = false;
+            _canTest = false;                        
+            
         }
 
         /// <summary>
@@ -562,6 +563,7 @@ namespace jmILRL
                 case 3:
                     totalPort = 4;
                     break;
+
                 default:
                     totalPort = 2;
                     break;

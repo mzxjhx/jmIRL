@@ -76,10 +76,11 @@ namespace jmILRL.Sections
         {
             int total = 0;
             List<MySqlParameter> list = new List<MySqlParameter>();
-            sqlStr = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,id  FROM t_irl  where 1=1";
+            //sqlStr = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,id  FROM t_irl  where 1=1";
+            sqlStr = "";
 
-
-            string sqlCount = "select count(*) from t_irl f where 1=1 ";
+            //string sqlCount = "select count(*) from t_irl f where 1=1 ";
+            string sqlCount = "";
             if (checkBoxPN.Checked) {
                 sqlStr += " and batch_number=@batch_number";
                 sqlCount += " and batch_number=@batch_number";
@@ -194,7 +195,6 @@ namespace jmILRL.Sections
         private void LoadQuery()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            String sqlcon = config.AppSettings.Settings["connString"].Value;
             textBoxSN.Text = config.AppSettings.Settings["query_sn"].Value;
             textBoxPN.Text = config.AppSettings.Settings["query_danhao"].Value;
             textBoxstaff.Text = config.AppSettings.Settings["query_workId"].Value;

@@ -44,7 +44,7 @@ namespace jmILRL.BAL
         public int insert(string sql, MySqlParameter[] param)
         {
 
-            Console.WriteLine(string.Format(">>>>>>>>>>>insert sql={0}", sql));
+            //Console.WriteLine(string.Format(">>>>>>>>>>>insert sql={0}", sql));
             int res = 0;
             using (MySqlConnection conn = new MySqlConnection(sqlcon))
             {
@@ -90,7 +90,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public int execSql(string sql, MySqlParameter[] param)
         {
-
+            LogisTrac.WriteInfo("执行Sql语句,写入", String.Format("保存, IP址址={0}", sqlcon));
             int res = 0;
             using (MySqlConnection conn = new MySqlConnection(sqlcon))
             {

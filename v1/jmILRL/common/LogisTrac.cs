@@ -45,6 +45,17 @@ namespace jmILRL.common
             log.Info(msg);
         }
 
+        /// <summary>
+        /// 记录日志
+        /// </summary>
+        /// <param name="title">消息名</param>
+        /// <param name="msg">内容</param>
+        public static void WriteInfo(string title, string msg)
+        {
+            log4net.ILog log = log4net.LogManager.GetLogger(title);
+            log.Info(msg);
+        }
+
 
     }
 }

@@ -23,7 +23,6 @@ namespace jmILRL
         private void FrmOption_Load(object sender, EventArgs e)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            String sqlcon = config.AppSettings.Settings["connString"].Value;
             textBoxPath.Text = config.AppSettings.Settings["filePath"].Value;
             textBox1.Text = config.AppSettings.Settings["level_IL"].Value;
             textBox2.Text = config.AppSettings.Settings["level_RL"].Value;

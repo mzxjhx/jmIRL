@@ -244,7 +244,7 @@
             // 
             this.IL4.AutoSize = true;
             this.IL4.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL4.Location = new System.Drawing.Point(12, 322);
+            this.IL4.Location = new System.Drawing.Point(10, 300);
             this.IL4.Name = "IL4";
             this.IL4.Size = new System.Drawing.Size(92, 48);
             this.IL4.TabIndex = 0;
@@ -254,7 +254,7 @@
             // 
             this.IL3.AutoSize = true;
             this.IL3.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL3.Location = new System.Drawing.Point(12, 239);
+            this.IL3.Location = new System.Drawing.Point(10, 218);
             this.IL3.Name = "IL3";
             this.IL3.Size = new System.Drawing.Size(92, 48);
             this.IL3.TabIndex = 0;
@@ -264,7 +264,7 @@
             // 
             this.IL2.AutoSize = true;
             this.IL2.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL2.Location = new System.Drawing.Point(12, 159);
+            this.IL2.Location = new System.Drawing.Point(10, 137);
             this.IL2.Name = "IL2";
             this.IL2.Size = new System.Drawing.Size(92, 48);
             this.IL2.TabIndex = 0;
@@ -274,7 +274,7 @@
             // 
             this.IL1.AutoSize = true;
             this.IL1.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.IL1.Location = new System.Drawing.Point(12, 72);
+            this.IL1.Location = new System.Drawing.Point(10, 53);
             this.IL1.Name = "IL1";
             this.IL1.Size = new System.Drawing.Size(92, 48);
             this.IL1.TabIndex = 0;
@@ -374,7 +374,7 @@
             // 
             this.RL3.AutoSize = true;
             this.RL3.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL3.Location = new System.Drawing.Point(18, 236);
+            this.RL3.Location = new System.Drawing.Point(18, 220);
             this.RL3.Name = "RL3";
             this.RL3.Size = new System.Drawing.Size(92, 48);
             this.RL3.TabIndex = 2;
@@ -384,7 +384,7 @@
             // 
             this.RL2.AutoSize = true;
             this.RL2.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL2.Location = new System.Drawing.Point(18, 156);
+            this.RL2.Location = new System.Drawing.Point(18, 140);
             this.RL2.Name = "RL2";
             this.RL2.Size = new System.Drawing.Size(92, 48);
             this.RL2.TabIndex = 3;
@@ -394,7 +394,7 @@
             // 
             this.RL1.AutoSize = true;
             this.RL1.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL1.Location = new System.Drawing.Point(18, 69);
+            this.RL1.Location = new System.Drawing.Point(18, 53);
             this.RL1.Name = "RL1";
             this.RL1.Size = new System.Drawing.Size(92, 48);
             this.RL1.TabIndex = 4;
@@ -404,7 +404,7 @@
             // 
             this.RL4.AutoSize = true;
             this.RL4.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RL4.Location = new System.Drawing.Point(18, 319);
+            this.RL4.Location = new System.Drawing.Point(18, 303);
             this.RL4.Name = "RL4";
             this.RL4.Size = new System.Drawing.Size(92, 48);
             this.RL4.TabIndex = 1;
