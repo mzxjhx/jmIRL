@@ -90,7 +90,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public int execSql(string sql, MySqlParameter[] param)
         {
-            LogisTrac.WriteInfo("执行Sql语句,写入", String.Format("保存, IP址址={0}", sqlcon));
+            //LogisTrac.WriteInfo("执行Sql语句,写入", String.Format("保存, IP址址={0}", sqlcon));
             int res = 0;
             using (MySqlConnection conn = new MySqlConnection(sqlcon))
             {
@@ -116,7 +116,8 @@ namespace jmILRL.BAL
                 catch (Exception ex)
                 {
                     //事务回滚
-                    transaction.Rollback();
+                    if(transaction != null)
+                        transaction.Rollback();
                     Console.WriteLine(ex.Message);
                 }
 

@@ -185,7 +185,7 @@ namespace jmILRL
             filePath = config.AppSettings.Settings["filePath"].Value;
             ilLevel = float.Parse(config.AppSettings.Settings["level_IL"].Value);
             rlLevel = float.Parse(config.AppSettings.Settings["level_RL"].Value);
-            portBand = config.AppSettings.Settings["portBand"].Value == "zwd" ? PortBand.Zwd : PortBand.Hongshan;
+            portBand = config.AppSettings.Settings["portBand"].Value.ToUpper() == "ZWD" ? PortBand.Zwd : PortBand.Hongshan;
             reflesh = int.Parse(config.AppSettings.Settings["reflesh"].Value);
             times = int.Parse(config.AppSettings.Settings["times"].Value);
 
@@ -335,12 +335,12 @@ namespace jmILRL
             
             labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, rl0 );
             rlstmp[timerCount++] = rl0;
-
+            
             if (_realTimer.Enabled)
-            {
+            {				
                 _realRL = rlstmp[timerCount] = rl0;
                 if (_realRL < 30)
-                    _canTest = true;
+                    _canTest = true;                                    
                 labelTimes.Text = _realRL + "";
                 return;
             }
