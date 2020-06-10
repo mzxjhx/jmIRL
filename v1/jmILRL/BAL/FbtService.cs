@@ -119,11 +119,11 @@ namespace jmILRL.BAL
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
                     new MySqlParameter("@staff",MySqlDbType.VarString){Value = fbt.staff},
                     new MySqlParameter("@port_type",MySqlDbType.VarChar){Value = fbt.PortType},
-
+                    new MySqlParameter("@id",MySqlDbType.VarChar){Value = fbt.ID},
                                      };
             string sql = "update t_irl set " +
                          " staff=@staff,port_type=@port_type,batch_number=@batch_number " +
-                         " where serial_number=@serial_number ";
+                         " , serial_number=@serial_number where id=@id ";
             return helper.execSql(sql, param);
         }
 

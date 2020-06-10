@@ -65,6 +65,7 @@
             this.labelflesh = new System.Windows.Forms.Label();
             this.labelTimes = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSet)).BeginInit();
@@ -76,7 +77,7 @@
             // 
             this.btnMini.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMini.BackgroundImage = global::jmILRL.Properties.Resources._3btn_mini1;
-            this.btnMini.Location = new System.Drawing.Point(1116, 8);
+            this.btnMini.Location = new System.Drawing.Point(1131, 8);
             this.btnMini.Name = "btnMini";
             this.btnMini.Size = new System.Drawing.Size(32, 23);
             this.btnMini.TabIndex = 6;
@@ -88,7 +89,7 @@
             this.btnEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEx1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnEx1.EnterColor = System.Drawing.Color.Red;
-            this.btnEx1.Location = new System.Drawing.Point(1152, 11);
+            this.btnEx1.Location = new System.Drawing.Point(1167, 11);
             this.btnEx1.Name = "btnEx1";
             this.btnEx1.Size = new System.Drawing.Size(20, 20);
             this.btnEx1.TabIndex = 9;
@@ -105,7 +106,7 @@
             this.btnTest.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnTest.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTest.ForeColor = System.Drawing.Color.Black;
-            this.btnTest.Location = new System.Drawing.Point(781, 521);
+            this.btnTest.Location = new System.Drawing.Point(781, 554);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(89, 32);
             this.btnTest.TabIndex = 12;
@@ -118,7 +119,7 @@
             this.textBoxID.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxID.Location = new System.Drawing.Point(910, 316);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(214, 50);
+            this.textBoxID.Size = new System.Drawing.Size(260, 50);
             this.textBoxID.TabIndex = 88;
             // 
             // label39
@@ -143,7 +144,7 @@
             "1X4"});
             this.comboBoxPortType.Location = new System.Drawing.Point(910, 267);
             this.comboBoxPortType.Name = "comboBoxPortType";
-            this.comboBoxPortType.Size = new System.Drawing.Size(214, 45);
+            this.comboBoxPortType.Size = new System.Drawing.Size(260, 45);
             this.comboBoxPortType.TabIndex = 84;
             this.comboBoxPortType.SelectedIndexChanged += new System.EventHandler(this.comboBoxPortType_SelectedIndexChanged);
             // 
@@ -162,22 +163,22 @@
             this.batchNumber.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.batchNumber.Location = new System.Drawing.Point(910, 372);
             this.batchNumber.Name = "batchNumber";
-            this.batchNumber.Size = new System.Drawing.Size(214, 50);
+            this.batchNumber.Size = new System.Drawing.Size(260, 50);
             this.batchNumber.TabIndex = 81;
             // 
             // serialNumber_pre
             // 
             this.serialNumber_pre.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.serialNumber_pre.Location = new System.Drawing.Point(910, 435);
+            this.serialNumber_pre.Location = new System.Drawing.Point(910, 427);
             this.serialNumber_pre.Name = "serialNumber_pre";
-            this.serialNumber_pre.Size = new System.Drawing.Size(143, 50);
+            this.serialNumber_pre.Size = new System.Drawing.Size(260, 50);
             this.serialNumber_pre.TabIndex = 82;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(796, 438);
+            this.label1.Location = new System.Drawing.Point(796, 430);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 37);
             this.label1.TabIndex = 79;
@@ -201,7 +202,7 @@
             this.btnSave.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(942, 521);
+            this.btnSave.Location = new System.Drawing.Point(942, 554);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 32);
             this.btnSave.TabIndex = 12;
@@ -236,7 +237,7 @@
             this.comboBoxPort.FormattingEnabled = true;
             this.comboBoxPort.Location = new System.Drawing.Point(910, 216);
             this.comboBoxPort.Name = "comboBoxPort";
-            this.comboBoxPort.Size = new System.Drawing.Size(214, 45);
+            this.comboBoxPort.Size = new System.Drawing.Size(260, 45);
             this.comboBoxPort.TabIndex = 0;
             this.comboBoxPort.SelectedIndexChanged += new System.EventHandler(this.comboBoxPort_SelectedIndexChanged);
             // 
@@ -426,9 +427,9 @@
             // serialNumber_pix
             // 
             this.serialNumber_pix.Font = new System.Drawing.Font("宋体", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.serialNumber_pix.Location = new System.Drawing.Point(1059, 435);
+            this.serialNumber_pix.Location = new System.Drawing.Point(954, 483);
             this.serialNumber_pix.Name = "serialNumber_pix";
-            this.serialNumber_pix.Size = new System.Drawing.Size(119, 50);
+            this.serialNumber_pix.Size = new System.Drawing.Size(216, 50);
             this.serialNumber_pix.TabIndex = 82;
             // 
             // labelflesh
@@ -459,13 +460,23 @@
             this.richTextBox1.TabIndex = 101;
             this.richTextBox1.Text = "";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(910, 503);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.TabIndex = 102;
+            this.label5.Text = "-----";
+            // 
             // FrmMain
             // 
             this.AcceptButton = this.btnTest;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(1187, 632);
+            this.ClientSize = new System.Drawing.Size(1202, 632);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.labelTimes);
             this.Controls.Add(this.labelflesh);
@@ -550,6 +561,7 @@
         private System.Windows.Forms.Label labelflesh;
         private System.Windows.Forms.Label labelTimes;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
 

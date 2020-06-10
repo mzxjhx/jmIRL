@@ -206,7 +206,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
     <None Include="log.config">

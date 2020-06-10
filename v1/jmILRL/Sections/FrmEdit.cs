@@ -19,6 +19,8 @@ namespace jmILRL.Sections
             Load += FrmEdit_Load;
         }
 
+        public FBT Fbt { get; set; }
+
         private void FrmEdit_Load(object sender, EventArgs e)
         {
             if (Fbt != null) {
@@ -28,7 +30,6 @@ namespace jmILRL.Sections
             }
         }
 
-        public FBT Fbt { get; set; }
 
         private void btnEx1_Click(object sender, EventArgs e)
         {
@@ -41,6 +42,7 @@ namespace jmILRL.Sections
             f.serialNumber = textBox1.Text;
             f.staff = textBoxID.Text.Trim();
             f.batchNumber = batchNumber.Text.Trim();
+            f.ID = Fbt.ID;
             FBTService fBTService = new FBTService();
             fBTService.editInfo(f);
             this.Close();

@@ -29,6 +29,7 @@ namespace jmILRL
                         batchNumber = dgv.Rows[index].Cells[0].Value.ToString(),
                         serialNumber = dgv.Rows[index].Cells[1].Value.ToString(),
                         staff = dgv.Rows[index].Cells[2].Value.ToString(),
+                        ID = dgv.Rows[index].Cells["id"].Value.ToString(),
                     }
 
                 }.ShowDialog();

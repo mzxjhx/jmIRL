@@ -10,6 +10,18 @@ namespace jmILRL.DAL
     /// </summary>
     public class FBT
     {
+        private String _id;
+
+        public String ID {
+            get {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+
         /// <summary>
         /// sn
         /// </summary>
