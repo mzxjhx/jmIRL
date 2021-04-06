@@ -182,12 +182,6 @@ namespace jmILRL
                 else
                     rs232.Write();
             };
-
-            FBT f = new FBT();
-            f.serialNumber = "123";
-            f.batchNumber = "456";
-            f.staff = "www";
-            mysqlService.addNewFBT(f);
         }
         private void ReadConfig()
         {

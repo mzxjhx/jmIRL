@@ -1,5 +1,14 @@
- alter table t_irl add `DRL1` float(5,1) NOT NULL COMMENT '最大和最小差';
- alter table t_irl add `DRL2` float(5,1) NOT NULL;
-alter table t_irl add `DRL3` float(5,1) NOT NULL;
-alter table t_irl add `DRL4` float(5,1) NOT NULL;
+ alter table t_irl add `DRL1` float(5,1) NULL COMMENT '最大和最小差';
+ alter table t_irl add `DRL2` float(5,1) NULL;
+alter table t_irl add `DRL3` float(5,1) NULL;
+alter table t_irl add `DRL4` float(5,1) NULL;
+COMMIT;
+
+
+ alter table t_rl add `DRL1` float(5,1) NULL COMMENT '最大和最小差';
+ alter table t_rl add `DRL2` float(5,1) NULL;
+alter table t_rl add `DRL3` float(5,1) NULL;
+alter table t_rl add `DRL4` float(5,1) NULL;
+alter table t_rl add `DRL5` float(5,1) NULL;
+alter table t_rl add `DRL6` float(5,1) NULL;
 COMMIT;

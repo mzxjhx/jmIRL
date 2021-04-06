@@ -24,7 +24,7 @@ namespace jmILRL.BAL
         public int addNewFBT(FBT fbt)
         {
 
-            return helper.execSql(@"insert into t_rl(serial_number,batch_number,staff,create_time,wave1,wave2,wave3,wave4,wave5,wave6,RL1,RL2,RL3,RL4,RL5,RL6,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@wave1,@wave2,@wave3,@wave4,@wave5,@wave6,@RL1,@RL2,@RL3,@RL4,@RL5,@RL6,@level,@port_type)",
+            return helper.execSql(@"insert into t_rl(serial_number,batch_number,staff,create_time,wave1,wave2,wave3,wave4,wave5,wave6,RL1,RL2,RL3,RL4,RL5,RL6,DRL1,DRL2,DRL3,DRL4,DRL5,DRL6,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@wave1,@wave2,@wave3,@wave4,@wave5,@wave6,@RL1,@RL2,@RL3,@RL4,@RL5,@RL6,@DRL1,@DRL2,@DRL3,@DRL4,@DRL5,@DRL6,@level,@port_type)",
                 new MySqlParameter[]{
                     new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
@@ -44,6 +44,13 @@ namespace jmILRL.BAL
                     new MySqlParameter("@RL4",MySqlDbType.Float){Value = fbt.RL[3]},
                     new MySqlParameter("@RL5",MySqlDbType.Float){Value = fbt.RL[4]},
                     new MySqlParameter("@RL6",MySqlDbType.Float){Value = fbt.RL[5]},
+
+                    new MySqlParameter("@DRL1",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL2",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL3",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL4",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL5",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL6",MySqlDbType.Float){Value = fbt.DRL[5]},
                 }
             );
         }
@@ -73,9 +80,18 @@ namespace jmILRL.BAL
                     new MySqlParameter("@RL4",MySqlDbType.Float){Value = fbt.RL[3]},
                     new MySqlParameter("@RL5",MySqlDbType.Float){Value = fbt.RL[4]},
                     new MySqlParameter("@RL6",MySqlDbType.Float){Value = fbt.RL[5]},
+
+                    new MySqlParameter("@DRL1",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL2",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL3",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL4",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL5",MySqlDbType.Float){Value = fbt.DRL[5]},
+                    new MySqlParameter("@DRL6",MySqlDbType.Float){Value = fbt.DRL[5]},
                                      };
             string sql = "update t_rl set " +
-                         " wave1=@wave1,wave2=@wave2,wave3=@wave3,wave4=@wave4,wave5=@wave5,wave6=@wave6,RL1=@RL1,RL2=@RL2,RL3=@RL3,RL4=@RL4,RL5=@RL5,RL6=@RL6,level=@level,create_time=@create_time,staff=@staff,port_type=@port_type,batch_number=@batch_number " +
+                         " wave1=@wave1,wave2=@wave2,wave3=@wave3,wave4=@wave4,wave5=@wave5,wave6=@wave6,RL1=@RL1,RL2=@RL2,RL3=@RL3,RL4=@RL4,RL5=@RL5,RL6=@RL6," +
+                         " DRL1=@DRL1,DRL2=@DRL2,DRL3=@DRL3,DRL4=@DRL4,DRL5=@DRL5,DRL6=@DRL6,"+
+                         " level=@level,create_time=@create_time,staff=@staff,port_type=@port_type,batch_number=@batch_number " +
                          " where serial_number=@serial_number ";
             return helper.execSql(sql, param);
         }
