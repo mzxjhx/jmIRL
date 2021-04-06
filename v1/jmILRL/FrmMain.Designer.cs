@@ -454,6 +454,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("宋体", 10F);
             this.richTextBox1.Location = new System.Drawing.Point(35, 503);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(668, 79);

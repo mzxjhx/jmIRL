@@ -1,0 +1,88 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : 拉锥
+ Source Server Type    : MySQL
+ Source Server Version : 80016
+ Source Host           : 192.168.0.5:3306
+ Source Schema         : rayzer_irl
+
+ Target Server Type    : MySQL
+ Target Server Version : 80016
+ File Encoding         : 65001
+
+ Date: 06/04/2021 14:55:38
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for t_irl
+-- ----------------------------
+DROP TABLE IF EXISTS `t_irl`;
+CREATE TABLE `t_irl`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `serial_number` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `batch_number` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `staff` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `level` tinyint(1) NOT NULL COMMENT '等级:0-不合格，1-合格。默认合格',
+  `IL1` float(5, 1) NOT NULL,
+  `IL2` float(5, 1) NOT NULL,
+  `IL3` float(5, 1) NULL DEFAULT NULL,
+  `IL4` float(5, 1) NULL DEFAULT NULL,
+  `RL1` float(5, 1) NOT NULL,
+  `RL2` float(5, 1) NOT NULL,
+  `RL3` float(5, 1) NULL DEFAULT NULL,
+  `RL4` float(5, 1) NULL DEFAULT NULL,
+  `port_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`, `serial_number`) USING BTREE,
+  INDEX `sn`(`serial_number`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 863194 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_irl
+-- ----------------------------
+INSERT INTO `t_irl` VALUES (1, 'rz20190505', 'asbe001', '2019-05-10 19:53:52', 'rz0015', 1, 55.1, 50.2, 55.0, 51.0, 56.0, 57.0, 66.0, 85.0, NULL);
+INSERT INTO `t_irl` VALUES (2, 'rz20190505', 'asbe002', '2019-05-10 19:54:43', 'rz0010', 1, 53.1, 45.2, 55.7, 51.6, 58.0, 57.0, 66.0, 85.0, NULL);
+INSERT INTO `t_irl` VALUES (6, 'cs01', 'cs01', '2019-05-13 19:48:37', '01', 1, 100.0, 100.0, 100.0, NULL, 26.3, 26.9, 0.0, NULL, '');
+INSERT INTO `t_irl` VALUES (7, 'c', 'cs01', '2019-05-13 19:51:27', '01', 1, 100.0, 100.0, 100.0, 100.0, 27.6, 53.7, 66.9, 0.0, '1X3');
+INSERT INTO `t_irl` VALUES (8, '001', 'SY', '2020-12-22 13:33:32', '002099', 1, -58.6, 0.0, 0.0, 0.0, 66.8, 0.0, 0.0, 0.0, '1X1');
+INSERT INTO `t_irl` VALUES (9, '002', '001', '2019-05-13 20:02:18', '001', 0, 100.0, 100.0, 100.0, NULL, 33.2, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (10, '003', '001', '2019-05-13 20:02:30', '001', 0, 100.0, 100.0, 100.0, NULL, 70.0, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (11, '004', '001', '2019-05-13 20:02:41', '001', 0, 100.0, 100.0, 100.0, NULL, 32.9, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (12, '005', '001', '2019-05-13 20:02:52', '001', 0, 100.0, 100.0, 100.0, NULL, 46.8, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (13, '123', '13224', '2019-05-14 19:14:55', '123', 0, 100.0, 100.0, 100.0, 100.0, 40.1, 0.0, 0.0, 0.0, '1X1');
+INSERT INTO `t_irl` VALUES (14, '1231', 'SY', '2019-07-26 10:51:47', '012040', 1, -60.4, 0.0, 0.0, 0.0, 59.4, 0.0, 0.0, 0.0, '1X1');
+INSERT INTO `t_irl` VALUES (15, 'C57012345', 'R3A190352', '2019-05-14 19:46:14', '012040', 0, 100.0, 100.0, 100.0, NULL, 43.3, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (16, '818221234', 'R1A1223', '2019-05-15 09:04:12', '012040', 0, 58.9, 100.0, 100.0, 100.0, 29.2, 0.0, 0.0, 0.0, '1X1');
+INSERT INTO `t_irl` VALUES (17, '818221235', 'R1A1223', '2019-05-15 09:04:22', '012040', 0, 58.9, 100.0, 100.0, NULL, 38.7, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (18, '818221236', 'R1A1223', '2019-05-15 09:04:32', '012040', 0, 58.9, 100.0, 100.0, NULL, 37.6, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (19, '818221237', 'R1A1223', '2019-05-15 09:07:55', '012040', 0, 58.9, 100.0, 100.0, NULL, 19.1, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (20, 'C57926', 'R3A190352', '2019-05-15 09:18:00', '02163', 0, 58.9, 100.0, 100.0, NULL, 17.0, 17.0, 0.0, NULL, '1X2');
+INSERT INTO `t_irl` VALUES (21, 'C5792623', 'R3A190352J', '2019-05-15 10:11:10', '2163', 1, 100.0, 100.0, 100.0, 100.0, 64.8, 66.2, 0.0, 0.0, '1X2');
+INSERT INTO `t_irl` VALUES (22, 'C5792623623', 'R3A190352', '2019-05-15 09:34:45', '02163', 0, 58.9, 100.0, 100.0, NULL, 51.7, 37.7, 0.0, NULL, '1X2');
+INSERT INTO `t_irl` VALUES (23, 'c5778190', 'r3a190349j', '2019-05-15 10:02:30', '002099', 1, 100.0, 100.0, 100.0, NULL, 0.0, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (24, 'c5781619', 'r3a190349j', '2019-05-15 10:04:16', '002099', 1, 100.0, 100.0, 100.0, NULL, 64.2, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (25, 'c572356', 'r3a190349j', '2019-05-15 10:05:08', '002099', 0, 100.0, 100.0, 100.0, NULL, 19.2, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (26, 'c5778207', 'r3a190349j', '2019-05-15 10:06:13', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.2, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (27, 'c5781718', 'r3a190349j', '2019-05-15 10:07:32', '002099', 0, 100.0, 100.0, 100.0, NULL, 67.0, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (28, 'c5778237', 'r3a190349j', '2019-05-15 10:08:48', '002099', 0, 100.0, 100.0, 100.0, NULL, 65.4, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (29, 'c5778264', 'r3a190349j', '2019-05-15 10:09:59', '002099', 0, 100.0, 100.0, 100.0, NULL, 65.7, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (30, 'c5781608', 'r3a190349j', '2019-05-15 10:12:44', '002099', 0, 100.0, 100.0, 100.0, NULL, 66.2, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (31, 'c5779926', 'r3a190349j', '2019-05-15 10:15:41', '002099', 0, 100.0, 100.0, 100.0, NULL, 63.0, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (32, 'c5781711', 'r3a190349j', '2019-05-15 10:16:52', '002099', 0, 100.0, 100.0, 100.0, NULL, 63.2, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (33, 'C5792915', 'R3A190352J', '2019-05-15 10:17:48', '2163', 1, 100.0, 100.0, 100.0, NULL, 66.7, 65.1, 0.0, NULL, '1X2');
+INSERT INTO `t_irl` VALUES (34, 'c5778114', 'r3a190349j', '2019-05-15 10:17:47', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.0, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (35, 'c5781621', 'r3a190349j', '2019-05-15 10:18:37', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.3, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (36, 'c5778182', 'r3a190349j', '2019-05-15 10:19:47', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.8, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (37, 'c5780017', 'r3a190349j', '2019-05-15 10:20:51', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.9, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (38, 'C5792854', 'R3A190352J', '2019-05-15 10:21:44', '2163', 1, 100.0, 100.0, 100.0, NULL, 66.8, 60.8, 0.0, NULL, '1X2');
+INSERT INTO `t_irl` VALUES (39, 'c5781681', 'r3a190349j', '2019-05-15 10:23:32', '002099', 0, 100.0, 100.0, 100.0, NULL, 68.9, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (40, 'C5792813', 'R3A190352J', '2019-05-15 10:24:19', '2163', 0, 100.0, 100.0, 100.0, NULL, 64.6, 60.9, 0.0, NULL, '1X2');
+INSERT INTO `t_irl` VALUES (41, 'c5780047', 'r3a190349j', '2019-05-15 10:24:25', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.9, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (42, 'c5778249', 'r3a190349j', '2019-05-15 10:26:05', '002099', 0, 100.0, 100.0, 100.0, NULL, 63.7, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (43, 'c5791509', 'r3a190349j', '2019-05-15 10:28:06', '002099', 0, 100.0, 100.0, 100.0, NULL, 63.5, 0.0, 0.0, NULL, '1X1');
+INSERT INTO `t_irl` VALUES (44, 'c5781563', 'r3a190349j', '2019-05-15 10:29:11', '002099', 0, 100.0, 100.0, 100.0, NULL, 64.0, 0.0, 0.0, NULL, '1X1');
+

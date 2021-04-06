@@ -24,7 +24,7 @@ namespace jmILRL.BAL
         public int addNewFBT(FBT fbt)
         {
             
-            return helper.execSql(@"insert into t_irl(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,level,port_type) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@IL4,@RL1,@RL2,@RL3,@RL4,@level,@port_type)",
+            return helper.execSql(@"insert into t_irl(serial_number,batch_number,staff,create_time,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,level,port_type,DRL1,DRL2,DRL3,DRL4) values(@serial_number,@batch_number,@staff,@create_time,@IL1,@IL2,@IL3,@IL4,@RL1,@RL2,@RL3,@RL4,@level,@port_type,@DRL1,@DRL2,@DRL3,@DRL4)",
                 new MySqlParameter[]{
                     new MySqlParameter("@serial_number",MySqlDbType.VarChar){Value = fbt.serialNumber},
                     new MySqlParameter("@batch_number",MySqlDbType.VarString){Value = fbt.batchNumber},
@@ -40,6 +40,11 @@ namespace jmILRL.BAL
                     new MySqlParameter("@RL2",MySqlDbType.Float){Value = fbt.RL[1]},
                     new MySqlParameter("@RL3",MySqlDbType.Float){Value = fbt.RL[2]},
                     new MySqlParameter("@RL4",MySqlDbType.Float){Value = fbt.RL[3]},
+
+                    new MySqlParameter("@DRL1",MySqlDbType.Float){Value = fbt.DRL[0]},
+                    new MySqlParameter("@DRL2",MySqlDbType.Float){Value = fbt.DRL[1]},
+                    new MySqlParameter("@DRL3",MySqlDbType.Float){Value = fbt.DRL[2]},
+                    new MySqlParameter("@DRL4",MySqlDbType.Float){Value = fbt.DRL[3]},
                 }
             );
         }
@@ -65,9 +70,15 @@ namespace jmILRL.BAL
                     new MySqlParameter("@RL2",MySqlDbType.Float){Value = fbt.RL[1]},
                     new MySqlParameter("@RL3",MySqlDbType.Float){Value = fbt.RL[2]},
                     new MySqlParameter("@RL4",MySqlDbType.Float){Value = fbt.RL[3]},
+
+                    new MySqlParameter("@DRL1",MySqlDbType.Float){Value = fbt.DRL[0]},
+                    new MySqlParameter("@DRL2",MySqlDbType.Float){Value = fbt.DRL[1]},
+                    new MySqlParameter("@DRL3",MySqlDbType.Float){Value = fbt.DRL[2]},
+                    new MySqlParameter("@DRL4",MySqlDbType.Float){Value = fbt.DRL[3]},
                                      };
             string sql = "update t_irl set " +
                          " IL1=@IL1,IL2=@IL2,IL3=@IL3,IL4=@IL4,RL1=@RL1,RL2=@RL2,RL3=@RL3,RL4=@RL4,level=@level,create_time=@create_time,staff=@staff,port_type=@port_type,batch_number=@batch_number " +
+                         " ,DRL1=@DRL1,DRL2=@DRL2,DRL3=@DRL3,DRL4=@DRL4 "+
                          " where serial_number=@serial_number ";
             return helper.execSql(sql, param);
         }
@@ -88,7 +99,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public DataTable getTableByPage(string sql, MySqlParameter[] param)
         {
-            string str = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,id  FROM t_irl  where 1=1 ";
+            string str = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,IL1,IL2,IL3,IL4,RL1,RL2,RL3,RL4,DRL1,DRL2,DRL3,DRL4,id  FROM t_irl  where 1=1 ";
             return helper.getDataTable(str + sql, param);
         }
 

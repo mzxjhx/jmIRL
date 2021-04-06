@@ -71,6 +71,10 @@ namespace jmILRL
         /// </summary>
         private float ilLevel = 0, rlLevel = 0;
         /// <summary>
+        /// 最大和最小差值
+        /// </summary>
+        private float dRLlevel = 0;
+        /// <summary>
         /// 串口协议枚举
         /// </summary>
         private PortBand portBand = PortBand.Zwd;
@@ -89,7 +93,7 @@ namespace jmILRL
 
         private bool _canTest = true;
 
-        #endregion
+        #endregion       
 
         public FrmMain()
         {
@@ -178,6 +182,12 @@ namespace jmILRL
                 else
                     rs232.Write();
             };
+
+            FBT f = new FBT();
+            f.serialNumber = "123";
+            f.batchNumber = "456";
+            f.staff = "www";
+            mysqlService.addNewFBT(f);
         }
         private void ReadConfig()
         {
@@ -188,7 +198,7 @@ namespace jmILRL
             portBand = config.AppSettings.Settings["portBand"].Value.ToUpper() == "ZWD" ? PortBand.Zwd : PortBand.Hongshan;
             reflesh = int.Parse(config.AppSettings.Settings["reflesh"].Value);
             times = int.Parse(config.AppSettings.Settings["times"].Value);
-
+            dRLlevel= float.Parse(config.AppSettings.Settings["drl"].Value);    //这是个rl的差值阈值
             ilstmp = new float[times];
             rlstmp = new float[times];
 
@@ -354,6 +364,7 @@ namespace jmILRL
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                 //回损取最小值
                 float tt = Tools.getMin(rlstmp);
+                float max = Tools.getMax(rlstmp);
                 fbt.RL[curPort] = tt;
                 labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
                 bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
@@ -426,18 +437,41 @@ namespace jmILRL
                 level.ShowResult = Tools.isBeyond(totalPort, fbt, ilLevel) ? Result.result.failed : Result.result.pass;
                 //回损取最小值
                 tt = Tools.getMin(rlstmp);
+                // 2021-04-06 加最大值，然后取最大和最小的差值
+                float max = Tools.getMax(rlstmp);
+                fbt.DRL[curPort] = max - tt;
                 fbt.RL[curPort] = tt;
                 labelRL[curPort].Text = String.Format("RL{0}:{1:F} dB ", curPort + 1, tt);
                 bool isfail = Tools.isBelow(totalPort, fbt, rlLevel);
+                // 判断合格时去判断这个差值
+                if (!isfail)
+                {
+                    bool drl = false;
+                    for (int i = 0; i < fbt.DRL.Length; i++)
+                    {
+                        if (fbt.DRL[i] > dRLlevel)
+                        {
+                            drl = true;
+                            break;
+                        }
+                    }
+                    isfail = drl;
+                }
+
                 level.ShowResult = isfail == true ? Result.result.failed : Result.result.pass;
                 fbt.Level = isfail == true ? 0 : 1;
                 
                 StringBuilder sb = new StringBuilder();
-                sb.Append(String.Format("SN ={0},", serialNumber_pre.Text + serialNumber_pix.Text));
-                for (int i=0;i<rlstmp.Length;i++)
+                //sb.Append(String.Format("SN ={0},", serialNumber_pre.Text + serialNumber_pix.Text));
+                //for (int i=0;i<rlstmp.Length;i++)
+                //{
+                //    sb.Append(String.Format("RL[{1}]={0:F},", rlstmp[i], i));
+                //}
+                //richTextBox1.Text = sb.ToString();
+                for (int i = 0; i < fbt.DRL.Length; i++)
                 {
-                    sb.Append(String.Format("RL[{1}]={0:F},", rlstmp[i], i));
-                }                
+                    sb.Append(String.Format("DRL[{1}]={0,6:F} ,", fbt.DRL[i], i));
+                }
                 richTextBox1.Text = sb.ToString();
             }
         }

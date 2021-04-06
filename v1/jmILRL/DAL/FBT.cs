@@ -39,6 +39,10 @@ namespace jmILRL.DAL
 
         public float[] RL { get; set; }
         /// <summary>
+        /// 最大和最小的差值
+        /// </summary>
+        public float[] DRL { get; set; }
+        /// <summary>
         /// 波长
         /// </summary>
         public int[] wave { get; set; }
@@ -63,6 +67,7 @@ namespace jmILRL.DAL
             IL = new float[6];
             RL = new float[6];
             wave = new int[6];
+            DRL = new float[6];
         }
 
         /// <summary>
@@ -73,6 +78,7 @@ namespace jmILRL.DAL
             IL = new float[n];
             RL = new float[n];
             wave = new int[n];
+            DRL = new float[n];
         }
 
     }

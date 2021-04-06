@@ -30,6 +30,7 @@ namespace jmILRL
             radioButton2.Checked = config.AppSettings.Settings["portBand"].Value == "hongshan" ? true : false;
             textBoxreflesh.Text = config.AppSettings.Settings["reflesh"].Value;
             textBoxTimes.Text = config.AppSettings.Settings["times"].Value;
+            textBoxdrl.Text = config.AppSettings.Settings["drl"].Value;
 
             if (config.AppSettings.Settings["type"].Value.ToUpper() == "WDM")
             {
@@ -87,6 +88,7 @@ namespace jmILRL
             Tools.SetConfigValue("portBand", radioButton1.Checked ? "zwd" : "hongshan");
             Tools.SetConfigValue("reflesh", textBoxreflesh.Text.Trim());
             Tools.SetConfigValue("times", textBoxTimes.Text.Trim());
+            Tools.SetConfigValue("drl", textBoxdrl.Text.Trim());
             if (OnParamChange != null) {
                 OnParamChange(this, null);
             }

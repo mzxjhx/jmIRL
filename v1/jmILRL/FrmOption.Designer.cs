@@ -49,6 +49,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButtonWDM = new System.Windows.Forms.RadioButton();
             this.radioButtonFBT = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxdrl = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -127,7 +129,7 @@
             this.btnSave.EnterColor = System.Drawing.Color.RoyalBlue;
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(357, 276);
+            this.btnSave.Location = new System.Drawing.Point(348, 337);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(89, 32);
             this.btnSave.TabIndex = 13;
@@ -140,7 +142,7 @@
             this.btnEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEx1.ClickColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnEx1.EnterColor = System.Drawing.Color.Red;
-            this.btnEx1.Location = new System.Drawing.Point(431, 12);
+            this.btnEx1.Location = new System.Drawing.Point(433, 12);
             this.btnEx1.Name = "btnEx1";
             this.btnEx1.Size = new System.Drawing.Size(20, 20);
             this.btnEx1.TabIndex = 14;
@@ -287,12 +289,35 @@
             this.radioButtonFBT.UseVisualStyleBackColor = true;
             this.radioButtonFBT.Click += new System.EventHandler(this.radioButtonFBT_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(30, 312);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 14);
+            this.label9.TabIndex = 108;
+            this.label9.Text = "RL差值";
+            this.label9.Visible = false;
+            // 
+            // textBoxdrl
+            // 
+            this.textBoxdrl.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxdrl.Location = new System.Drawing.Point(85, 307);
+            this.textBoxdrl.Name = "textBoxdrl";
+            this.textBoxdrl.Size = new System.Drawing.Size(100, 26);
+            this.textBoxdrl.TabIndex = 107;
+            this.textBoxdrl.Visible = false;
+            // 
             // FrmOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(169)))), ((int)(((byte)(253)))));
-            this.ClientSize = new System.Drawing.Size(463, 320);
+            this.ClientSize = new System.Drawing.Size(465, 381);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.textBoxdrl);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
@@ -345,5 +370,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioButtonWDM;
         private System.Windows.Forms.RadioButton radioButtonFBT;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxdrl;
     }
 }
