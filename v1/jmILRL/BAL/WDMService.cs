@@ -112,7 +112,7 @@ namespace jmILRL.BAL
         /// <returns></returns>
         public DataTable getTableByPage(string sql, MySqlParameter[] param)
         {
-            string str = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,wave1,wave2,wave3,wave4,wave5,wave6,RL1,RL2,RL3,RL4,RL5,RL6,id  FROM t_rl  where 1=1 ";
+            string str = "SELECT batch_number as 单号,serial_number as sn号,staff as 工号,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S') as 时间 ,if(`level`=0,'不合格','合格') as 等级,wave1,wave2,wave3,wave4,wave5,wave6,RL1,RL2,RL3,RL4,RL5,RL6,DRL1,DRL2,DRL3,DRL4,DRL5,DRL6,id  FROM t_rl  where 1=1 ";
             return helper.getDataTable(str + sql, param);
         }
 

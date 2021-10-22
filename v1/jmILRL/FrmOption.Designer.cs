@@ -294,21 +294,19 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(30, 312);
+            this.label9.Location = new System.Drawing.Point(245, 182);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 14);
             this.label9.TabIndex = 108;
             this.label9.Text = "RL差值";
-            this.label9.Visible = false;
             // 
             // textBoxdrl
             // 
             this.textBoxdrl.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxdrl.Location = new System.Drawing.Point(85, 307);
+            this.textBoxdrl.Location = new System.Drawing.Point(300, 177);
             this.textBoxdrl.Name = "textBoxdrl";
             this.textBoxdrl.Size = new System.Drawing.Size(100, 26);
             this.textBoxdrl.TabIndex = 107;
-            this.textBoxdrl.Visible = false;
             // 
             // FrmOption
             // 
